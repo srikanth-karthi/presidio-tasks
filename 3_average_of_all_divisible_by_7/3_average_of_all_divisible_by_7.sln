@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34723.18
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3_average_of_all_divisible_by_7", "3_average_of_all_divisible_by_7\3_average_of_all_divisible_by_7.csproj", "{7C85A339-6EA0-4DC7-83EF-CA2DF2B56F66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C85A339-6EA0-4DC7-83EF-CA2DF2B56F66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C85A339-6EA0-4DC7-83EF-CA2DF2B56F66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C85A339-6EA0-4DC7-83EF-CA2DF2B56F66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C85A339-6EA0-4DC7-83EF-CA2DF2B56F66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7F7CCF9-0E48-4209-9B13-4AD01B8167DA}
+	EndGlobalSection
+EndGlobal
