@@ -7,32 +7,27 @@
             Console.WriteLine("Enter a String:");
             String str=Console.ReadLine();
             int count = 0;
-            Console.WriteLine(str.Length);
             int finalcount_count = int.MaxValue;
             String result="";
-            String finalresult = "";
+            List<string> minVowelWords = new List<string>();
             str.ToLower().Trim();
             for(int i = 0;i<str.Length;i++)
             {
-                if (str[i] =='a' || str[i] == 'e' || str[i] == 'i' || str[i] == 'o' || str[i] == 'u')
+            if (str[i] =='a' || str[i] == 'e' || str[i] == 'i' || str[i] == 'o' || str[i] == 'u')
                 {
                     count++;
-             
                 }
-              
-                if (str[i] == ',' || i==str.Length-1)
+              if (str[i] == ',' || i==str.Length-1)
                 {
-                    Console.WriteLine(count);
-                    Console.WriteLine(finalcount_count);
+  
                     if (i == str.Length - 1) result += str[i];
                     if (count < finalcount_count)
                     {
                         finalcount_count = count;
-                 
-                        finalresult = result;
-                       
-                
+                        minVowelWords.Clear();
+                        minVowelWords.Add(result);
                     }
+                    else if(count == finalcount_count) minVowelWords.Add(result);
                     count = 0;
                     result = "";
                   
@@ -41,12 +36,11 @@
                 }
                 result += str[i];
            
-                Console.WriteLine(result);
+          
             }
-       
-            Console.WriteLine(finalresult);
-
-
-        }
+            Console.WriteLine($"Number of Words: {str.Split(',').Length}");
+            Console.WriteLine($"Number of vowels: {finalcount_count}");
+            Console.WriteLine($"Word(s) with the least vowels : {string.Join(" ,", minVowelWords)}");
+                    }
     }
 }
