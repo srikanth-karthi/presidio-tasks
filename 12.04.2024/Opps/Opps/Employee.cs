@@ -11,7 +11,11 @@ namespace Opps
     {
 
        public string name {  get; set; }
-       public void work()
+        /// <summary>
+        /// the work method is is used to define the work of the employee
+        /// <param name="id">id as int</param>
+        /// </summary>
+        public void work()
         {
             Console.WriteLine("it works");
         }
