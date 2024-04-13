@@ -15,7 +15,7 @@ namespace _2_greatestofallnumber
             Console.WriteLine("Enter a number: ");
             while (int.TryParse(Console.ReadLine(), out number)  && number > 0)
             {
-                Console.WriteLine("Enter a number: ");
+                Console.WriteLine("Enter a valid number: ");
                 if(number > greatestnumber) greatestnumber=number;
             }
             Console.WriteLine($"The greatest number you Enter is:{greatestnumber} ");

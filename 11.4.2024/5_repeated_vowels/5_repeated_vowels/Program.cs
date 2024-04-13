@@ -10,8 +10,9 @@
             int finalcount_count = int.MaxValue;
             String result="";
             List<string> minVowelWords = new List<string>();
-            str.ToLower().Trim();
-            for(int i = 0;i<str.Length;i++)
+            str = str.ToLower().Trim();
+
+            for (int i = 0;i<str.Length;i++)
             {
             if (str[i] =='a' || str[i] == 'e' || str[i] == 'i' || str[i] == 'o' || str[i] == 'u')
                 {
