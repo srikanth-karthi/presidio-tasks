@@ -15,6 +15,12 @@ namespace RequestTrackerApplication
             Console.WriteLine("5. Delete Employee by ID");
             Console.WriteLine("0. Exit");
         }
+        void interfacefunction(IClient a)
+        {
+            a.PrintEmployeeDetails();
+            
+        }
+
         void EmployeeInteraction()
         {
             int choice = 0;
@@ -77,6 +83,8 @@ namespace RequestTrackerApplication
             {
                 if (employees[i] != null)
                     PrintEmployee(employees[i]);
+
+
             }
         }
         Employee CreateEmployee(int id)
@@ -84,7 +92,7 @@ namespace RequestTrackerApplication
             Employee employee = null;
             Console.WriteLine("pls Enter emp type");
             string type = Console.ReadLine();
-            if (type == "permenant") employee = new ContractEmployee();
+            if (type == "normal") employee = new Employee();
             else if (type == "contract") employee = new ContractEmployee();
 
             employee.Id = 101 + id;
@@ -96,6 +104,7 @@ namespace RequestTrackerApplication
         {
             Console.WriteLine("---------------------------");
             employee.PrintEmployeeDetails();
+     
             Console.WriteLine("---------------------------");
             return ;
         }
@@ -131,6 +140,7 @@ namespace RequestTrackerApplication
                 // if ( employees[i].Id == id && employees[i] != null)//Will lead to exception
                 if (employees[i] != null && employees[i].Id == id)
                 {
+        
                     employee = employees[i];
                     break;
                 }
@@ -168,6 +178,7 @@ namespace RequestTrackerApplication
         {
             Program program = new Program();
             program.EmployeeInteraction();
+    
             //Employee emp = new Employee();
             //emp.BuildEmployeeFromConsole();
             //ContractEmployee employee = new ContractEmployee(101, "Ramu", DateTime.Now, 123213, 1233);
