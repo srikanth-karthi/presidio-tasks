@@ -4,11 +4,8 @@ namespace RequestTrackerApplication
 {
     internal class Program
     {
-        Employee[] employees;
-        public Program()
-        {
-            employees = new Employee[1];
-        }
+        Employee[] employees=new Employee[1];
+
         void PrintMenu()
         {
             Console.WriteLine("1. Add Employee");
@@ -84,7 +81,12 @@ namespace RequestTrackerApplication
         }
         Employee CreateEmployee(int id)
         {
-            Employee employee = new Employee();
+            Employee employee = null;
+            Console.WriteLine("pls Enter emp type");
+            string type = Console.ReadLine();
+            if (type == "permenant") employee = new ContractEmployee();
+            else if (type == "contract") employee = new ContractEmployee();
+
             employee.Id = 101 + id;
             employee.BuildEmployeeFromConsole();
             return employee;
@@ -166,6 +168,10 @@ namespace RequestTrackerApplication
         {
             Program program = new Program();
             program.EmployeeInteraction();
+            //Employee emp = new Employee();
+            //emp.BuildEmployeeFromConsole();
+            //ContractEmployee employee = new ContractEmployee(101, "Ramu", DateTime.Now, 123213, 1233);
+            //employee.BuildEmployeeFromConsole();
         }
     }
 }

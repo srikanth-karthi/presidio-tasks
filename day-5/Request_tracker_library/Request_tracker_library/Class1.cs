@@ -1,9 +1,10 @@
 ﻿namespace Request_tracker_library
 {
 
-        public class Employee
-        {
-            int age;
+        public class Employee: IClient
+    {
+        public Department EmployeeDepartment { get; set; }
+        int age;
             DateTime dob;
             public int Id { get; set; }
             public string Name { get; set; } = string.Empty;
@@ -40,24 +41,25 @@
                 Salary = salary;
             }
 
-            public void BuildEmployeeFromConsole()
+            public   virtual void BuildEmployeeFromConsole()
             {
                 Console.WriteLine("Please enter the Name");
                 Name = Console.ReadLine() ?? String.Empty;
                 Console.WriteLine("Please enter the Date of birth");
                 DateOfBirth = Convert.ToDateTime(Console.ReadLine());
-                Console.WriteLine("Please enter the Basic Salary");
-                Salary = Convert.ToDouble(Console.ReadLine());
+
             }
 
-            public void PrintEmployeeDetails()
+            public virtual void PrintEmployeeDetails()
             {
+
                 Console.WriteLine("Employee Id : " + Id);
                 Console.WriteLine("Employee Name " + Name);
                 Console.WriteLine("Date of birth : " + DateOfBirth);
                 Console.WriteLine("Employee Age : " + Age);
                 Console.WriteLine("Employee Salary : Rs." + Salary);
             }
-        }
+
+    }
     }
 
