@@ -1,9 +1,9 @@
 ﻿
 namespace EmployeeManagementSystem
 {
-    public class Amazon : Employee, IGovrules
+    public class Company : Employee, IGovrules
     {
-        public Amazon(int id, string name, string dept, string desig, double basicSalary)
+        public Company(int id, string name, string dept, string desig, double basicSalary)
             : base(id, name, dept, desig, basicSalary)
         {
         }
@@ -53,7 +53,7 @@ namespace EmployeeManagementSystem
 
         public double GratuityAmount(float serviceCompleted, double basicSalary)
         {
-            // Google does not provide gratuity, so return 0
+        
             return 0;
         }
 

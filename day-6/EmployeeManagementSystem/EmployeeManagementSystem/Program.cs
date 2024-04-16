@@ -5,7 +5,7 @@
         void CreateEmployee()
         {
 
-            Amazon amazonEmployee = new Amazon(101, "John Doe", "Development", "Manager", 50000);
+            Company amazonEmployee = new Company(101, "John Doe", "Development", "Manager", 50000);
             Console.WriteLine($"Employee: {amazonEmployee}");
 
             Console.WriteLine($"Gratuity Amount: {amazonEmployee.GratuityAmount(10, amazonEmployee.BasicSalary)}");
