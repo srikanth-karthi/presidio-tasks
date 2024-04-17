@@ -8,6 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="RequestTrackerDALLibrary">
+      <HintPath>..\..\Request_tracker_library\RequestTrackerDALLibrary\bin\Debug\net8.0\RequestTrackerDALLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Request_tracker_library">
       <HintPath>..\..\Request_tracker_library\Request_tracker_library\bin\Debug\net8.0\Request_tracker_library.dll</HintPath>
     </Reference>

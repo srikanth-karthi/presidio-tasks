@@ -1,4 +1,5 @@
 ﻿using Request_tracker_library;
+using RequestTrackerDALLibrary;
 
 namespace RequestTrackerApplication
 {
@@ -17,7 +18,7 @@ namespace RequestTrackerApplication
         }
         void interfacefunction(IClient a)
         {
-            a.PrintEmployeeDetails();
+            //a.PrintEmployeeDetails();
             
         }
 
@@ -137,7 +138,7 @@ namespace RequestTrackerApplication
             Employee employee = null;
             for (int i = 0; i < employees.Length; i++)
             {
-                // if ( employees[i].Id == id && employees[i] != null)//Will lead to exception
+
                 if (employees[i] != null && employees[i].Id == id)
                 {
         
@@ -176,9 +177,15 @@ namespace RequestTrackerApplication
 
         static void Main(string[] args)
         {
-            Program program = new Program();
-            program.EmployeeInteraction();
-    
+            //Program program = new Program();
+            //program.EmployeeInteraction();   
+            DepartmentRepository emp = new DepartmentRepository();
+
+            Console.WriteLine(emp);
+
+
+
+
             //Employee emp = new Employee();
             //emp.BuildEmployeeFromConsole();
             //ContractEmployee employee = new ContractEmployee(101, "Ramu", DateTime.Now, 123213, 1233);
