@@ -23,8 +23,8 @@
                 }
                 else
                 {
-                    Console.WriteLine("Incorrect username or password. Please try again.");
-                    attempts--;
+                    Console.WriteLine("Incorrect username or password. Please try again!!.");
+                    attempts=attempts-1;
                     Console.WriteLine($"You have {attempts} attempts remaining.\n");
                 }
             }
