@@ -24,7 +24,7 @@
                 else
                 {
                     Console.WriteLine("Incorrect username or password. Please try again!!.");
-                    attempts=attempts-1;
+                    attempts--;
                     Console.WriteLine($"You have {attempts} attempts remaining.\n");
                 }
             }
