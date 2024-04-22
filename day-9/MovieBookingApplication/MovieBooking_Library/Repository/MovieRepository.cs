@@ -4,7 +4,7 @@ namespace MovieBooking_Library.Repository
 {
     public class MovieRepository : IRepository<string, Movie>
     {
-        public readonly Dictionary<string, Movie> movies;
+        public static Dictionary<string, Movie> movies;
 
         public MovieRepository()
         {
@@ -14,7 +14,7 @@ namespace MovieBooking_Library.Repository
             Add(new Movie("Titanic", "Romance", 195, new DateTime(2024, 8, 26, 14, 30, 0), 220));
         }
 
-        public Movie Add(Movie movie)
+        public void Add(Movie movie)
         {
             if (movies.ContainsKey(movie.Title))
             {
@@ -22,7 +22,7 @@ namespace MovieBooking_Library.Repository
             }
 
             movies.Add(movie.Title, movie);
-            return movie;
+     
         }
 
         public Movie Delete(string key)

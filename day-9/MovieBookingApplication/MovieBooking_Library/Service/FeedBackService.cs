@@ -29,7 +29,7 @@ namespace MovieBooking_Library.Services
                 throw new ArgumentException($"Movie '{movieTitle}' not found.");
             }
 
-            Add(new Feedback(GenerateFeedbackKey(), username, rating, review));
+            Add(new Feedback(GenerateFeedbackKey(), username, rating, review, movie.Title));
         }
 
 
@@ -52,19 +52,27 @@ namespace MovieBooking_Library.Services
 
             return Update(existingFeedback);
         }
-        public Feedback GetFeedbackByCustomerName(string customerName)
+        public List<Feedback> GetFeedbackByCustomerName(string customerName)
         {
- 
+            List<Feedback> foundFeedbacks = new List<Feedback>();
+
             var feedbacks = GetAll().Values;
             foreach (var feedback in feedbacks)
             {
                 if (feedback.CustomerName.Equals(customerName))
                 {
-                    return feedback;
+                    foundFeedbacks.Add(feedback);
                 }
             }
-            throw new KeyNotFoundException($"Feedback for customer {customerName} not found.");
+
+            if (foundFeedbacks.Count == 0)
+            {
+                throw new KeyNotFoundException($"Feedback for customer {customerName} not found.");
+            }
+
+            return foundFeedbacks;
         }
+
 
         public Feedback DeleteFeedback(string key)
         {

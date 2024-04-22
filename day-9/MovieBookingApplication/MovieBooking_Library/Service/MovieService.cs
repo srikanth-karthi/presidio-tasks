@@ -6,9 +6,14 @@ using System.Collections.Generic;
 
 namespace MovieBooking_Library.Service
 {
-    public class Movieservise: MovieRepository
+    public class Movieservise
     {
-      
+        MovieRepository movieRepository;
+        public Movieservise()
+        {
+            movieRepository = new MovieRepository();
+        }
+
 
 
 
@@ -30,9 +35,11 @@ namespace MovieBooking_Library.Service
 
             Movie newMovie = new Movie(title, genre, duration, screeningTime, price);
 
-         Add(newMovie);
+            movieRepository.Add(newMovie);
 
             Console.WriteLine($"Movie '{title}' added successfully.");
+
+    
         }
 
 
@@ -40,7 +47,7 @@ namespace MovieBooking_Library.Service
         {
             Dictionary<string, Movie> moviesAfterDate = new Dictionary<string, Movie>();
 
-            foreach (var movie in GetAll().Values)
+            foreach (var movie in movieRepository.GetAll().Values)
             {
                 if (movie.ScreeningTime > DateTime.Now)
                 {
@@ -53,7 +60,7 @@ namespace MovieBooking_Library.Service
 
         public Dictionary<string, Movie> ListAllMovies()
         {
-            return GetAll();
+            return movieRepository.GetAll();
         }
     }
 

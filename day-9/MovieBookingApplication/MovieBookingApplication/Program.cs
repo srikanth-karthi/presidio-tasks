@@ -26,8 +26,7 @@ namespace MovieBookingApp
                     Console.WriteLine("\nMenu:");
                     Console.WriteLine("1. Login");
                     Console.WriteLine("2. Register");
-            
-                    Console.WriteLine("4. Exit");
+                    Console.WriteLine("3. Exit");
                     Console.Write("Enter your choice: ");
 
                     string choice = Console.ReadLine();
@@ -70,9 +69,7 @@ namespace MovieBookingApp
                             }
                             break;
 
-                        
-
-                        case "4":
+                        case "3":
                             Console.WriteLine("Exiting application...");
                             return;
 
@@ -106,11 +103,10 @@ namespace MovieBookingApp
                                 Console.Write("Enter price Rs: ");
                                 double price = Convert.ToDouble(Console.ReadLine());
 
-
                                 try
                                 {
                                     movieRepo.AddMovie(title, genre, duration, screeningTime, price);
-                                    movieRepo.PrintAllMovies();
+                            
                                     Console.WriteLine("Movie added successfully!");
                                 }
                                 catch (UserException ex)
@@ -119,18 +115,15 @@ namespace MovieBookingApp
                                 }
                                 break;
 
-                 
-
                             case "2":
                                 Dictionary<string, Movie> allMovies = movieRepo.ListAllMovies();
                                 Console.WriteLine("\nList of Movies:");
-
                                 foreach (var movie in allMovies)
                                 {
-                             
                                     Console.WriteLine(movie);
                                 }
                                 break;
+
                             case "3":
                                 loggedInUser = null;
                                 Console.WriteLine("Logged out successfully!");
@@ -143,26 +136,26 @@ namespace MovieBookingApp
 
                         if (adminChoice == "3")
                         {
-                            break; 
+                            break;
                         }
                     }
                 }
                 else if (loggedInUser.Username != "admin")
                 {
                     Console.WriteLine("\nUser Menu:");
-               
                     Console.WriteLine("1. List Movies");
                     Console.WriteLine("2. Book Ticket");
                     Console.WriteLine("3. Ticket History");
                     Console.WriteLine("4. Review Movie");
-                    Console.WriteLine("5. Logout");
+             
+                    Console.WriteLine("5. View Feedback");
+                    Console.WriteLine("6. Logout");
                     Console.Write("Enter your choice: ");
                     string userChoice = Console.ReadLine();
 
                     switch (userChoice)
                     {
                         case "1":
-
                             Dictionary<string, Movie> allMovies = movieRepo.CurrentMovieList();
                             Console.WriteLine("\nList of Movies:");
                             foreach (var movie in allMovies)
@@ -183,13 +176,12 @@ namespace MovieBookingApp
                             {
                                 Console.WriteLine(ex.Message);
                             }
-
                             catch (ArgumentException ex)
                             {
                                 Console.WriteLine(ex.Message);
                             }
                             break;
-                    
+
                         case "3":
                             Console.WriteLine("Ticket History:");
                             foreach (var booking in loggedInUser.TicketHistory)
@@ -200,8 +192,6 @@ namespace MovieBookingApp
 
                         case "4":
                             Console.WriteLine("Enter your feedback:");
-
-
                             Console.Write("Enter the name of the movie you want to Review: ");
                             string MovieName = Console.ReadLine();
                             Console.Write("Rating (1-5): ");
@@ -216,7 +206,7 @@ namespace MovieBookingApp
 
                             try
                             {
-                                feedbackService.AddReview(MovieName,loggedInUser.Username,  comments, rating);
+                                feedbackService.AddReview(MovieName, loggedInUser.Username, comments, rating);
                                 Console.WriteLine("Feedback submitted successfully!");
                             }
                             catch (UserValidationException ex)
@@ -233,22 +223,39 @@ namespace MovieBookingApp
                             }
                             break;
 
-                        case "5":
+                        case "6":
                             loggedInUser = null;
                             Console.WriteLine("Logged out successfully!");
                             break;
+
+                     
+                        case "5":
+                            try
+                            {
+                                Console.WriteLine("Feedback:");
+                                foreach (var feedback in feedbackService.GetFeedbackByCustomerName(loggedInUser.Username))
+                                {
+                                    Console.WriteLine($"Movie: {feedback.Moviename}, User: {feedback.CustomerName}, Rating: {feedback.Rating}, Comments: {feedback.Comments}");
+                                }
+                            }
+                            catch (KeyNotFoundException ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
+                            break;
+
 
                         default:
                             Console.WriteLine("Invalid choice. Please try again.");
                             break;
                     }
-                    if (userChoice == "5")
+
+                    if (userChoice == "6")
                     {
                         break;
                     }
                 }
             }
-            }
         }
     }
-
+}

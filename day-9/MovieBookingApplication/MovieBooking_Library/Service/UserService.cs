@@ -16,9 +16,9 @@ namespace MovieBooking_Library.Service
             userRepository = new UserRepository();
         }
 
-        public User CreateUser(User newUser)
+        public void CreateUser(User newUser)
         {
-            return userRepository.Add(newUser);
+             userRepository.Add(newUser);
         }
 
         public User LoginUser(string username, string password)

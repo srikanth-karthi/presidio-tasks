@@ -17,14 +17,14 @@ namespace MovieBooking_Library
             };
         }
 
-        public User Add(User item)
+        public void Add(User item)
         {
             if (userDictionary.ContainsKey(item.Username))
             {
                 throw new UserException($"{item.Username} already exists.");
             }
             userDictionary.Add(item.Username, item);
-            return item;
+  
         }
 
         public User Delete(string key)

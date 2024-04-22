@@ -13,11 +13,11 @@ namespace MovieBooking_Library.Repository
             feedbacks = new Dictionary<string, Feedback>();
         }
 
-        public Feedback Add(Feedback feedback)
+        public void Add(Feedback feedback)
         {
             string key = GenerateFeedbackKey();
             feedbacks.Add(key, feedback);
-            return feedback;
+       
         }
 
         public Feedback Delete(string key)

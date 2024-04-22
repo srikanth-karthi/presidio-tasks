@@ -6,13 +6,15 @@ namespace MovieBooking_Library.Models
     {
         public string Key { get; set; }
         public string CustomerName { get; set; }
+        public string Moviename { get; private set; }
         public int Rating { get; set; }
         public string Comments { get; set; }
 
-        public Feedback(string key, string customerName, int rating, string comments)
+        public Feedback(string key, string customerName, int rating, string comments,string moviename)
         {
             Key = key;
             CustomerName = customerName;
+            Moviename = moviename;
             Rating = rating;
             Comments = comments;
         }

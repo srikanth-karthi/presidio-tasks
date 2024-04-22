@@ -7,7 +7,7 @@ namespace MovieBooking_Library.Service
 {
     public class MovieBookingService
     {
-        public readonly MovieRepository movieRepository;
+        private readonly MovieRepository movieRepository;
 
         public MovieBookingService()
         {
@@ -25,16 +25,15 @@ namespace MovieBooking_Library.Service
             {
                 throw new UserValidationException("User must be logged in to book tickets.");
             }
-
-            Dictionary<string, Movie> movies = movieRepository.GetAll();
-            if (!movies.ContainsKey(movieName))
+     
+            if (!MovieRepository.movies.ContainsKey(movieName))
             {
-                throw new ArgumentException($"Movie '{movieName}' not found.");
+                throw new ArgumentException($"Movie '{movieName}' not exists.");
             }
 
-            Movie selectedMovie = movies[movieName];
-            selectedMovie.PrintSeats();
+            Movie selectedMovie = MovieRepository.movies[movieName];
 
+            selectedMovie.PrintSeats();
             Console.Write("Enter number of seats: ");
             int numberOfSeats;
             while (!int.TryParse(Console.ReadLine(), out numberOfSeats) || numberOfSeats < 1 || numberOfSeats > selectedMovie.Seats.Length)

@@ -6,7 +6,7 @@ namespace MovieBooking_Library
     {
         Dictionary<K, T> GetAll();
         T Get(K key);
-        T Add(T item);
+        void Add(T item);
         T Update(T item);
         T Delete(K key);
     }
