@@ -12,7 +12,8 @@ namespace MovieBooking_Library
         {
             userDictionary = new Dictionary<string, User>()
             {
-                { "admin", new User("admin", "password") }
+                { "admin", new User("admin", "password") },
+                  { "s", new User("s", "s") }
             };
         }
 

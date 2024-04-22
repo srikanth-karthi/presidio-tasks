@@ -110,6 +110,7 @@ namespace MovieBookingApp
                                 try
                                 {
                                     movieRepo.AddMovie(title, genre, duration, screeningTime, price);
+                                    movieRepo.PrintAllMovies();
                                     Console.WriteLine("Movie added successfully!");
                                 }
                                 catch (UserException ex)
@@ -123,8 +124,10 @@ namespace MovieBookingApp
                             case "2":
                                 Dictionary<string, Movie> allMovies = movieRepo.ListAllMovies();
                                 Console.WriteLine("\nList of Movies:");
+
                                 foreach (var movie in allMovies)
                                 {
+                             
                                     Console.WriteLine(movie);
                                 }
                                 break;
@@ -151,8 +154,8 @@ namespace MovieBookingApp
                     Console.WriteLine("1. List Movies");
                     Console.WriteLine("2. Book Ticket");
                     Console.WriteLine("3. Ticket History");
-                    Console.WriteLine("5. Review Movie");
-                    Console.WriteLine("4. Logout");
+                    Console.WriteLine("4. Review Movie");
+                    Console.WriteLine("5. Logout");
                     Console.Write("Enter your choice: ");
                     string userChoice = Console.ReadLine();
 
@@ -180,6 +183,7 @@ namespace MovieBookingApp
                             {
                                 Console.WriteLine(ex.Message);
                             }
+
                             catch (ArgumentException ex)
                             {
                                 Console.WriteLine(ex.Message);
@@ -216,6 +220,14 @@ namespace MovieBookingApp
                                 Console.WriteLine("Feedback submitted successfully!");
                             }
                             catch (UserValidationException ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
+                            catch (ArgumentException ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
+                            catch (KeyNotFoundException ex)
                             {
                                 Console.WriteLine(ex.Message);
                             }

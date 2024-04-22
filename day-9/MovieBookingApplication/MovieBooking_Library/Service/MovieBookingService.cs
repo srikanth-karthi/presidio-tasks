@@ -2,38 +2,31 @@
 using MovieBooking_Library.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieBooking_Library.Service
 {
-    public class MovieBookingService: MovieRepository
+    public class MovieBookingService
     {
-
-        readonly private Dictionary<string, Booking> Booking;
+        public readonly MovieRepository movieRepository;
 
         public MovieBookingService()
         {
-            new Dictionary<string, Booking>();
-        }
-        private bool Userauthentication()
-        {
-            if (UserService.loggedInUser == null)
-            {
-                return false;
-            }
-            return true;
+            movieRepository = new MovieRepository();
         }
 
+        private bool UserAuthentication()
+        {
+            return UserService.loggedInUser != null;
+        }
 
         public void BookTicket(string movieName)
         {
-            if (!Userauthentication())
+            if (!UserAuthentication())
             {
                 throw new UserValidationException("User must be logged in to book tickets.");
             }
 
+            Dictionary<string, Movie> movies = movieRepository.GetAll();
             if (!movies.ContainsKey(movieName))
             {
                 throw new ArgumentException($"Movie '{movieName}' not found.");
@@ -60,7 +53,8 @@ namespace MovieBooking_Library.Service
                 if (selectedMovie.Seats[seatNumber - 1])
                 {
                     Console.WriteLine($"Seat {seatNumber} is already booked. Please select another seat.");
-                    BookTicket(movieName); 
+                    BookTicket(movieName);
+                    return;
                 }
                 else
                 {
@@ -68,10 +62,7 @@ namespace MovieBooking_Library.Service
                 }
             }
 
-
-
-            double totalCost = numberOfSeats * selectedMovie.Price; 
-
+            double totalCost = numberOfSeats * selectedMovie.Price;
             UserService.loggedInUser.AddToTicketHistory(new Booking(selectedMovie, selectedMovie.ScreeningTime, UserService.loggedInUser.Username, numberOfSeats, totalCost, GenerateBookingReference()));
         }
 

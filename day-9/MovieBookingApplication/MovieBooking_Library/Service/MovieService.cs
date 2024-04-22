@@ -1,18 +1,16 @@
-﻿using MovieBooking_Library.Models;
+﻿
+using MovieBooking_Library.Models;
 using MovieBooking_Library.Repository;
 using System;
 using System.Collections.Generic;
 
 namespace MovieBooking_Library.Service
 {
-    public class Movieservise
+    public class Movieservise: MovieRepository
     {
-        private MovieRepository movieRepository;
+      
 
-        public Movieservise()
-        {
-            movieRepository = new MovieRepository();
-        }
+
 
         private bool Adminauthentication()
         {
@@ -31,16 +29,18 @@ namespace MovieBooking_Library.Service
             }
 
             Movie newMovie = new Movie(title, genre, duration, screeningTime, price);
-            movieRepository.Add(newMovie);
+
+         Add(newMovie);
 
             Console.WriteLine($"Movie '{title}' added successfully.");
         }
+
 
         public Dictionary<string, Movie> CurrentMovieList()
         {
             Dictionary<string, Movie> moviesAfterDate = new Dictionary<string, Movie>();
 
-            foreach (var movie in movieRepository.GetAll().Values)
+            foreach (var movie in GetAll().Values)
             {
                 if (movie.ScreeningTime > DateTime.Now)
                 {
@@ -53,7 +53,9 @@ namespace MovieBooking_Library.Service
 
         public Dictionary<string, Movie> ListAllMovies()
         {
-            return movieRepository.GetAll();
+            return GetAll();
         }
     }
+
+
 }
