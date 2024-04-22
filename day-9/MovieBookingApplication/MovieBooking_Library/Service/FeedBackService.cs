@@ -1,12 +1,37 @@
-﻿using System;
+﻿using MovieBooking_Library.Models;
+using MovieBooking_Library.Repository;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MovieBooking_Library.Service
+namespace MovieBooking_Library.Services
 {
-    internal class FeedBackService
+    public class FeedBackService : FeedBackRepository
     {
+        private MovieRepository movieRepository;
+
+        public FeedBackService()
+        {
+            movieRepository = new MovieRepository();
+
+        }
+
+        public void AddReview(string movieTitle, string username, string review, int rating)
+        {
+            if (string.IsNullOrWhiteSpace(review))
+            {
+                throw new UserValidationException("Review cannot be empty.");
+            }
+
+
+            Movie movie = movieRepository.Get(movieTitle);
+            if (movie == null)
+            {
+                throw new ArgumentException($"Movie '{movieTitle}' not found.");
+            }
+
+            Add(new Feedback(GenerateFeedbackKey(), username, rating, review));
+        }
+
+
     }
 }

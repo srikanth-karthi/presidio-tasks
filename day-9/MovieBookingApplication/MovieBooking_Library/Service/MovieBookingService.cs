@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MovieBooking_Library.Service
 {
-    public class MovieBookingService : MovieRepository
+    public class MovieBookingService: MovieRepository
     {
 
         readonly private Dictionary<string, Booking> Booking;
@@ -60,7 +60,7 @@ namespace MovieBooking_Library.Service
                 if (selectedMovie.Seats[seatNumber - 1])
                 {
                     Console.WriteLine($"Seat {seatNumber} is already booked. Please select another seat.");
-                    BookTicket(movieName); // Recursive call to re-prompt for seat number
+                    BookTicket(movieName); 
                 }
                 else
                 {
@@ -70,9 +70,8 @@ namespace MovieBooking_Library.Service
 
 
 
-            double totalCost = numberOfSeats * selectedMovie.Price; // Assuming ticket cost is $10 per ticket
+            double totalCost = numberOfSeats * selectedMovie.Price; 
 
-            // Add the booking to the logged-in user's TicketHistory
             UserService.loggedInUser.AddToTicketHistory(new Booking(selectedMovie, selectedMovie.ScreeningTime, UserService.loggedInUser.Username, numberOfSeats, totalCost, GenerateBookingReference()));
         }
 

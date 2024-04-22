@@ -1,6 +1,7 @@
 ﻿using MovieBooking_Library;
 using MovieBooking_Library.Models;
 using MovieBooking_Library.Service;
+using MovieBooking_Library.Services;
 using System;
 using System.Collections.Generic;
 
@@ -13,6 +14,7 @@ namespace MovieBookingApp
             var userRepo = new UserService();
             var movieRepo = new Movieservise();
             var movieBooking = new MovieBookingService();
+            var feedbackService = new FeedBackService();
             User loggedInUser = null;
 
             Console.WriteLine("Welcome to the Movie Booking System!");
@@ -85,7 +87,6 @@ namespace MovieBookingApp
                     {
                         Console.WriteLine("\nAdmin Menu:");
                         Console.WriteLine("1. Add Movie");
-
                         Console.WriteLine("2. List Movies");
                         Console.WriteLine("3. Logout");
                         Console.Write("Enter your choice: ");
@@ -150,6 +151,7 @@ namespace MovieBookingApp
                     Console.WriteLine("1. List Movies");
                     Console.WriteLine("2. Book Ticket");
                     Console.WriteLine("3. Ticket History");
+                    Console.WriteLine("5. Review Movie");
                     Console.WriteLine("4. Logout");
                     Console.Write("Enter your choice: ");
                     string userChoice = Console.ReadLine();
@@ -191,7 +193,35 @@ namespace MovieBookingApp
                                 Console.WriteLine($"Movie: {booking.SelectedMovie.Title}, Screening Time: {booking.ScreeningTime}, Number of Tickets: {booking.NumberOfTickets}, Total Cost: {booking.TotalCost}");
                             }
                             break;
+
                         case "4":
+                            Console.WriteLine("Enter your feedback:");
+
+
+                            Console.Write("Enter the name of the movie you want to Review: ");
+                            string MovieName = Console.ReadLine();
+                            Console.Write("Rating (1-5): ");
+                            int rating;
+                            while (!int.TryParse(Console.ReadLine(), out rating) || rating < 1 || rating > 5)
+                            {
+                                Console.WriteLine("Invalid rating. Please enter a number between 1 and 5.");
+                            }
+
+                            Console.Write("Comments: ");
+                            string comments = Console.ReadLine();
+
+                            try
+                            {
+                                feedbackService.AddReview(MovieName,loggedInUser.Username,  comments, rating);
+                                Console.WriteLine("Feedback submitted successfully!");
+                            }
+                            catch (UserValidationException ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
+                            break;
+
+                        case "5":
                             loggedInUser = null;
                             Console.WriteLine("Logged out successfully!");
                             break;
@@ -200,7 +230,7 @@ namespace MovieBookingApp
                             Console.WriteLine("Invalid choice. Please try again.");
                             break;
                     }
-                    if (userChoice == "4")
+                    if (userChoice == "5")
                     {
                         break;
                     }
