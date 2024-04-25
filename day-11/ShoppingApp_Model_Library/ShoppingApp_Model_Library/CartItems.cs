@@ -19,5 +19,6 @@ namespace ShoppingApp_Model_Library
         public int Quantity { get; set; }
 
 
+
     }
 }

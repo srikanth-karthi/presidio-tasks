@@ -43,7 +43,14 @@ namespace ShoppingApp_BLL
         {
             Cart user = Get(key);
 
-            if (user.CartItems.Sum(cartItem => cartItem.Quantity) + item.Quantity <= 6) user.CartItems.Add(item);
+            if (user.CartItems.Sum(cartItem => cartItem.Quantity) + item.Quantity <= 6)
+            {
+
+                item.CartItemsId=GenerateId();
+                user.CartItems.Add(item);
+            }
+
+
             else throw new MaximumLimitReachedException("maximun card Quantity Reached");
 
             return item;
@@ -58,6 +65,7 @@ namespace ShoppingApp_BLL
 
         public double CheckOut(int key)
         {
+
             Cart user = Get(key);
             double finalPrice = 0;
 
@@ -65,17 +73,16 @@ namespace ShoppingApp_BLL
             {
                 Product product = ProductService.Get(cartItem.Product.PropertyId);
                 finalPrice += cartItem.Quantity * product.Price;
-                product.Stock-=cartItem.Quantity;
-                OrderService.Add(new Orders { ProductName = product.ProductName, Price = finalPrice, Quantity = cartItem.Quantity, ProductId = product.PropertyId });
+                product.Stock -= cartItem.Quantity;
+                OrderService.Add(new Orders { ProductName = product.ProductName, Price = cartItem.Quantity * product.Price, Quantity = cartItem.Quantity, ProductId = product.PropertyId });
             }
 
-            if (finalPrice < 100) _=finalPrice += 100;
-            else if (user.CartItems.Count() >= 3 && finalPrice <= 1500)  _= finalPrice * 0.15;
-
+            if (finalPrice < 100) finalPrice += 100;
+            else if (user.CartItems.Count() >= 3 && finalPrice >= 1500) finalPrice = finalPrice*0.95;
+            Console.WriteLine(finalPrice);
             return finalPrice;
-
-           
         }
+
 
 
 

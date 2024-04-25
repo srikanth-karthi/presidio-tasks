@@ -24,7 +24,7 @@ namespace ShoppingApp_Test
         {
            Product product= productService.Add(product1);
 
-            Assert.AreEqual(product, product1);
+            Assert.AreEqual(product.PropertyId, product1.PropertyId);
         }
         [Test]
         public void Gettest()
@@ -52,9 +52,9 @@ namespace ShoppingApp_Test
         [Test]
         public void Failed_Updatetest()
         {
-            productService.Add(product1);
-            product1.PropertyId = 1000;
-            product1.ProductName = "dove";
+           Product product= productService.Add(product1);
+            product.PropertyId = 1000;
+            product.ProductName = "dove";
         
             Assert.Throws<KeyNotFoundException>(() => productService.Update(product1));
         }

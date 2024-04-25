@@ -16,11 +16,11 @@ namespace ShoppingApp_Model_Library
         public double Price { get; set; }   
 
         public double Stock {  get; set; }
-
         public override string ToString()
         {
             return $"PropertyId: {PropertyId}, ProductName: {ProductName}, ProductDescription: {ProductDescription}, Price: {Price}, Stock: {Stock}";
         }
+
 
     }
 
