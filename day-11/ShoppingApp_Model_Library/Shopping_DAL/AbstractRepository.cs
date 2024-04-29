@@ -7,42 +7,34 @@ using System.Threading.Tasks;
 
 namespace Shopping_DAL
 {
-    public abstract class AbstractRepository<T, K> : IShoppingApp<T, K>
-    {
-        protected IList<T> items = new List<T>();
-
-        public AbstractRepository() { }
-
-        public virtual async Task<T> Add(T item)
+  
+        public abstract class AbstractRepository<T, K> : IShoppingApp<T, K>
         {
-            await Task.Run(() => items.Add(item));
-            return item;
-        }
+            protected  IList<T> items = new List<T>();
 
-        public async Task<bool> Delete(T item)
-        {
-            if (items.Contains(item))
-            {
-                await Task.Run(() => items.Remove(item));
-                return true;
-            }
-            else
-            {
-                throw new KeyNotFoundException($"{item} not found");
-            }
-        }
+            public AbstractRepository() { }
 
-        public abstract Task<T> Get(K key);
-        public async Task<ICollection<T>> GetAll()
+            public virtual T Add(T item)
+            {
+                
+                items.Add(item);
+                return item;
+            }
+
+            public bool Delete(T item) =>
+                items.Contains(item) ? items.Remove(item) : throw new KeyNotFoundException($"{item} not found");
+
+
+            public abstract T Get(K key);
+        public ICollection<T> GetAll()
         {
             var sortedList = items.ToList();
             sortedList.Sort();
             return sortedList;
         }
 
- 
 
-        public abstract Task<T> Update(T item);
+        public abstract T Update(T item);
 
 
             protected int GenerateId()
@@ -52,7 +44,7 @@ namespace Shopping_DAL
                 return count + 1;
             }
 
-       
+
     }
     }
 

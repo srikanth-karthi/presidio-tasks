@@ -10,18 +10,18 @@ namespace ShoppingApp_BLL
 {
     public class OrderServices:AbstractRepository<Orders,int>
     {
-        public override Orders Get(int key) => items.FirstOrDefault(item => item.OrderId == key) ?? throw new KeyNotFoundException("Item not found");
+        public override async Task<Orders>  Get(int key) => items.FirstOrDefault(item => item.OrderId == key) ?? throw new KeyNotFoundException("Item not found");
 
-        public override Orders Add(Orders item)
+        public override async  Task<Orders> Add(Orders item)
         {
             item.OrderId = GenerateId();
-            base.Add(item);
+           await base.Add(item);
             return item;
         }
 
 
 
-        public override Orders Update(Orders item)
+        public override async Task<Orders> Update(Orders item)
         {
             int index = items.ToList().FindIndex(p => p.OrderId == item.OrderId);
 

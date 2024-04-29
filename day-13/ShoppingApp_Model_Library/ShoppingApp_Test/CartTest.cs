@@ -18,7 +18,7 @@ namespace ShoppingApp_Test
         ProductService productService;
 
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
             productService = new ProductService();
             cartService = new CartService(productService);
@@ -26,49 +26,49 @@ namespace ShoppingApp_Test
    
             Product product1 = new Product() { ProductName = "samopoo", ProductDescription = "higenic", Price = 30, Stock = 150 };
             Product product2 = new Product() { ProductName = "sofa", ProductDescription = "good sofa", Price = 500, Stock = 4 };
-            productService.Add(product1);
-            productService.Add(product2);
+           await productService.Add(product1);
+          await  productService.Add(product2);
             cartItem1 = new CartItems() { Product= product1 , Quantity = 1 };
             cartItem2 = new CartItems() {  Product = product2, Quantity = 3 };
-           cart= cartService.Add(new Cart() { UserName = "JohnDoe", CartItems = new List<CartItems>() });
+           cart= await cartService.Add(new Cart() { UserName = "JohnDoe", CartItems = new List<CartItems>() });
         }
 
 
 
         [Test]
-        public void AddToCartTest()
+        public async Task AddToCartTest()
         {
-           cartService.AddToCart(cart.UserId, cartItem1);
+           await cartService.AddToCart(cart.UserId, cartItem1);
             Assert.AreEqual(1, cart.CartItems.Count);
             Assert.AreEqual(cartItem1, cart.CartItems[0]);
         }
-        [Test]
-        public void AddTest()
+      [Test]
+        public async Task AddTest()
         {
-            Cart data = cartService.Add(cart);
+            Cart data = await cartService.Add(cart);
             Console.WriteLine(data.UserId);
-            Cart data2 = cartService.Get(data.UserId);
+            Cart data2 = await cartService.Get(data.UserId);
             Assert.AreEqual(data, data2);
         }
-        [Test]
-        public void FAileAddToCartTest()
+       [Test]
+        public async Task FAileAddToCartTest()
         {
-            Assert.Throws<KeyNotFoundException>(() => cartService.AddToCart(100, cartItem1));
+            Assert.ThrowsAsync<KeyNotFoundException>(async () => await cartService.AddToCart(100, cartItem1));
         }
         [Test]
-        public void AddToCart_Failure_MaximumLimitReached()
+        public async Task AddToCart_Failure_MaximumLimitReached()
         {
             cart.CartItems.Add(new CartItems() { Product = new Product(), Quantity = 4 });
             cart.CartItems.Add(new CartItems() { Product = new Product(), Quantity = 2 });
 
-            Assert.Throws<MaximumLimitReachedException>(() => cartService.AddToCart(cart.UserId, cartItem2));
+            Assert.ThrowsAsync<MaximumLimitReachedException>(async () =>await cartService.AddToCart(cart.UserId, cartItem2));
             Assert.AreEqual(2, cart.CartItems.Count); 
         }
         [Test]
 
 
 
-        public void RemoveFromCartTest()
+        public async Task RemoveFromCartTest()
         {
             cart.CartItems.Add(cartItem1);
             cartService.RemoveFromCart(cart.UserId, 0);
@@ -77,39 +77,39 @@ namespace ShoppingApp_Test
 
 
         [Test]
-        public void RemoveFromCart_Failure_ItemNotFound()
+        public async Task RemoveFromCart_Failure_ItemNotFound()
         {
-            Assert.Throws<KeyNotFoundException>(() => cartService.RemoveFromCart(cart.UserId, 0));
+            Assert.ThrowsAsync<KeyNotFoundException>(async () =>await cartService.RemoveFromCart(cart.UserId, 0));
         }
 
 
 
         [Test]
-        public void CheckOutTest()
+        public async Task CheckOutTest()
         {
-            CartItems c=cartService.AddToCart(cart.UserId,cartItem1);
+            CartItems c= await cartService.AddToCart(cart.UserId,cartItem1);
 
 
             double expectedPrice = cartItem1.Quantity * cartItem1.Product.Price +100;
       
     
-            double finalPrice = cartService.CheckOut(cart.UserId);
+            double finalPrice = await cartService.CheckOut(cart.UserId);
       
             Assert.AreEqual(finalPrice, expectedPrice);
         }
 
         [Test]
-        public void Failed_CheckOut()
+        public async Task Failed_CheckOut()
         {
-            Assert.Throws<KeyNotFoundException>(() => cartService.CheckOut(100));
+            Assert.ThrowsAsync<KeyNotFoundException>(async () =>await cartService.CheckOut(100));
         }
 
         [Test]
 
      
-        public void CheckOut_DiscountApplied()
+        public async Task CheckOut_DiscountApplied()
         {
-            Cart data = cartService.Add(cart);
+            Cart data = await cartService.Add(cart);
 
             cartService.AddToCart(data.UserId,cartItem1);
             cartService.AddToCart(data.UserId, cartItem1);
@@ -118,7 +118,7 @@ namespace ShoppingApp_Test
 
             double expectedPrice = ((cartItem1.Quantity * cartItem1.Product.Price) + (cartItem1.Quantity * cartItem1.Product.Price) + (cartItem2.Quantity * cartItem2.Product.Price)) * 0.95;
             
-            double price = cartService.CheckOut(data.UserId);
+            double price = await cartService.CheckOut(data.UserId);
 
             Assert.AreEqual(expectedPrice, price);
         }

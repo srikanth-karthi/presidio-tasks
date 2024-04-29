@@ -21,17 +21,17 @@ namespace ShoppingApp_BLL
           
             OrderService = new OrderServices();
         }
-        public override async Task<Cart> Get(int key) => items.FirstOrDefault(item => item.UserId == key) ?? throw new KeyNotFoundException("Item not found");
+        public override Cart Get(int key) => items.FirstOrDefault(item => item.UserId == key) ?? throw new KeyNotFoundException("Item not found");
 
-        public override async Task<Cart> Add(Cart item)
+        public override Cart Add(Cart item)
         {
             item.UserId = GenerateId();
-           await base.Add(item);
+            base.Add(item);
             return item;
         }
 
 
-        public override async Task<Cart> Update(Cart item)
+        public override Cart Update(Cart item)
         {
             int index = items.ToList().FindIndex(p => p.UserId == item.UserId);
 
@@ -44,9 +44,9 @@ namespace ShoppingApp_BLL
 
         }
 
-        public async Task<CartItems> AddToCart(int key, CartItems item)
+        public CartItems AddToCart(int key, CartItems item)
         {
-            Cart user = await Get(key);
+            Cart user = Get(key);
 
             if (user.CartItems.Sum(cartItem => cartItem.Quantity) + item.Quantity <= 6)
             {
@@ -62,21 +62,21 @@ namespace ShoppingApp_BLL
         }
 
 
-        public async Task RemoveFromCart(int key, int CartItemsId)
+        public void RemoveFromCart(int key, int CartItemsId)
         {
-            Cart user = await Get(key);
+            Cart user = Get(key);
             if (!user.CartItems.Remove(user.CartItems.FirstOrDefault(item => item.CartItemsId == CartItemsId))) throw new KeyNotFoundException();
         }
 
-        public async Task<double> CheckOut(int key)
+        public double CheckOut(int key)
         {
 
-            Cart user =await Get(key);
+            Cart user = Get(key);
             double finalPrice = 0;
 
             foreach (var cartItem in user.CartItems)
             {
-                Product product =await  ProductService.Get(cartItem.Product.PropertyId);
+                Product product = ProductService.Get(cartItem.Product.PropertyId);
                 finalPrice += cartItem.Quantity * product.Price;
                 product.Stock -= cartItem.Quantity;
                 OrderService.Add(new Orders { ProductName = product.ProductName, Price = cartItem.Quantity * product.Price, Quantity = cartItem.Quantity, ProductId = product.PropertyId });

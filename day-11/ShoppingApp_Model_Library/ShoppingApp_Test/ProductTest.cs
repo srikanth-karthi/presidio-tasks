@@ -12,51 +12,59 @@ namespace ShoppingApp_Test
         Product product;
         Product product1 = new Product() { ProductName = "samopoo",ProductDescription = "higenic",Price = 30,Stock = 150};
         [SetUp]
-        public async Task  Setup()
+        public void Setup()
         {
             productService = new ProductService();
             product = new Product() { ProductName="soap",ProductDescription="higenic",Price=35,Stock=100};
-           await productService.Add(product);
+            productService.Add(product);
         }
 
         [Test]
-        public async Task Addtest()
+        public void Addtest()
         {
-           Product product= await productService.Add(product1);
+           Product product= productService.Add(product1);
 
             Assert.AreEqual(product.PropertyId, product1.PropertyId);
         }
         [Test]
-        public async Task Gettest()
+        public void Gettest()
         {
-            Product product = await productService.Get(1);
+            Product product = productService.Get(1);
 
             Assert.AreEqual(product.PropertyId, 1);
         }
         [Test]
-        public async Task Failed_Gettest()
+        public void Failed_Gettest()
         {
-            Product product = await productService.Get(1);
+            Product product = productService.Get(1);
 
-            Assert.ThrowsAsync<KeyNotFoundException>(async () => await productService.Get(100));
+            Assert.Throws<KeyNotFoundException>(() => productService.Get(100));
         }
         [Test]
-        public async Task Updatetest()
+        public void Updatetest()
         {
-            await productService.Add(product1);
+             productService.Add(product1);
             product1.ProductName = "dove";
-            Product product =await productService.Update(product1);
+            Product product = productService.Update(product1);
 
             Assert.AreEqual(product.ProductName, product1.ProductName);
         }
-
         [Test]
-        public async Task Deletetest()
+        public void Failed_Updatetest()
         {
-          bool Boolean= await productService.Delete(product);
+           Product product= productService.Add(product1);
+            product.PropertyId = 1000;
+            product.ProductName = "dove";
+        
+            Assert.Throws<KeyNotFoundException>(() => productService.Update(product));
+        }
+        [Test]
+        public void Deletetest()
+        {
+          bool Boolean=  productService.Delete(product);
             Assert.IsTrue(Boolean);
         }
-        public async Task Failed_Deletetest()
+        public void Failed_Deletetest()
         {
             Assert.Throws<KeyNotFoundException>(() => productService.Delete(product1));
         }
