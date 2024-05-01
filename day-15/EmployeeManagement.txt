@@ -1,0 +1,143 @@
+CREATE TABLE EMP
+(empno int identity(1,1) CONSTRAINT pk_empno PRIMARY KEY,
+empname varchar(50),
+salary float,
+deptname varchar(50),
+bossno int);
+
+CREATE TABLE DEPARTMENT
+(dept_name varchar(50) CONSTRAINT pk_dept_name PRIMARY KEY,
+dept_floor int,
+dept_phone varchar(10),
+mgrid int CONSTRAINT fk_emp_no FOREIGN KEY REFERENCES EMP(empno));
+
+ALTER TABLE EMP
+ADD CONSTRAINT fk_dept_name FOREIGN KEY (deptname) REFERENCES DEPARTMENT(dept_name),
+    CONSTRAINT fk_boss_no FOREIGN KEY (bossno) REFERENCES EMP(empno);
+
+
+
+CREATE TABLE SALES
+(salesno int identity(1, 1) CONSTRAINT pk_sales_no PRIMARY KEY,
+salesqty int,
+itemname varchar(50) NOT NULL,
+deptname varchar(50) CONSTRAINT fk_dept_name_in_sales FOREIGN KEY REFERENCES DEPARTMENT(dept_name));
+
+CREATE TABLE ITEM
+(itemname varchar(50) CONSTRAINT pk_item_name PRIMARY KEY,
+itemtype varchar(10), 
+itemcolor varchar(10));
+
+ALTER TABLE SALES
+ADD CONSTRAINT fk_item_name_in_sales FOREIGN KEY (itemname) REFERENCES ITEM(itemname)
+
+INSERT INTO EMP (empname, salary, deptname, Bossno)
+VALUES
+('Alice', 75000, NULL, NULL),
+('Ned', 45000, NULL, 1),
+('Andrew', 25000, NULL, 2),
+('Clare', 22000, NULL, 2),
+('Todd', 38000, NULL, 1),
+('Nancy', 22000, NULL, 5),
+('Brier', 43000, NULL, 1),
+('Sarah', 56000, NULL, 7),
+('Sophile', 35000, NULL, 1),
+('Sanjay', 15000, NULL, 3),
+('Rita', 15000, NULL, 4),
+('Gigi', 16000, NULL, 4),
+('Maggie', 11000, NULL, 4),
+('Paul', 15000, NULL, 3),
+('James', 15000, NULL, 3),
+('Pat', 15000, NULL, 3),
+('Mark', 15000, NULL, 3);
+
+
+
+INSERT INTO DEPARTMENT (dept_name, dept_floor, dept_phone, mgrid)
+VALUES
+('Management', 5, '34', 1),
+('Books', 1, '81', 4),
+('Clothes', 2, '24', 4),
+('Equipment', 3, '57', 3),
+('Furniture', 4, '14', 3),
+('Navigation', 1, '41', 3),
+('Recreation', 2, '29', 4),
+('Accounting', 5, '35', 5),
+('Purchasing', 5, '36', 7),
+('Personnel', 5, '37', 9),
+('Marketing', 5, '38', 2);
+
+
+UPDATE EMP
+SET deptname = 
+    CASE Empno
+        WHEN 1 THEN 'Management'
+        WHEN 2 THEN 'Marketing'
+        WHEN 3 THEN 'Marketing'
+        WHEN 4 THEN 'Marketing'
+        WHEN 5 THEN 'Accounting'
+        WHEN 6 THEN 'Accounting'
+        WHEN 7 THEN 'Purchasing'
+        WHEN 8 THEN 'Purchasing'
+        WHEN 9 THEN 'Personnel'
+        WHEN 10 THEN 'Navigation'
+        WHEN 11 THEN 'Books'
+        WHEN 12 THEN 'Clothes'
+        WHEN 13 THEN 'Clothes'
+        WHEN 14 THEN 'Equipment'
+        WHEN 15 THEN 'Equipment'
+        WHEN 16 THEN 'Furniture'
+        WHEN 17 THEN 'Recreation'
+    END;
+
+
+INSERT INTO ITEM (itemname, itemtype, itemcolor)
+VALUES
+('Pocket Knife-Nile', 'E', 'Brown'),
+('Pocket Knife-Avon', 'E', 'Brown'),
+('Compass', 'N', NULL),
+('Geo positioning system', 'N', NULL),
+('Elephant Polo stick', 'R', 'Bamboo'),
+('Camel Saddle', 'R', 'Brown'),
+('Sextant', 'N', NULL),
+('Map Measure', 'N', NULL),
+('Boots-snake proof', 'C', 'Green'),
+('Pith Helmet', 'C', 'Khaki'),
+('Hat-polar Explorer', 'C', 'White'),
+('Exploring in 10 Easy Lessons', 'B', NULL),
+('Hammock', 'F', 'Khaki'),
+('How to win Foreign Friends', 'B', NULL),
+('Map case', 'E', 'Brown'),
+('Safari Chair', 'F', 'Khaki'),
+('Safari cooking kit', 'F', 'Khaki'),
+('Stetson', 'C', 'Black'),
+('Tent - 2 person', 'F', 'Khaki'),
+('Tent -8 person', 'F', 'Khaki');
+
+INSERT INTO SALES VALUES
+(2, 'Pocket Knife-Nile', 'Clothes'), 
+(3, 'Pocket Knife-Nile', 'Recreation'), 
+(2, 'Geo positioning system', 'Navigation'), 
+(1, 'Compass', 'Navigation'), 
+(1, 'Elephant Polo stick', 'Recreation'),
+(2, 'Boots-snake proof', 'Clothes'), 
+(1, 'Pith Helmet', 'Clothes'), 
+(1, 'Sextant', 'Navigation'), 
+(3, 'Hat-polar Explorer', 'Clothes'), 
+(5, 'Pith Helmet', 'Equipment'), 
+(5, 'Map Measure', 'Navigation'), 
+(1, 'Pocket Knife-Nile', 'Navigation'), 
+(1, 'Geo positioning system', 'Books'),
+(1, 'Sextant', 'Books'), 
+(3, 'Pocket Knife-Nile', 'Books'), 
+(1, 'Pocket Knife-Nile', 'Equipment'), 
+(1, 'Sextant', 'Clothes'),
+(1, 'Elephant Polo stick', 'Recreation'), 
+(1, 'Exploring in 10 easy lessons', 'Books'),
+(1, 'Camel Saddle', 'Recreation');
+
+
+SELECT * FROM EMP;
+SELECT * FROM DEPARTMENT;
+SELECT * FROM ITEM;
+SELECT * FROM SALES;
