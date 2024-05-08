@@ -15,21 +15,25 @@ EXEC proc_PrintAuthorsBooks 'Marjorie';
 --2) Create a sp that will take the employee's firtname and print all the titles sold by him/her, price, quantity and the cost.
 -- Alter the stored procedure
 
-create proc proc_GetTitleSoldByEmployee(@firstName VARCHAR(50))
+Alter proc proc_GetTitleSoldByEmployee(@firstName VARCHAR(50))
 AS
 BEGIN
-    SELECT
-        t.title,
-        t.price,
-        s.qty,
-        (s.qty * t.price) AS cost
-    FROM
-        employee e
-        JOIN publishers p ON e.pub_id = p.pub_id
-        JOIN titles t ON p.pub_id = t.pub_id
-        JOIN sales s ON s.title_id = t.title_id
-    WHERE
-        e.fname = @firstName;
+SELECT
+    t.title,
+    t.price,
+    SUM(s.qty) AS total_qty,
+    (SUM(s.qty) * t.price) AS total_cost
+FROM
+    employee e
+    JOIN publishers p ON e.pub_id = p.pub_id
+    JOIN titles t ON p.pub_id = t.pub_id
+    JOIN sales s ON s.title_id = t.title_id
+WHERE
+    e.fname = @firstName
+GROUP BY
+    t.title,
+    t.price;
+
 END
 
 -- Call the stored procedure
@@ -53,31 +57,11 @@ FROM
 
 --4) Create a  query that will float the data from sales,titles, publisher and authors table to print title name, Publisher's name, author's full name with quantity ordered and price for the order for all orders,
 
-SELECT 
-    t.title AS [Book title],
-    p.pub_name AS [Publisher's name],
-    a.au_fname AS AuthorName,
-    SUM(s.qty) AS Quantity,
-    SUM(s.qty * t.price) AS Price
-FROM 
-    publishers p
-    JOIN titles t ON p.pub_id = t.pub_id
-    JOIN titleauthor ta ON t.title_id = ta.title_id
-    JOIN authors a ON ta.au_id = a.au_id
-    JOIN sales s ON s.title_id = t.title_id
-GROUP BY 
-    t.title, p.pub_name, a.au_fname;
-
-
 --print first 5 orders after sorting them based on the price of order
 
-SELECT TOP 5 
-    s.*,
-    SUM(t.price * s.qty) AS TotalPrice
-FROM 
-    sales s
-    JOIN titles t ON t.title_id = s.title_id
-GROUP BY 
-    s.ord_num, s.title_id, s.qty, s.payterms, s.ord_date, s.stor_id
-ORDER BY 
-    TotalPrice desc;
+select t1.title, p.pub_name, t1.Name, t.price, sum(s.qty)'Quantity', sum(t.price*s.qty)'Total Price' from
+(select t.title_id, t.title, STRING_AGG(Concat(a.au_fname ,' ', a.au_fname),', ') 'Name' from titles t join titleauthor ta on ta.title_id = t.title_id 
+join authors a on ta.au_id=a.au_id group by t.title,t.title_id) as t1 join titles t on t1.title_id=t.title_id
+join sales s on s.title_id = t.title_id
+join publishers p on t.pub_id=p.pub_id
+group by t1.title,p.pub_name,t1.Name,t.price order by sum(t.price*s.qty) desc;
