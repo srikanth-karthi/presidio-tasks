@@ -57,9 +57,11 @@ FROM
 
 --4) Create a  query that will float the data from sales, titles, publisher and authors table to print title name, Publisher's name, author's full name with quantity ordered and price for the order for all orders,
 
-select top 5 title, pub_name, concat(a.au_fname,' ', a.au_lname) as [Author Name], qty, (qty * price) as cost from titles t
-join publishers p on t.pub_id = p.pub_id
-join titleauthor ta on ta.title_id = t.title_id
-join authors a on a.au_id = ta.au_id
+--print first 5 orders after sorting them based on the price of order
+
+select t1.title, p.pub_name, t1.Name, t.price, sum(s.qty)'Quantity', sum(t.price*s.qty)'Total Price' from
+(select t.title_id, t.title, STRING_AGG(Concat(a.au_fname ,' ', a.au_fname),', ') 'Name' from titles t join titleauthor ta on ta.title_id = t.title_id 
+join authors a on ta.au_id=a.au_id group by t.title,t.title_id) as t1 join titles t on t1.title_id=t.title_id
 join sales s on s.title_id = t.title_id
-order by cost
+join publishers p on t.pub_id=p.pub_id
+group by t1.title,p.pub_name,t1.Name,t.price order by sum(t.price*s.qty) desc;
