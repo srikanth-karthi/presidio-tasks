@@ -40,6 +40,7 @@ namespace RequestTrackerBLLibrary
         public async Task<List<RequestSolution>> ViewSolutions(int adminId)
         {
             var solutions = await _SolutionRepository.GetAll();
+           
             var adminSolutions = solutions.Where(s => s.SolvedBy == adminId).ToList();
             return adminSolutions;
         }

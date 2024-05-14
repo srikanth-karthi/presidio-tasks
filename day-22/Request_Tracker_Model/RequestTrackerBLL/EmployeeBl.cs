@@ -62,6 +62,7 @@ namespace RequestTrackerBLLibrary
         public async Task<List<RequestSolution>> GetSolutions(int requestId)
         {
             var solutions = await _SolutionRepository.GetAll();
+           
             return solutions.Where(s => s.RequestId == requestId).ToList();
         }
 

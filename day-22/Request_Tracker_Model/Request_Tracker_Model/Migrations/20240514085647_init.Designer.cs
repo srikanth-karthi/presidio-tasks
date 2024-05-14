@@ -12,8 +12,8 @@ using RequestTrackerModelLibrary;
 namespace Request_Tracker_Model.Migrations
 {
     [DbContext(typeof(RequestTrackerContext))]
-    [Migration("20240512140427_update")]
-    partial class update
+    [Migration("20240514085647_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
