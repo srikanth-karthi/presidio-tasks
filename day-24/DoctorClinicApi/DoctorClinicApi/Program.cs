@@ -20,7 +20,11 @@ namespace DoctorClinicApi
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<DoctorClinicContext>();
+            builder.Services.AddDbContext<DoctorClinicContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("default"));
+            });
+
 
             builder.Services.AddScoped<IRepository<Doctor, int>, DoctorRepository>();
 

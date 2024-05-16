@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoctorClinicApi.Migrations
 {
     [DbContext(typeof(DoctorClinicContext))]
-    [Migration("20240514183958_addrow")]
-    partial class addrow
+    [Migration("20240515190401_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

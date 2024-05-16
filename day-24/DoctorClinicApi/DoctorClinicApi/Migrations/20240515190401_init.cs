@@ -33,7 +33,8 @@ namespace DoctorClinicApi.Migrations
                 values: new object[,]
                 {
                     { 1, "srikanth", 2f, "Mbbs" },
-                    { 2, "Barath", 5f, "Mbbs,md" }
+                    { 2, "Barath", 5f, "Mbbs,md" },
+                    { 3, "Sugan", 2f, "Mbbs" }
                 });
         }
 

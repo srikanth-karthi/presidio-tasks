@@ -46,8 +46,8 @@ public class DoctorController : ControllerBase
         }
     }
 
-    [HttpPut("{id}/experience/{experience}")]
-    public async Task<ActionResult<Doctor>> Put(int id, float experience)
+    [HttpPut("{id}/experience")]
+    public async Task<ActionResult<Doctor>> Put(int id, [FromBody]float experience)
     {
         try
         {

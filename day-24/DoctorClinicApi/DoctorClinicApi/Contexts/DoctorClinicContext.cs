@@ -5,10 +5,7 @@ namespace DoctorClinicApi.Contexts
 {
     public class DoctorClinicContext:DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-CUTTLDR\SQLDB;Integrated Security=true;TrustServerCertificate=true;Initial Catalog=dbclinic;");
-        }
+
         public DbSet<Doctor> Doctors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
