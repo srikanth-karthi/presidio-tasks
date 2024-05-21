@@ -13,29 +13,38 @@ namespace RequestTrackerApp.Controllers
     public class EmployeeController: ControllerBase
     {
         private readonly IEmployeeService _EmployeeService;
+        private readonly ILogger<EmployeeController> _logger;
 
-        public EmployeeController(IEmployeeService EmployeeService)
+        public EmployeeController(IEmployeeService EmployeeService,ILogger<EmployeeController> logger)
         {
             _EmployeeService = EmployeeService;
+            _logger= logger;
         }
 
         [HttpPost("register")]
 
         public async Task<IActionResult> Register([FromBody] RegisterDTO user)
         {
-            try
+            if (ModelState.IsValid)
+            {
+                try
             {
                 var registeredUser = await _EmployeeService.Register(user);
-                return Ok(new { message = "Login successful", registeredUser });
+          
+                return Ok(new { message = "Register successful", registeredUser });
             }
             catch (EmailAlreadyFoundException Emailfound)
             {
+                _logger.LogCritical("User Already found");
                 return StatusCode(401, $"An error occurred: {Emailfound.Message}");
             }
             catch (Exception ex)
             {
+                _logger.LogCritical(ex.Message);
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
+            }
+            return BadRequest("All details are not provided. Please check teh object");
         }
         [HttpGet("GetRequests")]
         [Authorize]

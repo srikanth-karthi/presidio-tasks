@@ -14,6 +14,7 @@ namespace RequestTrackerApp.Interface
         public Task<T> Delete(K key);
         public Task<T> Get(K key);
         public Task<IList<T>> GetAll();
+
         
     }
 }

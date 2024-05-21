@@ -17,5 +17,6 @@ namespace RequestTrackerApp.Interface
         Task<List<RequestSolution>> GetSolutions(int requestId);
         Task<bool> GiveFeedback(SolutionFeedback feedback);
         Task<bool> RespondToSolution(SolutionResposnse response);
+        Task<Employee> GetByEmail(string email);
     }
 }

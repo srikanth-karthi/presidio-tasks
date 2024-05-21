@@ -190,6 +190,11 @@ namespace RequestTrackerApp.Service
             await _feedbackRepository.Add(feedback);
             return true;
         }
+        public async Task<Employee> GetByEmail(string email)
+        {
+            var employeeRequestRepository = (EmployeeRequestRepository)_employeeRepository;
+            return await employeeRequestRepository.GetByEmail(email);
+        }
 
         public async Task<bool> RespondToSolution(SolutionResposnse response)
         {
