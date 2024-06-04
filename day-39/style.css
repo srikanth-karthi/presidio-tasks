@@ -1,0 +1,105 @@
+.body {
+    background-color: #000000; 
+    font-family: "Roboto Condensed", sans-serif;
+}
+.first-page {
+  background-color: #ff8553;
+  color: white;
+  padding-bottom: 50px;
+}
+.name {
+  font-size: 70px;
+
+
+}
+.photo {
+  width: 60%;
+  height: 100%;
+  border-radius: 10px;
+}
+.first-page .row-2 {
+  display: flex;
+  align-items: center;
+}
+.sign {
+  width: 250px;
+}
+.about-me {
+  display: flex;
+  width: 90%;
+  margin-left: 250px;
+  flex-direction: column;
+  font-weight: 410;
+  color: #fff;
+
+  font-size: 34px;
+  font-family: "Roboto Condensed", sans-serif;
+}
+.about-me span {
+  margin-top: 20px;
+}
+.role {
+  margin-top: 20px;
+  color: black;
+}
+.article-content {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.article-content .col-2 .row-2 
+{
+    margin-top: 8px;
+}
+.article-content .col-2 .row-3
+{
+    margin-top: 10px;
+}
+.work {
+  width: 480px;
+  size: 40px;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin: 20px;
+}
+.headings {
+  margin: 30px;
+  font-size: 34px;
+  font-weight: 100px;
+  font-family: "Roboto Condensed", sans-serif;
+  display: flex;
+  justify-content: center;
+}
+a {
+    display: inline-block; 
+    text-decoration: none; 
+    cursor: pointer; 
+  }
+  @keyframes fadeIn {
+    0% {opacity: 1;}
+    50% {opacity: 0.5;}
+    100% {opacity: 1;}
+  }
+  
+  a:hover {
+    animation: fadeIn 2s ease-in-out;
+  }
+.linkedin
+{
+    margin-left: 120px;
+}
+  
+  .third-page {
+
+    background-image: linear-gradient(to bottom, #ffffff 0%, #e9ab92 100%);
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    gap: 125px;
+  }
+  svg
+  {
+    cursor: pointer;
+    margin-top: 200px;
+  }
