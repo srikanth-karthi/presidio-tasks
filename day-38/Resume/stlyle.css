@@ -1,0 +1,149 @@
+body {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+}
+.resume-container {
+  background-color: white;
+  width: 900px;
+  padding: 45px;
+}
+.resume-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.resume-header .row-1,.resume-header .row-1
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+.resume-container .resume .resume-header .row-1 {
+  font-weight: bold;
+  font-size: 45px;
+  margin-bottom: 17px;
+ 
+}
+.resume-container .resume-header .row-2 {
+  font-weight: lighter;
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.summary {
+  display: flex;
+  flex-direction: column;
+}
+.summary .summary-heading {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+  color: rgb(57, 32, 197);
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.summary .summary-description {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+.resume-content {
+  display: flex;
+  margin: 20px;
+  margin-top: 80px;
+  
+}
+.resume-content .col-1 {
+  width: 50%;
+}
+.resume-content .col-2 {
+  display: flex;
+  flex-direction: column;
+margin-left: 60px;
+}
+.resume-content .col-1 .row-1 .title-content {
+  margin-left: 30px;
+}
+.title {
+  color: rgb(57, 32, 197);
+  font-size: 25px;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+.sub-Title,
+.sslc ,.Hsc{
+
+  font-weight: 700;
+}
+.cgpa,
+.level {
+  margin: 15px;
+}
+.level
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.sslc span ,.Hsc
+span{
+  font-weight: normal;
+  margin-left: 50px;
+}
+.sslc,.Hsc
+{
+    margin-top: 16px;
+    margin-bottom: 16px;
+    
+}
+.resume-content .col-2
+{
+  display: flex;
+  justify-content: flex-end;
+}
+.list
+{
+ 
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+}
+
+.list li
+{
+ margin-bottom: 20px;
+}
+.title-2
+{
+  margin-top: 30px;
+}
+.list ul li span {
+  font-weight: 600;
+}
+.project-content
+{
+  margin-left: 20px;
+}
+.resume-container .col-2.row-3 .list
+{
+
+}
+.resume-container .col-2.row-3 title
+{
+margin-top: 2px;
+margin-bottom: 4px;
+}
+
+.list-intern  ul li
+{
+  margin-bottom: 12px;
+}
+.desig
+{
+
+  margin: 16px 20px  20px;
+}
