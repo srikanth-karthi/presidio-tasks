@@ -1,0 +1,26 @@
+body {
+  font-family: "Montserrat", sans-serif;
+}
+.title {
+  font-size: 20px;
+}
+.heading {
+  font-size: 50px;
+  margin: 40px;
+  position: relative;
+  left: 70px;
+  margin-bottom: 60px;
+}
+.employee-list,
+.heading {
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+
+}
+a {
+  position: relative;
+  left: 250px;
+}

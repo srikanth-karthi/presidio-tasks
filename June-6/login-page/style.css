@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-color: rgba(33, 72, 192, 1);
+}
+
+.login-container {
+ 
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden; 
+}
+
+.right-image, .left-image {
+    position: fixed;
+}
+
+.right-image {
+    width: 800px; 
+    height: 600px;
+    right: 0;
+    top: 0;
+}
+
+.left-image {
+    width: 350px; 
+    height: 350px;
+    left: 0;
+    bottom: 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px; 
+}
+input
+{
+    font-family: "Montserrat", sans-serif;
+    background-color:transparent;
+    border-color:white;
+    border:1px white solid;
+    color: white;
+    border-radius: 5px;
+
+}
+.input-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-container input {
+    padding-left: 40px; 
+    height: 40px;
+    width: 300px; 
+}
+
+.input-container .input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px; 
+    height: 20px; 
+}
+input::placeholder
+{
+    color: white;
+
+}
+input:focus
+{
+    outline: none;
+
+}
+.cart
+{
+    width: 100px;
+    margin-bottom: 60px;
+}
+button
+{
+    margin-top: 10px;
+    height: 40px;
+    width: 300px;   
+    border-color: white;
+    border-radius: 5px;
+}
+.forget
+{
+    font-family: "Montserrat", sans-serif;
+    color: white;
+    font-size: smaller;
+    position: relative;
+    top:10px;
+    left:90px
+}
