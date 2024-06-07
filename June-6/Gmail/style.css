@@ -1,161 +1,98 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-body {
-  font-family: "Inter", sans-serif;
-}
-
-.table-container {
-  margin: 30px 80px;
-}
-
-.table-header {
-  background: rgba(244, 247, 252, 0.75);
-  padding-bottom: 30px;
-}
-
-.table-header .row-1 {
-  display: flex;
-  padding: 20px;
-  gap: 20px;
-  align-items: center;
-}
-
-.filter {
-  border: 1px solid rgba(161, 169, 184, 1);
-  border-radius: 5px;
-  background-color: white;
-  padding: 10px 15px;
-}
-
-.input-container {
-  display: flex;
-  position: relative;
-  flex-grow: 1;
-}
-
-.input-icon {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  pointer-events: none;
-}
-
-.search {
+.gmail-cointainer {
+  height: 100vh;
   width: 100%;
-  padding: 5px 10px 5px 40px;
-  border-radius: 5px;
-  border: 1px solid rgba(161, 169, 184, 1);
-  font-size: 16px;
 }
-
-.add-image {
-  margin-bottom: 3px;
-  margin-right: 14px;
+.background {
+  z-index: -1;
+  position: fixed;
+  inset: 0;
 }
-
-.table-header .row-2 {
+.background img {
+  height: 100%;
+  width: 100%;
+}
+.gmail-content {
+  height: 100%;
+  width: 100%;
   display: flex;
-  padding: 10px 20px;
-  gap: 20px;
+
 }
 
-.row-2 div {
-  font-family: "Inter", sans-serif;
-  font-weight: 500;
-  flex: 1;
-  text-align: center;
-}
-
-.row-2 .name,
-.row-2 .description {
-  flex: 2;
-}
-
-.table-content {
+.gmail-content .col-1 {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  justify-content: flex-start;
+  margin-top: 50px;
+margin-left: 170px;
+  margin-right: 125px;
+ 
+}
+.gmail-content .col-1 .row-1 {
+  font-size: 40px;
+  width:350px;
+  font-family: "Open Sans", sans-serif;
+}
+.gmil-ui {
+  font-weight: 800;
+  color: rgba(47, 128, 237, 1);
+}
+.gmail-content .col-1 .row-2 {
+  font-family: "Open Sans", sans-serif;
+  margin-left: 50px;
+  margin-top: 40px;
+  font-size: 30px;
+  font-weight: 600;
+
 }
 
-.content {
+.year {
+  font-weight: 800;
+  color: #000;
+}
+.template {
+  font-weight: 600;
+}
+
+.gmail-content .col-2 {
   display: flex;
-  padding: 20px;
+
+  justify-content: center;
   align-items: center;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  gap: 50px;
+  margin-right: 150px;
 }
-.content .status {
-  background-color: rgba(225, 252, 239, 1);
-  margin-inline: 18px;
-  border-radius: 90px;
+
+.gmail-content .col-2 .img-1 img,
+.gmail-content .col-2 .img-2 img {
+  margin-top: 180px;
+  width: 200.41px;
+
 }
-.content .id,.name > :first-child 
+
+.gmail-content .col-2 .img-1 ,.gmail-content .col-2 .img-2
 {
-  font-weight: 500;
+  position: relative;
 }
+.second-img
+{
+  position: absolute;
+z-index: -1;
+left: 33px;
+bottom: 40px;
 
-.content div {
-  font-family: "Inter", sans-serif;
 
-  flex: 1;
-  text-align: center;
 }
-
-.content .name,
-.content .description {
-  flex: 2;
-}
-
-.content .description {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-@media (max-width: 768px) {
-  .table-header .row-2 {
-    display: none;
-  }
-
-  .content {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 15px;
-  }
-
-  .content div {
-    text-align: left;
-  }
-
-  .content .name,
-  .content .description {
-    margin-bottom: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .table-header .row-1 {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-
-  .input-container {
-    flex-grow: unset;
-  }
-
-  .filter,
-  .btn.add {
-    width: 100%;
-    text-align: center;
-  }
+.third-img
+{
+  position: absolute;
+z-index: -1;
+left: 33px;
+bottom: 40px;
 }
