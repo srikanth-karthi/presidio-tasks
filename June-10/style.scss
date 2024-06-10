@@ -1,0 +1,86 @@
+// $box-width: 150px;
+// $box-height: 150px;
+// $gap: 20px;
+
+// @mixin flex-center($display: flex) {
+//     display: $display;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+// body {
+//     @include flex-center;
+//     min-height: 100vh; // Ensure body takes full height of the viewport
+//     margin: 0; // Remove default margin
+// }
+
+// .container {
+//     @include flex-center;
+//     flex-wrap: wrap;
+//     gap: $gap;
+//     width: 800px;
+// }
+
+// .box {
+//     width: $box-width;
+//     height: $box-height;
+//     background-color: #3498db;
+//     color: #fff;
+//     font-size: 2rem;
+//     flex: 1;
+//     @include flex-center;
+    
+//     &:nth-child(2) {
+//         flex: 2; 
+//     }
+// }
+
+// @media (max-width: 768px) {
+//     .box {
+//         width: calc(50% - #{$gap / 2});
+//         height: auto;
+//     }
+// }
+
+// @media (max-width: 480px) {
+//     .box {
+//         width: calc(100% - #{$gap});
+//         height: auto;
+//     }
+// }
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    a {
+        padding: 10px;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        background-color: #555;
+    }
+}
+
+/* Media query for screens smaller than 768px */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .navbar a {
+        padding: 10px 0;
+        width: 100%;
+    }
+}
