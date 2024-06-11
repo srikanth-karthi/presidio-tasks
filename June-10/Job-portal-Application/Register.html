@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <nav>
+      <img src="assets/icon.svg" width="52" height="52" alt="Icon" />
+      <div class="title">JobHuntly</div>
+    </nav>
+    <main>
+      <div class="login-cointainer">
+        <div class="col-1">
+          <img
+            src="assets/login-photo.png"
+            width="306"
+            height="522"
+            class="login-img"
+            alt=""
+            sizes=""
+            srcset=""
+          />
+        </div>
+        <div class="col-2">
+            <div class="tabs">
+                <input type="checkbox" id="job-seeker" class="tab-input" checked>
+                <label for="job-seeker" class="tab-label">Job Seeker</label>
+                <input type="checkbox" id="company" class="tab-input">
+                <label for="company" class="tab-label">Company</label>
+            </div>
+            <h1 class="welcome-message">Get more opportunities</h1>
+        <form>
+          <label for="name">Name</label>
+          <input
+            placeholder="Email Full Name"
+            required
+          />
+          <label for="email">Email</label>
+          <input
+            type="email"
+            placeholder="Email Address"
+            aria-label="Email Address"
+            required
+          />
+          <label for="password">Password</label>
+          <input type="password" placeholder="Password" required />
+          <div class="check-box">
+
+          </div>
+          <button type="submit"><a href="dashboard.html">Continue</a></button>
+
+          <div class="signup">
+            Don’t have an account?
+            <a href="login.html">Sign in</a>
+          </div>
+        </form>
+
+      </div>
+    </main>
+  </body>
+</html>

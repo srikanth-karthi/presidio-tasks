@@ -1,0 +1,398 @@
+@import url("https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap");
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Epilogue", sans-serif;
+  margin: 0;
+  display: flex;
+}
+
+.sidebar {
+  font-family: "Nunito", sans-serif;
+  width: 250px;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s ease;
+}
+#cross {
+  background-color: transparent;
+  border: none;
+  font-size: 30px;
+  font-weight: bold;
+  width: 30px;
+  color: #000;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+#cross:hover {
+  color: #ff0000;
+}
+
+#cross:active {
+  transform: scale(0.9);
+}
+
+
+.menu-button {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  margin-left: 15px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+  padding: 10px;
+}
+
+.menu-button:hover {
+  color: #ff0000;
+}
+
+.menu-button:active {
+  transform: scale(0.9);
+}
+
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.logo .title {
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+  margin-left: 20px;
+  font-family: "Red Hat Display", sans-serif;
+}
+
+.nav-menu {
+  flex: 1;
+}
+
+.nav-item {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.nav-item.selected,
+.nav-item:hover {
+  background-color: #e0e8ff;
+  color: #3b4cc0;
+}
+
+.settings {
+  margin-top: 20px;
+}
+
+.settings-item {
+  font-family: "Nunito", sans-serif;
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.settings-item:hover {
+  background-color: #e0e8ff;
+  color: #3b4cc0;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.profile img {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.expanded {
+  margin-left: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.back-button {
+  padding: 10px 20px;
+  background-color: #e0e8ff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.menu-button {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.overview {
+  margin-bottom: 20px;
+}
+
+.overview h2 {
+  margin: 0 0 10px;
+}
+
+.overview p {
+  margin: 0 0 20px;
+}
+
+.stats {
+  display: flex;
+  margin: 30px;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.stat h3 {
+  font-size: 42px;
+}
+.state {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stat {
+  background-color: #f8f9fa;
+  font-weight: 500;
+  padding: 23px 25px 25px 20px;
+  border-radius: 5px;
+  flex: 1;
+  margin-right: 10px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+canvas {
+  width: 150px;
+  height: 150px;
+}
+
+.chart-container {
+  width: 500px;
+  text-align: center;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.chart-legend .element {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  gap: 10px;
+}
+.legend-text {
+  display: flex;
+  color: #333;
+  gap: 5px;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: "Epilogue", sans-serif;
+}
+
+.color-block {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  margin-right: 10px;
+  border-radius: 2px;
+}
+
+.unsuitable {
+  background-color: #4e44ce;
+}
+
+.interviewed {
+  background-color: #e0e7ff;
+}
+
+.view-applications {
+  display: inline-block;
+  margin-top: 20px;
+  color: #4e44ce;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.applications h2 {
+  font-family: "Epilogue", sans-serif;
+  margin: 30px;
+  font-weight: 500;
+}
+
+.application {
+  margin: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.company-logo {
+  flex: 1;
+}
+.company-details {
+  flex: 2.5;
+}
+.application p {
+  margin: 0 0 10px;
+}
+.applied-date {
+  flex: 1.5;
+}
+
+.status {
+  height: 30px;
+  padding-top: 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  flex: 0.5px;
+  color: #fff;
+  text-align: center;
+}
+
+.status.in-review {
+  background-color: #ffc107;
+}
+
+.status.shortlisted {
+  background-color: #007bff;
+}
+
+.status.declined {
+  background-color: #dc3545;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.hidden {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .menu-button {
+    display: block;
+  }
+  .application
+  {
+    flex-direction: column;
+    text-align: center;
+    gap:20px
+  }
+  .status {
+    width: 120px;
+    height: 33px;
+    padding-bottom: 8px;
+    border-radius: 20px;
+    font-size: 12px;
+
+    color: #fff;
+
+  }
+    .overview h2 ,  .overview p{
+      margin-inline: 20px;
+    }
+  .main-content
+  {
+    margin: 0;
+    padding: 0;
+  }
+  .state
+  {
+    margin: auto;
+    flex-direction: row;
+align-content: center;
+
+  }
+  .chart-container
+  {
+    width: 100%;
+margin-right: 20px;
+  }
+}
