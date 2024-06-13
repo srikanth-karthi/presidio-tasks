@@ -322,25 +322,36 @@ h1 {
 }
 
 .status {
-  height: 30px;
+  height: 40px;
   padding-top: 10px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 18px;
   flex: 0.5px;
-  color: #fff;
+border: 2px solid ;
   text-align: center;
 }
 
-.status.in-review {
-  background-color: #ffc107;
+.status.Applied {
+  border-color:    #ffc107;
+  color:  #ffc107;
+
+}
+.status.Hired {
+  border-color:    rgba(86, 205, 173, 1);
+  color:  rgba(86, 205, 173, 1),
+
 }
 
-.status.shortlisted {
-  background-color: #007bff;
+.status.Interviewed {
+
+  border-color:    #007bff;
+  color:  #007bff;
 }
 
-.status.declined {
-  background-color: #dc3545;
+.status.rejected {
+
+  border-color:   #dc3545;
+  color: #dc3545;
 }
 
 @media (max-width: 768px) {

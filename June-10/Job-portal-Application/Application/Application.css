@@ -1,0 +1,359 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Epilogue:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap");
+
+body {
+  font-family: "Epilogue", sans-serif;
+  margin: 0;
+  display: flex;
+}
+
+.sidebar {
+  font-family: "Nunito", sans-serif;
+  width: 200px;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s ease;
+}
+
+#cross {
+  background-color: transparent;
+  border: none;
+  font-size: 30px;
+  font-weight: bold;
+  width: 30px;
+  color: #000;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+#cross:hover {
+  color: #ff0000;
+}
+
+#cross:active {
+  transform: scale(0.9);
+}
+
+.menu-button {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  margin-left: 15px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+  padding: 10px;
+}
+
+.menu-button:hover {
+  color: #ff0000;
+}
+
+.menu-button:active {
+  transform: scale(0.9);
+}
+
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.logo .title {
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+  margin-left: 20px;
+  font-family: "Red Hat Display", sans-serif;
+}
+
+.nav-menu {
+  flex: 1;
+}
+
+.nav-item {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.nav-item.selected,
+.nav-item:hover {
+  background-color: #e0e8ff;
+  color: #3b4cc0;
+}
+
+.settings {
+  margin-top: 20px;
+}
+
+.settings-item {
+  font-family: "Nunito", sans-serif;
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.settings-item:hover {
+  background-color: #e0e8ff;
+  color: #3b4cc0;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.profile img {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.expanded {
+  margin-left: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.header h1 {
+  font-family: "Nunito", sans-serif;
+  margin: 0;
+}
+
+.back-button {
+  padding: 10px 20px;
+  background-color: #e0e8ff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.menu-button {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+.separator {
+  width: 100% !important;
+  height: 2px;
+  background-color: rgba(214, 221, 235, 1);
+  margin-bottom: 20px;
+}
+.overview {
+  margin-bottom: 20px;
+}
+
+.overview h2 {
+  font-family: "Nunito", sans-serif;
+  margin: 0 0 10px;
+}
+
+.overview p {
+  margin: 0 0 20px;
+}
+
+.tab-container {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(214, 221, 235, 1);
+  margin-bottom: 16px;
+}
+
+.tab-container .tab-item {
+  position: relative;
+  padding: 12px 16px;
+  cursor: pointer;
+  color: #3c3c3c;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.tab-container .tab-item:hover,
+.tab-container .tab-item.active {
+  color: #4a90e2;
+}
+
+.tab-container .tab-item.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: #4a90e2;
+}
+
+.tab-container .tab-item span {
+  color: #a0a0a0;
+
+}
+
+.tab-container .tab-item.active {
+  font-weight: bold;
+}
+
+.tab-container .tab-item.active span {
+  color: #4a90e2;
+}
+
+@media (max-width: 768px) {
+  .tab-container {
+    flex-wrap: wrap;
+  }
+
+  .tab-container .tab-item {
+    flex: 1 1 50%;
+    text-align: center;
+    padding: 8px 12px;
+  }
+}
+
+.applications-list {
+  margin-top: 20px;
+}
+.applications-list h2 {
+  font-family: "Epilogue", sans-serif;
+  font-weight: 500;
+  margin-top: 40px;
+}
+.applications-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#applicationsTable tr:hover {
+  cursor: pointer;
+  background-color: rgba(248, 248, 253, 1);
+}
+.applications-list th,
+.applications-list td {
+  padding: 15px;
+  text-align: left;
+}
+
+.applications-list th {
+  color: rgba(32, 36, 48, 1);
+}
+.status {
+  height: 40px;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 18px;
+
+  border: 2px solid;
+  text-align: center;
+}
+.status.Applied {
+  border-color: #ffc107;
+  color: #ffc107;
+}
+.status.Hired {
+  border-color: rgba(86, 205, 173, 1);
+  color: rgba(86, 205, 173, 1);
+}
+
+.status.Interviewed {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.status.Rejected {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pagination button {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  background: #e0e8ff;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background: #3b4cc0;
+  color: #fff;
+}
+
+.pagination button:disabled {
+  background: #f0f0f0;
+  cursor: not-allowed;
+}
+.data-center {
+  height: fit-content;
+}
+.status-td {
+  display: flex;
+  justify-content: center;
+}
+.status-th {
+  text-align: center !important;
+}
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.hidden {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .menu-button {
+    display: inline-block;
+  }
+
+  .main-content.expanded {
+    margin-left: 0;
+  }
+}
