@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find Jobs</title>
+    <link rel="stylesheet" href="findjobs.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="sidebar" id="sidebar">
+      <nav class="logo">
+        <button id="cross">x</button>
+        <img
+          src="../assets/icon.svg"
+          width="42"
+          height="42"
+          alt="Icon"
+          id="company-logo"
+        />
+        <div class="title">JobHuntly</div>
+      </nav>
+      <nav class="nav-menu">
+        <a href="#" class="nav-item">Dashboard</a>
+        <a href="#" class="nav-item">My Applications</a>
+        <a href="../FindJobs/findjobs.html" class="nav-item selected"
+          >Find Jobs</a
+        >
+        <a href="#" class="nav-item">Browse Companies</a>
+        <a href="#" class="nav-item">My Public Profile</a>
+      </nav>
+      <div class="settings">
+        <a href="#" class="settings-item">Settings</a>
+        <a href="#" class="settings-item">Help Center</a>
+      </div>
+      <div class="profile">
+        <img src="https://via.placeholder.com/40" alt="Profile Picture" />
+        <div>
+          <p>Jake Gyll</p>
+          <p>jakegyll@email.com</p>
+        </div>
+      </div>
+    </div>
+    <div class="main-content" id="main-content">
+      <header class="header">
+        <button class="menu-button" id="menuButton">☰</button>
+        <h1>Find Jobs</h1>
+        <button class="back-button">Back to homepage</button>
+      </header>
+      <div class="separator"></div>
+      <div class="search-bar">
+        <div class="search-box">
+          <img src="../assets/search-icon.svg" alt="Search Icon" />
+          <input
+            type="text"
+            placeholder="Job title or keyword"
+            id="title-input"
+            list="title-list"
+          />
+          <datalist id="title-list"></datalist>
+        </div>
+        <div class="search-box">
+          <img src="../assets/company-icon.svg" alt="Search Icon" />
+          <input
+            type="text"
+            placeholder="Company Name"
+            id="company-input"
+            list="company-list"
+          />
+          <datalist id="company-list"></datalist>
+        </div>
+        <div class="search-box">
+          <img src="../assets/location-icon.svg" alt="Location Icon" />
+          <input type="text" placeholder="Location" id="location-input" />
+
+          <button id="search-button">Search</button>
+        </div>
+      </div>
+      <div class="job-content">
+        <div class="filters" id="filters">
+          <div class="filter-group">
+            <button class="toggle-button">
+              <span>Type of Employment </span>
+              <img src="../assets/down-arrow.svg" alt="Search Icon" />
+            </button>
+            <div class="toggle-content">
+              <div>
+                <input type="checkbox" id="full-time" />
+                <label for="full-time">Full-Time</label>
+              </div>
+              <div>
+                <input type="checkbox" id="part-time" />
+                <label for="part-time">Part-Time</label>
+              </div>
+              <div>
+                <input type="checkbox" id="remote" />
+                <label for="remote">Remote</label>
+              </div>
+              <div>
+                <input type="checkbox" id="internship" />
+                <label for="internship">Internship</label>
+              </div>
+              <div>
+                <input type="checkbox" id="contract" />
+                <label for="contract">Freelance</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <button class="toggle-button">
+              <span>Job Level</span>
+              <img src="../assets/down-arrow.svg" alt="Search Icon" />
+            </button>
+            <div class="toggle-content">
+              <div>
+                <input type="checkbox" id="entry-level" />
+                <label for="entry-level">Entry Level</label>
+              </div>
+              <div>
+                <input type="checkbox" id="mid-level" />
+                <label for="mid-level">Mid Level</label>
+              </div>
+              <div>
+                <input type="checkbox" id="senior-level" />
+                <label for="senior-level">Senior Level</label>
+              </div>
+              <div>
+                <input type="checkbox" id="director" />
+                <label for="director">Director</label>
+              </div>
+              <div>
+                <input type="checkbox" id="vp" />
+                <label for="vp">VP or Above</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <button class="toggle-button">
+              <span>Salary Range (in LPA)</span>
+              <img src="../assets/down-arrow.svg" alt="Search Icon" />
+            </button>
+            <div class="toggle-content">
+              <div>
+                <input type="checkbox" id="1-5-lpa" />
+                <label for="1-5-lpa">1 LPA - 5 LPA</label>
+              </div>
+              <div>
+                <input type="checkbox" id="5-10-lpa" />
+                <label for="5-10-lpa">5 LPA - 10 LPA</label>
+              </div>
+              <div>
+                <input type="checkbox" id="10-20-lpa" />
+                <label for="10-20-lpa">10 LPA - 20 LPA</label>
+              </div>
+              <div>
+                <input type="checkbox" id="20-plus-lpa" />
+                <label for="20-plus-lpa">20 LPA or above</label>
+              </div>
+              <div class="range-slider">
+                <label for="salary-range">Select Range:<span id="range-values"></span></label>
+                <input
+                  type="range"
+                  id="salary-range-min"
+                  name="salary-range-min"
+                  min="1"
+                  max="100"
+                  value="1"
+                  oninput="updateSliderValue()"
+                />
+                <input
+                  type="range"
+                  id="salary-range-max"
+                  name="salary-range-max"
+                  min="1"
+                  max="100"
+                  value="100"
+                  oninput="updateSliderValue()"
+                />
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="job-content-right">
+          <div class="job-header">
+            <h1>All Jobs</h1>
+
+            <div class="sort-and-view">
+              <label for="sort" class="sort-label">Sort by:</label>
+              <select id="sort" class="sort-select">
+                <option value="relevant">Most relevant</option>
+                <option value="applied">First Applied</option>
+              </select>
+              <button id="list-view-button" class="view-button active">
+                <img
+                  id="list-view-img"
+                  src="../assets/list-active.svg"
+                  alt="List View"
+                />
+              </button>
+              <button id="grid-view-button" class="view-button">
+                <img
+                  id="grid-view-img"
+                  src="../assets/grid.svg"
+                  alt="Grid View"
+                />
+              </button>
+            </div>
+          </div>
+
+          <div class="job-list" id="job-list"></div>
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <script src="findjobs.js"></script>
+  </body>
+</html>

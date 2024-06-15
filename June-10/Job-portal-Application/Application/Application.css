@@ -284,8 +284,8 @@ body {
   text-align: center;
 }
 .status.Applied {
-  border-color: #ffc107;
-  color: #ffc107;
+  border-color: rgba(255, 184, 54, 1);
+  color: rgba(255, 184, 54, 1);
 }
 .status.Hired {
   border-color: rgba(86, 205, 173, 1);
@@ -293,13 +293,13 @@ body {
 }
 
 .status.Interviewed {
-  border-color: #007bff;
-  color: #007bff;
+  border-color: rgba(70, 64, 222, 1);
+  color:rgba(70, 64, 222, 1)
 }
 
 .status.Rejected {
-  border-color: #dc3545;
-  color: #dc3545;
+  border-color: rgba(255, 101, 80, 1);
+  color:  rgba(255, 101, 80, 1)
 }
 .pagination {
   margin-top: 20px;
