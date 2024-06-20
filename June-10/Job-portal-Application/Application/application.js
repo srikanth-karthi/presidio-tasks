@@ -375,7 +375,7 @@ function renderTable(page) {
       tr.innerHTML = `
           <td>${i + 1}</td>
           <td>
-              <img src="../assets/dropbox.svg" alt="${row.companyName} logo" style="width:50px; height:auto; vertical-align:middle; margin-right:10px;">
+              <img src="../assets/Company.png" alt="${row.companyName} logo" style="width:50px; height:auto; vertical-align:middle; margin-right:10px;">
               ${row.companyName}
           </td>
           <td>${row.roles}</td>
