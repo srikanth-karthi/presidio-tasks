@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.page {
+    padding: 2rem;
+    text-align: center;
+}
+.quotesContainer{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.quote {
+        background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.quote p {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.quote small {
+    color: #777;
+    font-style: italic;
+}
