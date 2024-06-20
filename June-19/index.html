@@ -34,15 +34,21 @@
 
     </div>
 
-    <div id="quotes" class="page container mt-5" style="display: none;">
-        <h1>Quotes</h1>
-        <div id="quotesContainer" class="quotesContainer"></div>
-        <div id="pagination" class="d-flex justify-content-center align-items-center mt-4">
-            <button id="prevPage" class="btn btn-primary">Previous</button>
-            <span id="pageInfo" class="mx-3"></span>
-            <button id="nextPage" class="btn btn-primary">Next</button>
-        </div>
+<!-- Inside quotes page -->
+<div id="quotes" class="page container mt-5" style="display: none;">
+    <h1>Quotes</h1>
+    <div class="input-group mb-3">
+        <input type="text" id="authorSearchInput" class="form-control" placeholder="Search by author...">
+        <button id="authorSearchBtn" class="btn btn-outline-secondary" type="button">Search</button>
     </div>
+    <div id="quotesContainer" class="quotesContainer row"></div>
+    <div id="pagination" class="d-flex justify-content-center align-items-center mt-4">
+        <button id="prevPage" class="btn btn-primary">Previous</button>
+        <span id="pageInfo" class="mx-3"></span>
+        <button id="nextPage" class="btn btn-primary">Next</button>
+    </div>
+</div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="script.js"></script>
