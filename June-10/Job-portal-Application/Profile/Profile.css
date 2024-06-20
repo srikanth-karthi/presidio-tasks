@@ -169,7 +169,50 @@ body {
 #cross:active {
   transform: scale(0.9);
 }
+.file-upload {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  padding: 20px;
+  border: 2px dashed blue;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+}
 
+.file-upload input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-upload span {
+  display: block;
+  font-size: 16px;
+  color: #007bff;
+  margin-bottom: 5px;
+}
+
+.file-upload small {
+  display: block;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.remove-file-btn {
+  display: none;
+  margin-bottom: 25px;
+  padding: 5px 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 .menu-button {
   background-color: transparent;
   border: none;
@@ -315,8 +358,96 @@ body {
   background-color: rgba(214, 221, 235, 1);
   margin-bottom: 20px;
 }
+.profile-container
+{
+  display: flex;
+  gap: 20px;
+  flex: 1;
+}
+.profile-container-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-section {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.edit-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon img {
+  width: 20px;
+  height: 20px;
+}
+
+.detail-text {
+  font-size: 14px;
+  color: #333;
+}
+
+.detail-text:empty::after {
+  content: "Not provided";
+  color: #999;
+  font-style: italic;
+}
+
+/* Optional: Adjust text color for better visibility */
+.profile-section h2, .detail-text {
+  color: #444;
+}
+
+.detail-item .icon img {
+  vertical-align: middle;
+}
+
+.detail-item .icon img,
+.detail-item .detail-text {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.details-container .detail-item {
+  padding: 5px 0;
+}
+.profile-container-right 
+{
+  flex:1
+}
 .profile-container-left {
-  width: 650px;
+flex:2
 }
 .profile-header {
   display: flex;
@@ -436,8 +567,9 @@ background-color: #fff;
 {
 display: flex;
 align-items: center;
+align-content: center;
 gap: 30px;
-justify-content: space-between;
+justify-content: center;
 }
 .search-bar input, .search-bar select {
 
