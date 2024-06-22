@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", async function () {
-  const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODFjYzdiLWJjMjctNDIxZS05YmNhLTMyZDRjOGIzOGYyYiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlVzZXIiLCJleHAiOjE3MTkwNTI1MzZ9.YWtLpwZQURa8SFaBzFGWv3-qrtlhm0MXSvVArzdOulo"
+  const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzM2FhMjk2LTdiZmMtNDM4Mi1hNTE4LTQ5MjBmZTNhZjIyNCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlVzZXIiLCJleHAiOjE3MTkyMzAwOTZ9.WFtMKNEp3LwHBN4dEJIHoUzB-1iobSpGSNsZ41HlzMc"
   localStorage.setItem("authToken", token);
 
   const baseUrl = "http://localhost:5117/";
 
   async function fetchData(url, httpMethod = "GET", body = null, isFileUpload = false) {
-    try {
+
       const headers = {
         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
       };
@@ -19,17 +19,17 @@ document.addEventListener("DOMContentLoaded", async function () {
         headers: headers,
         body: isFileUpload ? body : body ? JSON.stringify(body) : undefined,
       });
-  
+
+
+      if(response.status==401)  { window.location.href = "Auth/login.html";}
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const errorMessage = `Error ${response.status}: ${response.statusText}`;
+        throw new Error(errorMessage);
       }
   
       const data = await response.json();
       return data; 
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      throw error;
-    }
+
   }
 
 
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const editAboutMeBtn = document.querySelector(".edit-about-me");
   const addExperienceModal = document.getElementById("addExperienceModal");
   const addEducationModal = document.getElementById("addEducationModal");
-  const skillsModal = document.getElementById("skilsModal");
+  const skillsModal = document.getElementById("skillsModal");
   const expSubmitBtnAdd = document.getElementById("Exp-submitBtn-add");
   const expSubmitBtnUpdate = document.getElementById("Exp-submitBtn-update");
   const eduSubmitBtnAdd = document.getElementById("Edu-submitBtn-add");
@@ -67,7 +67,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   const institutionNameInput = document.getElementById("institutionName");
   const levelInput = document.getElementById("level");
   const startYearInput = document.getElementById("startYear");
-  const endYearInput = document.getElementById("endYear");
+  const isCurrentlyStudyingCheckbox = document.getElementById('isCurrentlyStudying');
+    const endYearInput = document.getElementById('endYear');
   const percentageInput = document.getElementById("percentage");
   const isCurrentlyStudyingInput = document.getElementById("isCurrentlyStudying");
   const skillsList = document.getElementById("skills-list");
@@ -82,7 +83,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   const updateAoiBtn = document.getElementById("update-aoi-btn");
   const addAoiBtn = document.getElementById("add-aoi-btn");
   const aoiContainer = document.querySelector(".aoi-items");
-
+  var editAdditionalDetailsModal= document.getElementById('editAdditionalDetailsModal');
+  var editBtn = document.querySelector('.edit-Aditional-details');
+  var updateDetailsForm = document.getElementById('editAdditionalDetailsForm');
 
   crossButton.style.display = "none";
 
@@ -109,7 +112,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   });
 
   const userprofile = await fetchData("api/User/profile");
-  console.log(userprofile);
+
   const skillsArray = await fetchData("api/Skill");
 
   const jobTitles = await fetchData("api/Title");
@@ -130,17 +133,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   aboutMeText.textContent = userprofile.aboutMe;
 
 
-  var editAdditionalDetailsModal= document.getElementById('editAdditionalDetailsModal');
-  var editBtn = document.querySelector('.edit-Aditional-details');
-
-  var updateDetailsForm = document.getElementById('editAdditionalDetailsForm');
 
 
   document.querySelector('.detail-text.phone').textContent=  userprofile. phoneNumber
   document.querySelector('.detail-text.email').textContent=  userprofile. email
  document.querySelector('.detail-text.dob').textContent=   new Date(  userprofile.   dob).toLocaleDateString('en-US');
 document.querySelector('.detail-text.address').textContent=userprofile.  address
-document.querySelector('.detail-text.portfolio').textContent =   userprofile.portfolioLink
+document.querySelector('.detail-text.portfolio').innerHTML = userprofile.portfolioLink ? `<a href="${userprofile.portfolioLink}" class="portfolio-link" target="_blank" rel="noopener noreferrer">${userprofile.portfolioLink}</a>`:null
+
 
 
   editBtn.addEventListener('click', ()=>
@@ -168,63 +168,78 @@ document.querySelector('.detail-text.portfolio').textContent =   userprofile.por
 
   updateDetailsForm.addEventListener('submit', async function(event) {
     event.preventDefault();
-    
-
+  
     var formData = new FormData(updateDetailsForm);
   
 
+    var email =formData.get('modal-email');
     var phoneNumber = formData.get('modal-phone');
-    if (!/^\d{10}$/.test(phoneNumber)) {
-      showToast('warning', 'Warning', 'Phone number must be 10 digits.');
+    var dob = formData.get('modal-dob');
+    var address = formData.get('modal-address');
+    var portfolioLink = formData.get('modal-portfolio');
+  
+
+    if ( !phoneNumber.trim() || !dob.trim() || !address.trim()) {
+      showToast('warning', 'Warning', 'Please fill in all required fields.');
       return;
     }
   
 
-    var portfolioLink = formData.get('modal-portfolio');
+    if (!/^\d{10}$/.test(phoneNumber)) {
+      showToast('warning', 'Warning', 'Phone number must be 10 digits.');
+      return;
+    }
+
     if (portfolioLink.length > 200) {
       showToast('warning', 'Warning', 'Portfolio link should not exceed 200 characters.');
       return;
     }
   
-
     var updatedDetails = {
       city: userprofile.city,
       resumeUrl: userprofile.resumeUrl,
       aboutMe: userprofile.aboutMe,
       name: userprofile.name,
-      email: formData.get('modal-email'),
-      phoneNumber: phoneNumber, 
-      dob: formData.get('modal-dob'),
-      address: formData.get('modal-address'),
+      email: email,
+      phoneNumber: phoneNumber,
+      dob: dob,
+      address: address,
       portfolioLink: portfolioLink
     };
   
     try {
-
       const updateResponse = await fetchData(`api/User/update`, "PUT", updatedDetails);
-      
   
       userprofile.email = updateResponse.email;
       userprofile.phoneNumber = updateResponse.phoneNumber;
       userprofile.dob = updateResponse.dob;
       userprofile.address = updateResponse.address;
       userprofile.portfolioLink = updateResponse.portfolioLink;
-      
-
+  
       document.querySelector('.detail-text.phone').textContent = userprofile.phoneNumber;
       document.querySelector('.detail-text.email').textContent = userprofile.email;
       document.querySelector('.detail-text.dob').textContent = new Date(userprofile.dob).toLocaleDateString('en-US');
       document.querySelector('.detail-text.address').textContent = userprofile.address;
-      document.querySelector('.detail-text.portfolio').textContent = userprofile.portfolioLink;
-      yaervalidation(userprofile.dob); 
+      document.querySelector('.detail-text.portfolio').innerHTML = userprofile.portfolioLink ? `<a href="${userprofile.portfolioLink}" class="portfolio-link" target="_blank" rel="noopener noreferrer">${userprofile.portfolioLink}</a>` : null;
   
+      yaervalidation(userprofile.dob);
+  
+      showToast('success', 'Success', 'Profile details updated successfully');
     } catch (error) {
-      console.error("Error updating data:", error);
-      showToast('error', 'Error', 'Failed to update user details. Please try again later.');
+      console.error("Error updating profile details:", error);
+  
+      if (error.message.includes("401")) {
+        showToast('error', 'Unauthorized', 'Unauthorized access. Please login again.');
+      } else if (error.message.includes("404")) {
+        showToast('error', 'Not Found', 'User profile not found.');
+      } else {
+        showToast('error', 'Error', 'An error occurred while updating profile details.');
+      }
     }
-
-    editAdditionalDetailsModal.style.display = 'none'; 
+  
+    editAdditionalDetailsModal.style.display = 'none';
   });
+  
   
 
   viewResumeBtn.addEventListener('click', function(event) {
@@ -251,7 +266,11 @@ document.querySelector('.detail-text.portfolio').textContent =   userprofile.por
 
   profileSubmitBtn.addEventListener('click', async (event) => {
       event.preventDefault();
-
+      if (! editNameInput.value.trim() || ! editLocationInput.value.trim() ) {
+        showToast('warning', 'Warning', 'Please fill in all required fields.');
+        return;
+      }
+    
       const updatedProfile = {
           dob: userprofile.dob,
           name: editNameInput.value,
@@ -264,16 +283,32 @@ document.querySelector('.detail-text.portfolio').textContent =   userprofile.por
       };
 
       try {
-          const updateResponse = await fetchData(`api/User/update`, "PUT", updatedProfile);
-          userprofile.city = updateResponse.city;
-          userprofile.name = updateResponse.name;
-          userName.innerText = userprofile.name;
-          userLocation.innerHTML = `
-              <img src="../assets/profile-location-icon.svg" alt="Location Icon"> ${userprofile.city}
-          `;
+        const updateResponse = await fetchData(`api/User/update`, "PUT", updatedProfile);
+        
+
+        userprofile.city = updateResponse.city;
+        userprofile.name = updateResponse.name;
+        
+
+        userName.innerText = userprofile.name;
+        userLocation.innerHTML = `
+          <img src="../assets/profile-location-icon.svg" alt="Location Icon"> ${userprofile.city}
+        `;
+      
+        showToast('success', 'Success', 'Profile updated successfully');
       } catch (error) {
-          console.error("Error updating data:", error);
+        console.error("Error updating profile:", error);
+      
+        if (error.message.includes("401")) {
+          showToast('error', 'Unauthorized', 'Unauthorized access. Please login again.');
+
+        } else if (error.message.includes("404")) {
+          showToast('error', 'Not Found', 'User profile not found.');
+        } else {
+          showToast('error', 'Error', 'An error occurred while updating profile.');
+        }
       }
+      
 
       const profilePic = fileInput.files[0];
       if (profilePic) {
@@ -281,13 +316,30 @@ document.querySelector('.detail-text.portfolio').textContent =   userprofile.por
           formData.append("logo", profilePic);
 
           try {
-              const uploadResponse = await fetchData("api/User/upload-User-profilepicture", "POST", formData, true);
-              console.log("Profile picture uploaded successfully:", uploadResponse);
-              profilePictureContainer.innerHTML = `<img src="${uploadResponse.logoUrl}" alt="User Profile Picture" />`;
-              userprofile.profilePictureUrl = uploadResponse.logoUrl;
+            const uploadResponse = await fetchData("api/User/upload-User-profilepicture", "POST", formData, true);
+   
+            
+
+            profilePictureContainer.innerHTML = `<img src="${uploadResponse.logoUrl}" alt="User Profile Picture" />`;
+            
+
+            userprofile.profilePictureUrl = uploadResponse.logoUrl;
+          
+            showToast('success', 'Success', 'Profile picture uploaded successfully');
           } catch (error) {
-              console.error("Error uploading profile picture:", error);
+            console.error("Error uploading profile picture:", error);
+          
+            if (error.message.includes("401")) {
+              showToast('error', 'Unauthorized', 'Unauthorized access. Please login again.');
+
+            } else if (error.message.includes("500")) {
+              showToast('error', 'Server Error', 'Server error. Please try again later.');
+            } else {
+              showToast('error', 'Error', 'An error occurred while uploading profile picture.');
+            }
           }
+          
+          
       }
 
       addProfileModal.style.display = "none";
@@ -339,9 +391,12 @@ document.querySelector('.detail-text.portfolio').textContent =   userprofile.por
       const aboutMeContainer = document.getElementById("about-me-container");
       const textarea = document.getElementById("about-me-textarea");
       const updatedText = textarea.value;
-
+      
+      if (!updatedText) {
+        showToast('warning', 'Warning', 'About Me cannot be empty.');
+        return;
+      }
       const paragraph = document.createElement("p");
-
       const updateAboutMe = {
           dob: userprofile.dob,
           name: userprofile.name,
@@ -354,13 +409,18 @@ document.querySelector('.detail-text.portfolio').textContent =   userprofile.por
       };
 
       try {
-          const updateResponse = await fetchData(`api/User/update`, "PUT", updateAboutMe);
-          userprofile.aboutMe = updateResponse.aboutMe;
-          paragraph.textContent = updateResponse.aboutMe;
+        const updateResponse = await fetchData(`api/User/update`, "PUT", updateAboutMe);
+        userprofile.aboutMe = updateResponse.aboutMe;
+        paragraph.textContent = updateResponse.aboutMe;
+        showToast('success', 'Success', 'About Me updated successfully');
       } catch (error) {
-          console.error("Error updating data:", error);
-          paragraph.textContent = updatedText; 
+        if (error.message.includes("404")) {
+          showToast('error', 'Error', 'User not found. Please try again later.');
+        } else {
+          showToast('error', 'Error', 'An error occurred while updating About Me. Please try again later.');
+        }
       }
+      
 
       paragraph.id = "about-me-text";
       aboutMeContainer.innerHTML = "";
@@ -372,6 +432,7 @@ document.querySelector('.detail-text.portfolio').textContent =   userprofile.por
   }
 
   function populateData(selectId, options, displayKey, valueKey, selectedValues = []) {
+
       const select = document.getElementById(selectId);
       options.forEach((option) => {
           const optionElement = document.createElement("option");
@@ -396,7 +457,7 @@ document.querySelector('.detail-text.portfolio').textContent =   userprofile.por
  
   let activeToasts = [];
 
-   function showToast(type, message1, message2, duration = 5000) {
+   function showToast(type, message1, message2, duration = 2000) {
     const toastContainer = document.createElement('div');
     toastContainer.classList.add('toast', type);
   
@@ -544,24 +605,32 @@ yaervalidation(userprofile.dob);
       "Add Education";
   });
 
-
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'long' };
+    return date.toLocaleDateString(undefined, options);
+  }
 function renderExperience() {
   experiencesContainer.innerHTML = ``;
   experiences.forEach(function (experience) {
+
     const newExperience = document.createElement("div");
     newExperience.classList.add("experience");
     newExperience.innerHTML = `
-      <h3 class="job-title">${experience.titleName}
-        <button class="edit-btn edit-experience">
-          <img src="../assets/edit.svg" width="20" height="20">
-        </button>
-        <button class="delete-btn delete-experience">
-          <img src="../assets/delete.svg" width="20" height="20">
-        </button>
-      </h3>
-      <p><strong class="company-name">${experience.companyName}</strong></p>
-      <p class="dates">${experience.startYear} - ${experience.endYear}</p>
-      <p>${experience.experienceDuration}</p>
+    <div class="job-title">
+  ${experience.titleName}
+  <button class="edit-btn edit-experience">
+    <img src="../assets/edit.svg" width="20" height="20">
+  </button>
+  <button class="delete-btn delete-experience">
+    <img src="../assets/delete.svg" width="20" height="20">
+  </button>
+</div>
+      <p><strong class="degree-level">${experience.companyName  }</strong></p>
+
+<div class="dates">${ formatDate(experience.startYear)} - ${formatDate(experience.endYear)}</div>
+${experience.experienceDuration > 0 ? `<div class="duration">${experience.experienceDuration} Years</div>` : ''}
+
     `;
     experiencesContainer.appendChild(newExperience);
   });
@@ -599,9 +668,10 @@ function renderEducation() {
   educations.forEach(function (education) {
     const newEducation = document.createElement("div");
     newEducation.classList.add("education");
+
     const dates = education.isCurrentlyStudying
-      ? `Currently Studying (Started ${education.startYear})`
-      : `${education.startYear} - ${education.endYear}`;
+      ? `Currently Studying (Started ${formatDate(education.startYear)})`
+      : `${formatDate(education.startYear)} - ${formatDate(education.endYear)}`;
 
     newEducation.innerHTML = `
       <h3 class="institution-name">${education.institutionName}
@@ -644,9 +714,19 @@ function assignExperienceEventListeners() {
   document.querySelectorAll(".delete-experience").forEach(function (deleteButton, index) {
     deleteButton.addEventListener("click", async function () {
       const experienceId = experiences[index].experienceId;
-      await fetchData(`api/UserExperience/${experienceId}`, "DELETE");
-      experiences.splice(index, 1);
-      renderExperience();
+      try {
+        await fetchData(`api/UserExperience/${experienceId}`, "DELETE");
+        experiences.splice(index, 1);
+        renderExperience();
+        showToast('success', 'Success', 'Experience deleted successfully');
+      } catch (error) {
+        if (error.message.includes("404")) {
+          showToast('error', 'Error', 'Experience not found. Please try again later.');
+        } else {
+          showToast('error', 'Error', 'An error occurred while deleting the experience. Please try again later.');
+        }
+      }
+      
     });
   });
 }
@@ -673,9 +753,19 @@ function assignEducationEventListeners() {
   document.querySelectorAll(".delete-education").forEach(function (deleteButton, index) {
     deleteButton.addEventListener("click", async function () {
       const educationId = educations[index].educationId;
-      await fetchData(`api/UserEducation/${educationId}`, "DELETE");
-      educations.splice(index, 1);
-      renderEducation();
+      try {
+        await fetchData(`api/UserEducation/${educationId}`, "DELETE");
+        educations.splice(index, 1);
+        renderEducation();
+        showToast('success', 'Success', 'Education deleted successfully');
+      } catch (error) {
+        if (error.message.includes("404")) {
+          showToast('error', 'Error', 'Education not found. Please try again later.');
+        } else {
+          showToast('error', 'Error', 'An error occurred while deleting the education. Please try again later.');
+        }
+      }
+      
     });
   });
 }
@@ -685,8 +775,18 @@ function assignAoiEventListeners() {
   document.querySelectorAll(".delete-aoi").forEach((deleteButton, index) => {
     deleteButton.addEventListener("click", async function () {
       const AreasOfInterestId = useraoi[index].areasOfInterestId;
-      await fetchData(`api/UserAreasOfInterest/${AreasOfInterestId}`, "DELETE");
-      useraoi.splice(index, 1);
+      try {
+        await fetchData(`api/UserAreasOfInterest/${AreasOfInterestId}`, "DELETE");
+        useraoi.splice(index, 1);
+        showToast('success', 'Success', 'Area of interest deleted successfully')
+      } catch (error) {
+        if (error.message.includes("404")) {
+          showToast('error', 'Error', 'Area of interest not found. Please try again later.');
+        } else {
+          showToast('error', 'Error', 'An error occurred while deleting the area of interest. Please try again later.');
+        }
+      }
+      
       renderAOI();
     });
   });
@@ -734,14 +834,31 @@ expSubmitBtnAdd.addEventListener("click", async function (event) {
     titleId: jobTitle,
   };
 
-  experienceData = await fetchData(`api/UserExperience`, "POST", experienceData);
-  experienceData.titleName = experienceData.title.titleName;
-  experiences.push(experienceData);
-  addExperienceForm.reset();
-  renderExperience();
+  try {
+    experienceData = await fetchData(`api/UserExperience`, "POST", experienceData);
+    experienceData.titleName = experienceData.title.titleName;
+    experiences.push(experienceData);
+    addExperienceForm.reset();
+    renderExperience();
+    showToast('success', 'Success', 'Experience added successfully')
+  } catch (error) {
+    if (error.message.includes("400")) {
+      showToast('error', 'Error', 'Bad request. Please check your input.');
+    } else {
+      showToast('error', 'Error', 'An error occurred while adding experience. Please try again later.');
+    }
+  }
+  
   addExperienceModal.style.display = "none";
 });
-
+isCurrentlyStudyingCheckbox.addEventListener('change', () => {
+  if (isCurrentlyStudyingCheckbox.checked) {
+      endYearInput.value = "";
+      endYearInput.disabled = true;
+  } else {
+      endYearInput.disabled = false;
+  }
+});
 expSubmitBtnUpdate.addEventListener("click", async function (event) {
   event.preventDefault();
 
@@ -771,14 +888,26 @@ expSubmitBtnUpdate.addEventListener("click", async function (event) {
     titleId: jobTitle,
   };
 
-  updateExperience = await fetchData(`api/UserExperience`, "PUT", updateExperience);
-
-  const index = experiences.findIndex((exp) => exp.experienceId === updateExperience.experienceId);
-  updateExperience.titleName = updateExperience.title.titleName;
-  experiences[index] = updateExperience;
-
-  addExperienceForm.reset();
-  renderExperience();
+  try {
+    updateExperience = await fetchData(`api/UserExperience`, "PUT", updateExperience);
+  
+    const index = experiences.findIndex((exp) => exp.experienceId === updateExperience.experienceId);
+    updateExperience.titleName = updateExperience.title.titleName;
+    experiences[index] = updateExperience;
+  
+    addExperienceForm.reset();
+    renderExperience();
+    showToast('success', 'Success', 'Experience updated successfully')
+  } catch (error) {
+    if (error.message.includes("400")) {
+      showToast('error', 'Error', 'Bad request. Please check your input.');
+    } else if (error.message.includes("404")) {
+      showToast('error', 'Error', 'Experience not found. Please try again later.');
+    } else {
+      showToast('error', 'Error', 'An error occurred while updating experience. Please try again later.');
+    }
+  }
+  
   addExperienceModal.style.display = "none";
 });
 
@@ -792,7 +921,7 @@ eduSubmitBtnAdd.addEventListener("click", async function (event) {
   const percentage = parseFloat(percentageInput.value);
   const isCurrentlyStudying = isCurrentlyStudyingInput.checked;
 
-  if (!institutionName || !level || !startYearString || (!isCurrentlyStudying && !endYearString)) {
+  if (!institutionName.trim() || !level.trim() || !startYearString.trim()  || (!isCurrentlyStudying && !endYearString.trim() ) || !percentage) {
     showToast('warning', 'Warning', 'Please fill in all required fields');
     return;
   }
@@ -818,11 +947,22 @@ eduSubmitBtnAdd.addEventListener("click", async function (event) {
     isCurrentlyStudying,
   };
 
-  const addedEducation = await fetchData(`api/UserEducation`, "POST", educationData);
-  educations.push(addedEducation);
-
-  addEducationForm.reset();
-  renderEducation();
+  try {
+    const addedEducation = await fetchData(`api/UserEducation`, "POST", educationData);
+    educations.push(addedEducation);
+    addEducationForm.reset();
+    renderEducation();
+    showToast('success', 'Success', 'Education added successfully');
+  } catch (error) {
+    if (error.message.includes("400")) {
+      showToast('error', 'Error', 'Bad request. Please check your input.');
+    } else if (error.message.includes("401")) {
+      showToast('error', 'Error', 'Unauthorized access. Please login again.');
+    } else {
+      showToast('error', 'Error', 'An error occurred while adding education. Please try again later.');
+    }
+  }
+  
   addEducationModal.style.display = "none";
 });
 
@@ -836,11 +976,10 @@ eduSubmitBtnUpdate.addEventListener("click", async function (event) {
   const percentage = parseFloat(percentageInput.value);
   const isCurrentlyStudying = isCurrentlyStudyingInput.checked;
 
-  if (!institutionName || !level || !startYearString || (!isCurrentlyStudying && !endYearString)) {
+  if (!institutionName.trim() || !level.trim() || !startYearString.trim()  || (!isCurrentlyStudying && !endYearString.trim() ) || !percentage) {
     showToast('warning', 'Warning', 'Please fill in all required fields');
     return;
   }
-
   const startYear = new Date(startYearString).toISOString().split("T")[0];
   const endYear = isCurrentlyStudying ? null : new Date(endYearString).toISOString().split("T")[0];
 
@@ -854,22 +993,37 @@ eduSubmitBtnUpdate.addEventListener("click", async function (event) {
   }
   
   const educationId = addEducationForm.getAttribute("data-education-id");
-  const updateEducation = {
+  let updateEducation = {
     educationId,
     institutionName,
     level,
     startYear,
     endYear,
     percentage,
-    isCurrentlyStudying,
+    isCurrentlyStudying
   };
-
-  const updatedEducation = await fetchData(`api/UserEducation`, "PUT", updateEducation);
-  const index = educations.findIndex((edu) => edu.educationId === updatedEducation.educationId);
-  educations[index] = updatedEducation;
+  
+  try {
+    updateEducation = await fetchData(`api/UserEducation`, "PUT", updateEducation);
+    const index = educations.findIndex((edu) => edu.educationId === updateEducation.educationId);
+  educations[index] = updateEducation;
 
   addEducationForm.reset();
   renderEducation();
+    showToast('success', 'Success', 'Education updated successfully');
+  } catch (error) {
+
+  
+    if (error.message.includes("400")) {
+      showToast('error', 'Error', 'Enter proper Input');
+    } else if (error.message.includes("404")) {
+      showToast('error', 'Error', 'Education not found. Please try again later.');
+    } else {
+      showToast('error', 'Error', 'Internal Server Error. Please try again later.');
+    }
+  }
+  
+
   addEducationModal.style.display = "none";
 });
 
@@ -887,11 +1041,26 @@ addAoiBtn.addEventListener("click", async function (event) {
     titleId: jobTitle,
   };
 
-  const addedAoi = await fetchData("api/UserAreasOfInterest", "POST", newAreaOfInterest);
-  addedAoi.titleName = addedAoi.title.titleName;
-  useraoi.push(addedAoi);
-  renderAOI();
-  addAreaOfInterestForm.reset()
+  try {
+    const addedAoi = await fetchData("api/UserAreasOfInterest", "POST", newAreaOfInterest);
+    addedAoi.titleName = addedAoi.title.titleName;
+    useraoi.push(addedAoi);
+    
+
+    renderAOI();
+    addAreaOfInterestForm.reset();
+  
+    showToast('success', 'Success', 'Area of Interest added successfully');
+  } catch (error) {
+    if (error.message.includes("400")) {
+      showToast('error', 'Error', 'Enter proper input');
+    } else if (error.message.includes("404")) {
+      showToast('error', 'Error', 'Area of Interest not found. Please try again later.');
+    } else {
+      showToast('error', 'Error', 'Internal Server Error. Please try again later.');
+    }
+  }
+  
   addAreaOfInterestModal.style.display = "none";
 });
 
@@ -902,18 +1071,33 @@ updateAoiBtn.addEventListener("click", async function (event) {
   const titleId = formData.get("title");
   const AreasOfInterestId = addAreaOfInterestForm.getAttribute("data-aoi-id");
 
-  const updatedAoi = await fetchData("api/UserAreasOfInterest", "PUT", {
-    areasOfInterestId: AreasOfInterestId,
-    lpa: lpa,
-    titleId: titleId,
-  });
+  try {
+    const updatedAoi = await fetchData("api/UserAreasOfInterest", "PUT", {
+      areasOfInterestId: AreasOfInterestId,
+      lpa: lpa,
+      titleId: titleId,
+    });
+  
+    updatedAoi.titleName = jobTitles.find(jobTitle => jobTitle.titleId === updatedAoi.titleId).titleName;
+  
+    const index = useraoi.findIndex(aoi => aoi.areasOfInterestId === updatedAoi.areasOfInterestId);
+    useraoi[index] = updatedAoi;
+  
 
-  updatedAoi.titleName = jobTitles.find(jobTitle => jobTitle.titleId == updatedAoi.titleId).titleName;
-  const index = useraoi.findIndex(aoi => aoi.areasOfInterestId === updatedAoi.areasOfInterestId);
-  useraoi[index] = updatedAoi;
-
-  addAreaOfInterestForm.reset();
-  renderAOI();
+    addAreaOfInterestForm.reset();
+    renderAOI();
+  
+    showToast('success', 'Success', 'Area of Interest updated successfully');
+  } catch (error) {
+    if (error.message.includes("400")) {
+      showToast('error', 'Error', 'Enter proper input');
+    } else if (error.message.includes("404")) {
+      showToast('error', 'Error', 'Area of Interest not found. Please try again later.');
+    } else {
+      showToast('error', 'Error', 'Internal Server Error. Please try again later.');
+    }
+  }
+  
   addAreaOfInterestModal.style.display = "none";
 });
 document.querySelectorAll('.close').forEach(closeBtn => {
@@ -983,16 +1167,29 @@ document.querySelectorAll('.close').forEach(closeBtn => {
             )
         ).map((filteredSkill) => filteredSkill.skillId),
       };
+      try {
+        const skillsresponse = await fetchData("api/User/skills", "POST", requestBody);
+      
 
-      skillsresponse = await fetchData("api/User/skills", "POST", requestBody);
-      UserSkillsArray = updateUserSkillsArray(
-        UserSkillsArray,
-        skillsresponse,
-        skillsArray
-      );
-      console.log(UserSkillsArray);
-      renderSkills();
-      skilsModal.style.display = "none";
+        UserSkillsArray = updateUserSkillsArray(UserSkillsArray, skillsresponse, skillsArray);
+      
+        renderSkills();
+      
+        showToast('success', 'Success', 'Skills added successfully');
+      } catch (error) {
+        console.error("Error adding skills:", error);
+      
+        if (error.message.includes("400")) {
+          showToast('error', 'Error', 'Bad request. Please check your input.');
+        } else if (error.message.includes("401")) {
+          showToast('error', 'Error', 'Unauthorized access. Please login again.');
+ 
+        } else {
+          showToast('error', 'Error', 'An error occurred while adding skills. Please try again later.');
+        }
+      }
+      
+      skillsModal.style.display = "none";
     });
 
 
