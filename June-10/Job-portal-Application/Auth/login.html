@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <link rel="stylesheet" href="Auth.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
+
   </head>
   <body>
     <nav>
@@ -12,7 +14,7 @@
       <div class="title">JobHuntly</div>
     </nav>
     <main>
-      <div class="login-cointainer">
+      <div class="login-container">
         <div class="col-1">
           <img
             src="../assets/login-photo.png"
@@ -24,36 +26,31 @@
             srcset=""
           />
         </div>
-        <div class="col-2">
+        <div class="col-2" style="margin-top: 50px;">
             <div class="tabs">
-                <input type="checkbox" id="job-seeker" class="tab-input" checked>
-                <label for="job-seeker" class="tab-label">Job Seeker</label>
-                <input type="checkbox" id="company" class="tab-input">
-                <label for="company" class="tab-label">Company</label>
+              <input type="radio" id="job-seeker" name="user-type" class="tab-input" checked />
+              <label for="job-seeker" class="tab-label">Job Seeker</label>
+              <input type="radio" id="company" name="user-type" class="tab-input" />
+              <label for="company" class="tab-label">Company</label>
             </div>
             <h1 class="welcome-message">Welcome Back, Dude</h1>
-        <form>
+        <form id="loginForm">
           <label for="email">Email</label>
-          <input
-            type="email"
-            placeholder="Email Address"
-            aria-label="Email Address"
-            required
-          />
+          <input type="email" id="email" placeholder="Email Address" aria-label="Email Address" required />
           <label for="password">Password</label>
-          <input type="password" placeholder="Password" required />
+          <input type="password" id="password" placeholder="Password" required />
           <div class="check-box">
-            <input type="checkbox" name="" id="" />
-            <label for="checkbox">Remember me</label>
+              <input type="checkbox" id="remember" />
+              <label for="remember">Remember me</label>
           </div>
-          <button type="submit"><a href="dashboard/dashboard.html">Login</a></button>
-
+          <button type="submit">Login</button>
           <div class="signup">
-            Don’t have an account?
-            <a href="Register.html">Sign up</a>
+              Don’t have an account?
+              <a href="Register.html">Sign up</a>
           </div>
         </form>
       </div>
     </main>
+    <script src="login.js"></script>
   </body>
 </html>
