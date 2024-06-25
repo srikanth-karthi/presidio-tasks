@@ -1,77 +1,242 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const canvas = document.getElementById("donutChart");
-    const ctx = canvas.getContext("2d");
+import { fetchData } from "../Pakage/api.js";
+import { showToast } from "../Pakage/toster.js";
+// document.addEventListener("DOMContentLoaded", async function() {
+  if(!localStorage.getItem('authToken'))
+    {
+      window.location.href = "/Auth/login.html?authid=3";
 
-    const data = {
-        unsuitable: 60,
-        interviewed: 40
+    }
+    
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+  
+  
+    const authid = getQueryParam('authid');
+  
+  if(authid==1)
+    {
+      showToast('success', 'Success', 'Login Sucessfull.');
+    }
+
+  const profileElement = document.querySelector(".profile");
+  const nameElement = document.querySelector('.name');
+  const appliedCountElement = document.querySelector(".Applied-count");
+  const interviewedCountElement = document.querySelector(".interviewed-count");
+  const canvas = document.getElementById("donutChart");
+  const applicationsContainer = document.getElementById('applicationsContainer');
+  const menuButton = document.getElementById('menuButton');
+  const sidebar = document.getElementById('sidebar');
+  const companyLogo = document.getElementById('company-logo');
+  const crossButton = document.getElementById('cross');
+  const mainContent = document.querySelector('.main-content');
+  const legendElements = document.querySelectorAll(".chart-legend .element .legend-text .percentage");
+
+  try {
+    const userProfile = await fetchData("api/User/profile");
+    const firstName = userProfile.name.split(' ')[0];
+
+    const profileData = {
+      name: firstName,
+      email: userProfile.email,
+      profileUrl: userProfile.profilePictureUrl
     };
 
-    function drawSegment(startAngle, endAngle, color) {
+    localStorage.setItem("profile", JSON.stringify(profileData));
+
+    profileElement.innerHTML = `
+      <img src="${profileData.profileUrl?profileData.profileUrl :'../assets/profile.png' }" width="60" height="60" alt="" />
+      <div>
+        <p>${profileData.name}</p>
+        <p>${profileData.email}</p>
+      </div>
+    `;
+
+    nameElement.textContent = profileData.name;
+  } catch (error) {
+    console.log(error)
+    if (error.message.includes("401")) {
+      console.log("sisydg")
+    }
+  }
+
+  async function fetchJobHistory() {
+    try {
+      const jobHistory = await fetchData("api/JobActivity/user/appliedjobs");
+
+      const data = {
+        offered: 0,
+        interviewed: 0,
+        applied: 0,
+        rejected: 0
+      };
+
+      const JobStatus = {
+        Applied: 'Applied',
+        Interviewed: 'Interviewed',
+        Hired: 'Hired',
+        Rejected: 'Rejected'
+      };
+
+      jobHistory.forEach(job => {
+        switch (job.jobStatus) {
+          case JobStatus.Hired:
+            data.offered += 1;
+            break;
+          case JobStatus.Interviewed:
+            data.interviewed += 1;
+            break;
+          case JobStatus.Applied:
+            data.applied += 1;
+            break;
+          case JobStatus.Rejected:
+            data.rejected += 1;
+            break;
+        }
+      });
+
+      appliedCountElement.textContent = jobHistory.length;
+      interviewedCountElement.textContent = data.interviewed;
+
+      const total = data.offered + data.interviewed + data.applied + data.rejected;
+
+      if (total > 0) {
+        data.offered = Number(((data.offered / total) * 100).toFixed(1));
+        data.interviewed = Number(((data.interviewed / total) * 100).toFixed(1));
+        data.applied = Number(((data.applied / total) * 100).toFixed(1));
+        data.rejected = Number(((data.rejected / total) * 100).toFixed(1));
+      }
+
+      const recentJobHistory = jobHistory.slice(0, 3);
+
+      const ctx = canvas.getContext("2d");
+      const colors = {
+        rejected: "#C4E4FF",
+        interviewed: "#393ebc",
+        applied: "#98ABEE",
+        offered: "#201658"
+      };
+
+      function drawSegment(startAngle, endAngle, color) {
         ctx.beginPath();
         ctx.arc(100, 100, 70, startAngle, endAngle);
         ctx.arc(100, 100, 50, endAngle, startAngle, true);
         ctx.fillStyle = color;
         ctx.fill();
-    }
-
-    function animateChart(duration) {
-        const total = data.unsuitable + data.interviewed;
-        const unsuitableAngle = (data.unsuitable / total) * 2 * Math.PI;
-        const interviewedAngle = (data.interviewed / total) * 2 * Math.PI;
+      }
+      
+      function animateChart(duration) {
+        const total = data.offered + data.interviewed + data.applied + data.rejected;
+        const angles = {
+          offered: (data.offered / total) * 2 * Math.PI,
+          interviewed: (data.interviewed / total) * 2 * Math.PI,
+          applied: (data.applied / total) * 2 * Math.PI,
+          rejected: (data.rejected / total) * 2 * Math.PI
+        };
 
         let start = null;
 
         function animate(time) {
             if (!start) start = time;
             const progress = Math.min((time - start) / duration, 1);
-
+        
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            drawSegment(0, unsuitableAngle * progress, "#4e44ce");
-            drawSegment(unsuitableAngle * progress, unsuitableAngle * progress + interviewedAngle * progress, "#e0e7ff");
-
+        
+            let startAngle = 0;
+            Object.keys(angles).forEach((key) => {
+              const endAngle = startAngle + angles[key] * progress;
+              drawSegment(startAngle, endAngle, colors[key]);
+              startAngle = endAngle;
+            });
+        
             if (progress < 1) {
-                requestAnimationFrame(animate);
+              requestAnimationFrame(animate);
             }
+          }
+        
+          requestAnimationFrame(animate);
         }
+        
+        animateChart(2000);
 
-        requestAnimationFrame(animate);
+      legendElements[0].textContent = `${data.offered}%`;
+      legendElements[1].textContent = `${data.interviewed}%`;
+      legendElements[2].textContent = `${data.applied}%`;
+      legendElements[3].textContent = `${data.rejected}%`;
+
+      function getStatusClass(status) {
+        switch (status) {
+          case "Applied":
+            return "status Applied";
+          case "Hired":
+            return "status Hired";
+          case "Interviewed":
+            return "status Interviewed";
+          case "Rejected":
+            return "status Rejected";
+          default:
+            return "status";
+        }
+      }
+
+      recentJobHistory.forEach(app => {
+        const applicationDiv = document.createElement('div');
+        applicationDiv.classList.add('application');
+
+        applicationDiv.innerHTML = `
+          <div class="company-logo">
+          <img src="${app.logourl ? app.logourl : '../assets/Company.png'}" width="62" height="62" alt="Icon" />
+        
+          </div>
+          <div class="company-details">
+            <p style="margin-bottom: 13px; font-weight: 600;">${app.companyName}</p>
+            <p>${app.titleName}</p>
+          </div>
+          <div class="applied-date">
+            <p>Date Applied</p>
+            <p>${app.appliedDate}</p>
+          </div>
+          <span class="${getStatusClass(app.jobStatus)}">${app.jobStatus}</span>
+        `;
+
+        applicationsContainer.appendChild(applicationDiv);
+      });
+
+    } catch (error) {
+        if (error.message.includes("404")) {
+        document.querySelector(".stats").style.display='none'
+        document.querySelector(".applications").style.display='none'
+        document.querySelector(".description").style.display='none'
+        document.querySelector(".notfound").style.display='block'
+
+        }
+           else {            showToast('error', 'Server Error', 'Server error. Please try again later.');
+          } 
+
     }
+  }
 
-    animateChart(2000); 
+  fetchJobHistory();
 
+  menuButton.addEventListener('click', function() {
+    sidebar.classList.toggle('hidden');
+    companyLogo.style.display = 'none';
+    crossButton.style.display = 'block';
+    mainContent.classList.toggle('expanded');
+  });
 
-    document.querySelector(".chart-legend .element:nth-child(1) .legend-text .percentage").textContent = `${data.unsuitable}%`;
-    document.querySelector(".chart-legend .element:nth-child(2) .legend-text .percentage").textContent = `${data.interviewed}%`;
-});
-
- document.getElementById('cross').style.display='none';
-
-    
-
-document.getElementById('menuButton').addEventListener('click', function() {
-    document.getElementById('sidebar').classList.toggle('hidden');
- document.getElementById('company-logo').style.display = 'none';
-
-    document.getElementById('cross').style.display='block';
-    document.querySelector('.main-content').classList.toggle('expanded');
-});
-
-document.getElementById('cross').addEventListener('click', function() {
-    const sidebar = document.getElementById('sidebar');
-    const companyLogo = document.getElementById('company-logo');
-    const crossButton = document.getElementById('cross');
-    const mainContent = document.querySelector('.main-content');
-
+  crossButton.addEventListener('click', function() {
     sidebar.classList.toggle('hidden');
     mainContent.classList.toggle('expanded');
 
     if (companyLogo.style.display === 'none' || companyLogo.style.display === '') {
-        companyLogo.style.display = 'block';
-        crossButton.style.display = 'none';
+      companyLogo.style.display = 'block';
+      crossButton.style.display = 'none';
     } else {
-        companyLogo.style.display = 'none';
-        crossButton.style.display = 'block';
+      companyLogo.style.display = 'none';
+      crossButton.style.display = 'block';
     }
-});
+  });
+
+// });

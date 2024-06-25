@@ -1,335 +1,13 @@
-const data = [
-    {
-      companyName: "Nomad",
-      roles: "Social Media Assistant",
-      dateApplied: "24 July 2021",
-      status: "Rejected",
-    },
-    {
-      companyName: "Udacity",
-      roles: "Social Media Assistant",
-      dateApplied: "20 July 2021",
-      status: "Interviewed",
-    },
-    {
-      companyName: "Packer",
-      roles: "Social Media Assistant",
-      dateApplied: "16 July 2021",
-      status: "Hired",
-    },
-    {
-      companyName: "Divvy",
-      roles: "Social Media Assistant",
-      dateApplied: "14 July 2021",
-      status: "Applied",
-    },
-    {
-      companyName: "Nomad",
-      roles: "Social Media Assistant",
-      dateApplied: "24 July 2021",
-      status: "Rejected",
-    },
-    {
-      companyName: "Udacity",
-      roles: "Social Media Assistant",
-      dateApplied: "20 July 2021",
-      status: "Interviewed",
-    },
-    {
-      companyName: "Packer",
-      roles: "Social Media Assistant",
-      dateApplied: "16 July 2021",
-      status: "Hired",
-    },
-    {
-      companyName: "Divvy",
-      roles: "Social Media Assistant",
-      dateApplied: "14 July 2021",
-      status: "Applied",
-    },
-    {
-      companyName: "Nomad",
-      roles: "Social Media Assistant",
-      dateApplied: "24 July 2021",
-      status: "Rejected",
-    },
-    {
-      companyName: "Udacity",
-      roles: "Social Media Assistant",
-      dateApplied: "20 July 2021",
-      status: "Interviewed",
-    },
-    {
-      companyName: "Packer",
-      roles: "Social Media Assistant",
-      dateApplied: "16 July 2021",
-      status: "Hired",
-    },
-    {
-      companyName: "Divvy",
-      roles: "Social Media Assistant",
-      dateApplied: "14 July 2021",
-      status: "Applied",
-    },
-    {
-      companyName: "Nomad",
-      roles: "Social Media Assistant",
-      dateApplied: "24 July 2021",
-      status: "Rejected",
-    },
-    {
-      companyName: "Udacity",
-      roles: "Social Media Assistant",
-      dateApplied: "20 July 2021",
-      status: "Interviewed",
-    },
-    {
-      companyName: "Packer",
-      roles: "Social Media Assistant",
-      dateApplied: "16 July 2021",
-      status: "Hired",
-    },
-    {
-      companyName: "Divvy",
-      roles: "Social Media Assistant",
-      dateApplied: "14 July 2021",
-      status: "Applied",
-    },
-    {
-      companyName: "Nomad",
-      roles: "Social Media Assistant",
-      dateApplied: "24 July 2021",
-      status: "Rejected",
-    },
-    {
-      companyName: "Udacity",
-      roles: "Social Media Assistant",
-      dateApplied: "20 July 2021",
-      status: "Interviewed",
-    },
-    {
-      companyName: "Packer",
-      roles: "Social Media Assistant",
-      dateApplied: "16 July 2021",
-      status: "Hired",
-    },
-    {
-      companyName: "Divvy",
-      roles: "Social Media Assistant",
-      dateApplied: "14 July 2021",
-      status: "Applied",
-    },
-    {
-      companyName: "Nomad",
-      roles: "Social Media Assistant",
-      dateApplied: "24 July 2021",
-      status: "Rejected",
-    },
-    {
-      companyName: "Udacity",
-      roles: "Social Media Assistant",
-      dateApplied: "20 July 2021",
-      status: "Interviewed",
-    },
-    {
-      companyName: "Packer",
-      roles: "Social Media Assistant",
-      dateApplied: "16 July 2021",
-      status: "Hired",
-    },
-    {
-      companyName: "Divvy",
-      roles: "Social Media Assistant",
-      dateApplied: "14 July 2021",
-      status: "Applied",
-    },
-    {
-      companyName: "Nomad",
-      roles: "Social Media Assistant",
-      dateApplied: "24 July 2021",
-      status: "Rejected",
-    },
-    {
-      companyName: "Udacity",
-      roles: "Social Media Assistant",
-      dateApplied: "20 July 2021",
-      status: "Interviewed",
-    },
-    {
-      companyName: "Packer",
-      roles: "Social Media Assistant",
-      dateApplied: "16 July 2021",
-      status: "Hired",
-    },
-    {
-      companyName: "Divvy",
-      roles: "Social Media Assistant",
-      dateApplied: "14 July 2021",
-      status: "Applied",
-    },
-    {
-      companyName: "Nomad",
-      roles: "Social Media Assistant",
-      dateApplied: "24 July 2021",
-      status: "Rejected",
-    },
-    {
-      companyName: "Udacity",
-      roles: "Social Media Assistant",
-      dateApplied: "20 July 2021",
-      status: "Interviewed",
-    },
-    {
-      companyName: "Packer",
-      roles: "Social Media Assistant",
-      dateApplied: "16 July 2021",
-      status: "Hired",
-    },
-    {
-      companyName: "Divvy",
-      roles: "Social Media Assistant",
-      dateApplied: "14 July 2021",
-      status: "Applied",
-    },
-    {
-      companyName: "Nomad",
-      roles: "Social Media Assistant",
-      dateApplied: "24 July 2021",
-      status: "Rejected",
-    },
-    {
-      companyName: "Udacity",
-      roles: "Social Media Assistant",
-      dateApplied: "20 July 2021",
-      status: "Interviewed",
-    },
-    {
-      companyName: "Packer",
-      roles: "Social Media Assistant",
-      dateApplied: "16 July 2021",
-      status: "Hired",
-    },
-    {
-      companyName: "Divvy",
-      roles: "Social Media Assistant",
-      dateApplied: "14 July 2021",
-      status: "Applied",
-    },
-    {
-      companyName: "Nomad",
-      roles: "Social Media Assistant",
-      dateApplied: "24 July 2021",
-      status: "Rejected",
-    },
-    {
-      companyName: "Udacity",
-      roles: "Social Media Assistant",
-      dateApplied: "20 July 2021",
-      status: "Interviewed",
-    },
-    {
-      companyName: "Packer",
-      roles: "Social Media Assistant",
-      dateApplied: "16 July 2021",
-      status: "Hired",
-    },
-    {
-      companyName: "Divvy",
-      roles: "Social Media Assistant",
-      dateApplied: "14 July 2021",
-      status: "Applied",
-    },
-    {
-      companyName: "Nomad",
-      roles: "Social Media Assistant",
-      dateApplied: "24 July 2021",
-      status: "Rejected",
-    },
-    {
-      companyName: "Udacity",
-      roles: "Social Media Assistant",
-      dateApplied: "20 July 2021",
-      status: "Interviewed",
-    },
-    {
-      companyName: "Packer",
-      roles: "Social Media Assistant",
-      dateApplied: "16 July 2021",
-      status: "Hired",
-    },
-    {
-      companyName: "Divvy",
-      roles: "Social Media Assistant",
-      dateApplied: "14 July 2021",
-      status: "Applied",
-    },
-    {
-      companyName: "Nomad",
-      roles: "Social Media Assistant",
-      dateApplied: "24 July 2021",
-      status: "Rejected",
-    },
-    {
-      companyName: "Udacity",
-      roles: "Social Media Assistant",
-      dateApplied: "20 July 2021",
-      status: "Interviewed",
-    },
-    {
-      companyName: "Packer",
-      roles: "Social Media Assistant",
-      dateApplied: "16 July 2021",
-      status: "Hired",
-    },
-    {
-      companyName: "Divvy",
-      roles: "Social Media Assistant",
-      dateApplied: "14 July 2021",
-      status: "Applied",
-    },
-    {
-      companyName: "Nomad",
-      roles: "Social Media Assistant",
-      dateApplied: "24 July 2021",
-      status: "Rejected",
-    },
-    {
-      companyName: "Udacity",
-      roles: "Social Media Assistant",
-      dateApplied: "20 July 2021",
-      status: "Interviewed",
-    },
-    {
-      companyName: "Packer",
-      roles: "Social Media Assistant",
-      dateApplied: "16 July 2021",
-      status: "Hired",
-    },
-    {
-      companyName: "Divvy",
-      roles: "Social Media Assistant",
-      dateApplied: "14 July 2021",
-      status: "Applied",
-    },
 
+import { fetchData } from "../Pakage/api.js";
+
+
+if(!localStorage.getItem('authToken'))
     {
-      companyName: "Packer",
-      roles: "Social Media Assistant",
-      dateApplied: "16 July 2021",
-      status: "Hired",
-    },
-    {
-      companyName: "Divvy",
-      roles: "Social Media Assistant",
-      dateApplied: "14 July 2021",
-      status: "Applied",
+      window.location.href = "/Auth/login.html?authid=3";
+   
     }
-     
-  ];
-
-
-
-  // Handle sidebar and logo toggle
+    
 document.getElementById('cross').style.display = 'none';
 
 document.getElementById('menuButton').addEventListener('click', function() {
@@ -358,33 +36,99 @@ document.getElementById('cross').addEventListener('click', function() {
 });
 
 
+const profileData = JSON.parse(localStorage.getItem("profile"));
+
+
+if (profileData) {
+  const profileElement = document.querySelector(".profile");
+
+
+  if (profileElement) {
+    profileElement.innerHTML = `
+  <img src="${profileData.profileUrl?profileData.profileUrl :'../assets/profile.png' }" width="60" height="60" alt="" />
+      <div>
+        <p>${profileData.name}</p>
+        <p>${profileData.email}</p>
+      </div>
+    `;
+  }
+
+  const nameElement = document.querySelector('.name');
+
+
+  if (nameElement) {
+    nameElement.textContent = profileData.name;
+  }
+} else {
+  console.error("Profile data not found in localStorage.");
+}
+
+
+
+function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+}
+
+
+  function showModal(jobData) {
+    document.getElementById('companyLogo').src = jobData.logourl;
+    document.getElementById('titleName').textContent = jobData.titleName;
+    document.getElementById('companyName').textContent = jobData.companyName;
+    document.getElementById('jobType').textContent = jobData.jobType;
+    document.getElementById('jobStatus').textContent = jobData.jobStatus;
+    document.getElementById('appliedDate').textContent = formatDate(jobData.appliedDate);
+    document.getElementById('resumeViewed').textContent = jobData.resumeViewed ? 'Yes' : 'No';
+    document.getElementById('comments').textContent = jobData.comments || 'Comments not provided';
+    document.getElementById('updatedDate').textContent = jobData.updatedDate ? formatDate(jobData.updatedDate): 'Not yet updated';
+    
+    const modal = document.getElementById("jobModal");
+    modal.style.display = "block";
+  }
+
+  document.querySelector(".close").onclick = function() {
+    const modal = document.getElementById("jobModal");
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    const modal = document.getElementById("jobModal");
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+  try {
+const jobhistory = await fetchData("api/JobActivity/user/appliedjobs");
+
 const itemsPerPage = 5;
 let currentPage = 1;
-const totalItems = data.length;
+const totalItems = jobhistory.length;
 const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-function renderTable(page) {
+function renderTable(page, filteredJobs) {
     const tableBody = document.getElementById("applicationsTable");
     tableBody.innerHTML = "";
 
     const startIndex = (page - 1) * itemsPerPage;
-    const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+    const endIndex = Math.min(startIndex + itemsPerPage, filteredJobs.length);
     for (let i = startIndex; i < endIndex; i++) {
-      const row = data[i];
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-          <td>${i + 1}</td>
-          <td>
-              <img src="../assets/Company.png" alt="${row.companyName} logo" style="width:50px; height:auto; vertical-align:middle; margin-right:10px;">
-              ${row.companyName}
-          </td>
-          <td>${row.roles}</td>
-          <td>${row.dateApplied}</td>
-          <td class="status-td"><span class="${getStatusClass(row.status)} data-center">${row.status}</span></td>
-      `;
-      tableBody.appendChild(tr);
-  }
-  
+        const row = filteredJobs[i];
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${i + 1}</td>
+            <td>
+                <img src="${row.logourl ? row.logourl :"../assets/Company.png"}" alt="${row.companyName} logo" style="width:50px; height:auto; vertical-align:middle; margin-right:10px;">
+                ${row.companyName}
+            </td>
+            <td>${row.titleName}</td>
+            <td>${row.appliedDate}</td>
+            <td class="status-td"><span class="${getStatusClass(row.applicationstatus)} data-center">${row.applicationstatus}</span></td>
+        `;
+        tr.addEventListener("click", function() {
+            showModal(row);
+        });
+        tableBody.appendChild(tr);
+    }
 }
 
 function getStatusClass(status) {
@@ -402,9 +146,11 @@ function getStatusClass(status) {
     }
 }
 
-function renderPagination() {
+function renderPagination(filteredJobs) {
     const pagination = document.getElementById("pagination");
     pagination.innerHTML = "";
+
+    const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);
 
     const createButton = (text, isActive = false, isDisabled = false) => {
         const button = document.createElement("button");
@@ -418,8 +164,8 @@ function renderPagination() {
         button.addEventListener("click", function() {
             if (!isDisabled) {
                 currentPage = parseInt(text) || currentPage + (text === '>' ? 1 : -1);
-                renderTable(currentPage);
-                renderPagination();
+                renderTable(currentPage, filteredJobs);
+                renderPagination(filteredJobs);
             }
         });
         return button;
@@ -428,7 +174,6 @@ function renderPagination() {
     // Previous button
     pagination.appendChild(createButton("<", false, currentPage === 1));
 
-    // Page buttons
     if (totalPages <= 7) {
         for (let i = 1; i <= totalPages; i++) {
             pagination.appendChild(createButton(i, i === currentPage));
@@ -448,17 +193,15 @@ function renderPagination() {
         pagination.appendChild(createButton(totalPages, currentPage === totalPages));
     }
 
-    // Next button
     pagination.appendChild(createButton(">", false, currentPage === totalPages));
 }
 
 function updateCategoryCounts() {
-    const allCount = data.length;
-    const AppliedCount = data.filter((item) => item.status === "Applied").length;
-    const InterviewedCount = data.filter((item) => item.status === "Interviewed").length;
-    const HiredCount = data.filter((item) => item.status === "Hired").length;
-    const RejectedCount = data.filter((item) => item.status === "Rejected").length;
-
+    const allCount = jobhistory.length;
+    const AppliedCount = jobhistory.filter((item) => item.applicationstatus === "Applied").length;
+    const InterviewedCount = jobhistory.filter((item) => item.applicationstatus === "Interviewed").length;
+    const HiredCount = jobhistory.filter((item) => item.applicationstatus === "Hired").length;
+    const RejectedCount = jobhistory.filter((item) => item.applicationstatus === "Rejected").length;
 
     document.getElementById("allCount").textContent = allCount;
     document.getElementById("AppliedCount").textContent = AppliedCount;
@@ -468,20 +211,52 @@ function updateCategoryCounts() {
 }
 
 updateCategoryCounts();
-renderTable(currentPage);
-renderPagination();
+renderTable(currentPage, jobhistory);
+renderPagination(jobhistory);
+} catch (error) {
+    if (error.message.includes("404")) {
+    document.querySelector(".tab-container").style.display='none'
+    document.querySelector(".applications-list").style.display='none'
+    document.querySelector(".description").style.display='none'
+    document.querySelector(".notfound").style.display='block'
 
+    }
+       else {            showToast('error', 'Server Error', 'Server error. Please try again later.');
+      } 
 
-  const tabs = document.querySelectorAll('.tab-item');
+}
+const tabs = document.querySelectorAll('.tab-item');
 
-  tabs.forEach(tab => {
-      tab.addEventListener('click', function(event) {
-          event.preventDefault();
+tabs.forEach((tab, index) => {
+    tab.addEventListener('click', function(event) {
+        event.preventDefault();
 
-          tabs.forEach(item => item.classList.remove('active'));
+        tabs.forEach(item => item.classList.remove('active'));
+        this.classList.add('active');
 
+        let filteredJobs = jobhistory;
+        switch (index) {
+            case 0:
+                filteredJobs = jobhistory;
+                break;
+            case 1:
+                filteredJobs = jobhistory.filter(job => job.applicationstatus === 'Applied');
+                break;
+            case 2:
+                filteredJobs = jobhistory.filter(job => job.applicationstatus === 'Interviewed');
+                break;
+            case 3:
+                filteredJobs = jobhistory.filter(job => job.applicationstatus === 'Hired');
+                break;
+            case 4:
+                filteredJobs = jobhistory.filter(job => job.applicationstatus === 'Rejected');
+                break;
+        }
 
-          this.classList.add('active');
-      });
-  });
+        currentPage = 1; 
+        renderTable(currentPage, filteredJobs);
+        renderPagination(filteredJobs);
+    });
+});
+
 

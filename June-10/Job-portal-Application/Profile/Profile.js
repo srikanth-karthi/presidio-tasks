@@ -1,36 +1,14 @@
+import { showToast } from "../Pakage/toster.js";
+import { fetchData } from "../Pakage/api.js";
+import { MultiSelectTag } from "../Pakage/Multiselect.js";
+
 document.addEventListener("DOMContentLoaded", async function () {
-  const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzM2FhMjk2LTdiZmMtNDM4Mi1hNTE4LTQ5MjBmZTNhZjIyNCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlVzZXIiLCJleHAiOjE3MTkyMzAwOTZ9.WFtMKNEp3LwHBN4dEJIHoUzB-1iobSpGSNsZ41HlzMc"
-  localStorage.setItem("authToken", token);
-
-  const baseUrl = "http://localhost:5117/";
-
-  async function fetchData(url, httpMethod = "GET", body = null, isFileUpload = false) {
-
-      const headers = {
-        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-      };
-  
-      if (!isFileUpload) {
-        headers["Content-Type"] = "application/json";
-      }
-  
-      const response = await fetch(`${baseUrl}${url}`, {
-        method: httpMethod,
-        headers: headers,
-        body: isFileUpload ? body : body ? JSON.stringify(body) : undefined,
-      });
-
-
-      if(response.status==401)  { window.location.href = "Auth/login.html";}
-      if (!response.ok) {
-        const errorMessage = `Error ${response.status}: ${response.statusText}`;
-        throw new Error(errorMessage);
-      }
-  
-      const data = await response.json();
-      return data; 
+if(!localStorage.getItem('authToken'))
+  {
+    window.location.href = "/Auth/login.html?authid=3";
 
   }
+  
 
 
   const sidebar = document.getElementById("sidebar");
@@ -68,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const levelInput = document.getElementById("level");
   const startYearInput = document.getElementById("startYear");
   const isCurrentlyStudyingCheckbox = document.getElementById('isCurrentlyStudying');
-    const endYearInput = document.getElementById('endYear');
+  const endYearInput = document.getElementById('endYear');
   const percentageInput = document.getElementById("percentage");
   const isCurrentlyStudyingInput = document.getElementById("isCurrentlyStudying");
   const skillsList = document.getElementById("skills-list");
@@ -86,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   var editAdditionalDetailsModal= document.getElementById('editAdditionalDetailsModal');
   var editBtn = document.querySelector('.edit-Aditional-details');
   var updateDetailsForm = document.getElementById('editAdditionalDetailsForm');
-
+  const profileElement = document.querySelector(".profile");
   crossButton.style.display = "none";
 
   menuButton.addEventListener("click", () => {
@@ -110,15 +88,44 @@ document.addEventListener("DOMContentLoaded", async function () {
     $("#title-list-aoi").select2();
     $("#title-list").select2();
   });
+  var userprofile;
+  try{
+    const companies = await fetchData("api/Company");
+     userprofile = await fetchData("api/User/profile");
+     console.log(userprofile)
+     
 
-  const userprofile = await fetchData("api/User/profile");
+
+
+
+    profileElement.innerHTML = `
+  <img src="${userprofile.profilePictureUrl?userprofile.profilePictureUrl :'../assets/profile.png' }" width="60" height="60" alt="" />
+      <div>
+        <p>${userprofile.name.split(' ')[0]}</p>
+        <p>${userprofile.email}</p>
+      </div>
+    `;
+  
+
+    const skillsArray = await fetchData("api/Skill");
+    const jobTitles = await fetchData("api/Title");
+    populateData("title-list", jobTitles, "titleName", "titleId");
+    populateData("title-list-aoi", jobTitles, "titleName", "titleId");
+    populateData("company-list", companies, "companyName", "companyId");
+    populateData("skill-list", skillsArray, "skillName", "skillId", userprofile.userSkills);
+  }
+  catch
+  {
+  
+  }
+
 
   const skillsArray = await fetchData("api/Skill");
 
-  const jobTitles = await fetchData("api/Title");
   const educations = userprofile.educations;
   const experiences = userprofile.experiences;
   var UserSkillsArray = userprofile.userSkills;
+  var selected_values=UserSkillsArray
   var useraoi = userprofile.areasOfInterests;
 
 
@@ -194,7 +201,6 @@ document.querySelector('.detail-text.portfolio').innerHTML = userprofile.portfol
       showToast('warning', 'Warning', 'Portfolio link should not exceed 200 characters.');
       return;
     }
-  
     var updatedDetails = {
       city: userprofile.city,
       resumeUrl: userprofile.resumeUrl,
@@ -204,8 +210,9 @@ document.querySelector('.detail-text.portfolio').innerHTML = userprofile.portfol
       phoneNumber: phoneNumber,
       dob: dob,
       address: address,
-      portfolioLink: portfolioLink
+      portfolioLink: portfolioLink === "" ? null : portfolioLink
     };
+    
   
     try {
       const updateResponse = await fetchData(`api/User/update`, "PUT", updatedDetails);
@@ -294,7 +301,16 @@ document.querySelector('.detail-text.portfolio').innerHTML = userprofile.portfol
         userLocation.innerHTML = `
           <img src="../assets/profile-location-icon.svg" alt="Location Icon"> ${userprofile.city}
         `;
-      
+        profileElement.innerHTML = `
+        <img src="${userprofile.profilePictureUrl?userprofile.profilePictureUrl :'../assets/profile.png' }" width="60" height="60" alt="" />
+            <div>
+              <p>${userprofile.name.split(' ')[0]}</p>
+              <p>${userprofile.email}</p>
+            </div>
+          `;
+          localStorage.setItem("profile", JSON.stringify(   {name: userprofile.name.split(' ')[0],
+            email: userprofile.email,
+            profileUrl: userprofile.profilePictureUrl}));
         showToast('success', 'Success', 'Profile updated successfully');
       } catch (error) {
         console.error("Error updating profile:", error);
@@ -324,7 +340,17 @@ document.querySelector('.detail-text.portfolio').innerHTML = userprofile.portfol
             
 
             userprofile.profilePictureUrl = uploadResponse.logoUrl;
-          
+              profileElement.innerHTML = `
+           <img src="${userprofile.profilePictureUrl?userprofile.profilePictureUrl :'../assets/profile.png' }" width="60" height="60" alt="" />
+            <div>
+              <p>${userprofile.name.split(' ')[0]}</p>
+              <p>${userprofile.email}</p>
+            </div>`
+
+            
+    localStorage.setItem("profile", JSON.stringify(   {name: userprofile.name.split(' ')[0],
+      email: userprofile.email,
+      profileUrl: userprofile.profilePictureUrl}));
             showToast('success', 'Success', 'Profile picture uploaded successfully');
           } catch (error) {
             console.error("Error uploading profile picture:", error);
@@ -445,102 +471,9 @@ document.querySelector('.detail-text.portfolio').innerHTML = userprofile.portfol
       });
   }
 
-  const companies = [
-      { companyId: "1", companyName: "Google" },
-      { companyId: "2", companyName: "Microsoft" },
-  ];
 
-  populateData("title-list", jobTitles, "titleName", "titleId");
-  populateData("title-list-aoi", jobTitles, "titleName", "titleId");
-  populateData("company-list", companies, "companyName", "companyId");
-  populateData("skill-list", skillsArray, "skillName", "skillId", userprofile.userSkills);
  
-  let activeToasts = [];
-
-   function showToast(type, message1, message2, duration = 2000) {
-    const toastContainer = document.createElement('div');
-    toastContainer.classList.add('toast', type);
-  
-    let iconClass;
-    switch(type) {
-      case 'success':
-        iconClass = 'fas fa-check';
-        break;
-      case 'error':
-        iconClass = 'fas fa-times';
-        break;
-      case 'warning':
-        iconClass = 'fas fa-exclamation';
-        break;
-      default:
-        iconClass = 'fas fa-info';
-    }
-  
-    toastContainer.innerHTML = `
-      <div class="toast-content">
-        <i class="${iconClass} check"></i>
-        <div class="message">
-          <span class="text text-1">${message1}</span>
-          <span class="text text-2">${message2}</span>
-        </div>
-      </div>
-      <i class="fas fa-times close"></i>
-      <div class="progress"></div>
-    `;
-  
-    const toastWrapper = document.querySelector('.toast-container') || createToastWrapper();
-    toastWrapper.appendChild(toastContainer);
-  
-    const closeIcon = toastContainer.querySelector(".close");
-    const progress = toastContainer.querySelector(".progress");
-  
-    activeToasts.push(toastContainer);
-    updateToastPositions();
-  
-    toastContainer.classList.add("active");
-    progress.classList.add("active");
-  
-    let timer1, timer2;
-  
-    timer1 = setTimeout(() => {
-      toastContainer.classList.remove("active");
-    }, duration);
-  
-    timer2 = setTimeout(() => {
-      progress.classList.remove("active");
-      toastWrapper.removeChild(toastContainer);
-      activeToasts = activeToasts.filter(toast => toast !== toastContainer);
-      updateToastPositions();
-    }, duration + 300);
-  
-    closeIcon.addEventListener("click", () => {
-      toastContainer.classList.remove("active");
-  
-      setTimeout(() => {
-        progress.classList.remove("active");
-        toastWrapper.removeChild(toastContainer);
-        activeToasts = activeToasts.filter(toast => toast !== toastContainer);
-        updateToastPositions();
-      }, 300);
-  
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    });
-  }
-  
-  function createToastWrapper() {
-    const toastWrapper = document.createElement('div');
-    toastWrapper.classList.add('toast-container');
-    document.body.appendChild(toastWrapper);
-    return toastWrapper;
-  }
-  
-  function updateToastPositions() {
-    activeToasts.forEach((toast, index) => {
-      toast.style.top = `${index * (toast.offsetHeight + 10)}px`;
-    });
-  }
-
+ 
 
 
   function yaervalidation(dob) {
@@ -570,22 +503,23 @@ document.querySelector('.detail-text.portfolio').innerHTML = userprofile.portfol
 yaervalidation(userprofile.dob); 
 
   
-
-  yaervalidation(userprofile.dob);
+var Updateskills=[]
   
-  new MultiSelectTag("skill-list", {
+
+new MultiSelectTag("skill-list", {
     rounded: true,
-    shadow: true, 
-    placeholder: "Search", 
+    shadow: true,
+    placeholder: "Search",
     tagColor: {
-      textColor: "#327b2c",
-      borderColor: "#92e681",
-      bgColor: "#eaffe6",
+        textColor: "#327b2c",
+        borderColor: "#92e681",
+        bgColor: "#eaffe6",
     },
     onChange: function (values) {
-      Updateskills = values;
+        Updateskills = values;
     },
-  });
+},selected_values);
+
 
   document.getElementById("add-experience").addEventListener("click", function () {
     addExperienceModal.style.display = "block";
@@ -1192,6 +1126,20 @@ document.querySelectorAll('.close').forEach(closeBtn => {
       skillsModal.style.display = "none";
     });
 
+  const elements = document.querySelectorAll('.select2-container--default .select2-selection--single');
+
+
+elements.forEach(element => {
+  element.style.backgroundColor = '#fff';
+  element.style.border = 'none';
+  element.style.borderBottom = '2px solid rgba(214, 221, 235, 1)';
+  element.style.borderRadius = '4px';
+  element.style.transition = 'border-bottom-color 0.3s';
+  element.style.marginBottom = '8px';
+});
+
+
+
 
 });
 
@@ -1212,3 +1160,8 @@ function updateUserSkillsArray(userSkills, response, skillsArray) {
 
   return userSkills;
 }
+document.querySelector(".back-button").addEventListener("click",()=>
+{
+  localStorage.clear()
+  window.location.href = "/Auth/login.html?authid=2";
+})

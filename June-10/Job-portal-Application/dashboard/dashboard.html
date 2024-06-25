@@ -9,53 +9,53 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
     />
+    <link rel="stylesheet" href="../Pakage/toster.css">
   </head>
   <body>
     <div class="sidebar" id="sidebar">
       <nav class="logo">
-        <button id="cross">x</button>
+        <button style="display: none;" id="cross">x</button>
         <img src="../assets/icon.svg" width="42" height="42" alt="Icon" id="company-logo"/>
         <div class="title">JobHuntly</div>
     </nav>
     
       <nav class="nav-menu">
-        <a href="#" class="nav-item selected">Dashboard</a>
+        <a href="../dashboard/dashboard.html" class="nav-item selected">Dashboard</a>
         <a href="../Application/application.html" class="nav-item">My Applications</a>
         <a href="../FindJobs/findjobs.html" class="nav-item">Find Jobs</a>
         <a href="#" class="nav-item">Browse Companies</a>
-        <a href="#" class="nav-item">My Public Profile</a>
+        <a href="../Profile/Profile.html" class="nav-item">My Public Profile</a>
       </nav>
-      <div class="settings">
+      <!-- <div class="settings">
         <a href="#" class="settings-item">Settings</a>
         <a href="#" class="settings-item">Help Center</a>
-      </div>
+      </div> -->
       <div class="profile">
-        
-        <img src="https://via.placeholder.com/40" alt="Profile Picture" />
-        <div>
-          <p>Jake Gyll</p>
-          <p>jakegyll@email.com</p>
-        </div>
+
+
       </div>
     </div>
     <div class="main-content">
       <header class="header">
         <button class="menu-button" id="menuButton">☰</button>
         <h1>Dashboard</h1>
-        <button class="back-button">Back to homepage</button>
+      
       </header>
       <section class="overview">
-        <h2>Good morning, Jake</h2>
-        <p>Here is what's happening with your job  applications.</p>
+        <h2>Good morning, <span class="name"></span></h2>
+        <p class="description">Here is what's happening with your job  applications.</p>
+        <div style="display: none; margin-left: 130px;margin-top: 15px;" class="notfound" >
+          <img src="../assets/jobactivity.gif" alt="" width="700" height="450">
+        </div>
         <div class="stats">
           <div class="state">
             <div class="stat">
               <p>Total Jobs Applied</p>
-              <h3>45</h3>
+              <h3 class="Applied-count"></h3>
             </div>
             <div class="stat">
               <p>Interviewed</p>
-              <h3>18</h3>
+              <h3 class="interviewed-count">18</h3>
             </div>
           </div>
           <div class="chart-container">
@@ -64,72 +64,46 @@
               <canvas id="donutChart" width="200" height="200"></canvas>
               <div class="chart-legend">
                 <div class="element">
-                  <span class="color-block unsuitable"></span>
+                  <span class="color-block offered"></span>
                   <div class="legend-text">
-                    <div class="percentage">60%</div>
-                    <div>Unsuitable</div>
+                    <div class="percentage">10%</div>
+                    <div>Offered</div>
                   </div>
                 </div>
                 <div class="element">
                   <span class="color-block interviewed"></span>
                   <div class="legend-text">
-                    <div class="percentage">40%</div>
+                    <div class="percentage">30%</div>
                     <div>Interviewed</div>
+                  </div>
+                </div>
+                <div class="element">
+                  <span class="color-block applied"></span>
+                  <div class="legend-text">
+                    <div class="percentage">20%</div>
+                    <div>Applied</div>
+                  </div>
+                </div>
+                <div class="element">
+                  <span class="color-block unsuitable"></span>
+                  <div class="legend-text">
+                    <div class="percentage">40%</div>
+                    <div>Unsuitable</div>
                   </div>
                 </div>
               </div>
             </div>
-            <a href="#" class="view-applications">View All Applications →</a>
+            <a href="../Application/application.html" class="view-applications">View All Applications →</a>
           </div>
         </div>
       </section>
       <section class="applications">
         <h2>Recent Applications History</h2>
-        <div class="application">
-            <div class="company-logo">
-                <img src="../assets/dropbox.svg" width="62" height="62" alt="Icon" />
-            </div>
-            <div class="company-details">
-                <p>Social Media Assistant</p>
-                <p>Nomad - Paris, France - Full-Time</p>
-            </div>
-            <div class="applied-date">
-                <p>Date Applied</p>
-                <p>24 July 2021</p>
-            </div>
-            <span class="status Applied">Applied</span>
-        </div>
-        <div class="application">
-            <div class="company-logo">
-                <img src="../assets/teraform.svg" width="62" height="62" alt="Icon" />
-            </div>
-            <div class="company-details">
-                <p>Social Media Assistant</p>
-                <p>Udacity - New York, USA - Full-Time</p>
-            </div>
-            <div class="applied-date">
-                <p>Date Applied</p>
-                <p>23 July 2021</p>
-            </div>
-            <span class="status Interviewed">Shortlisted</span>
-        </div>
-        <div class="application">
-            <div class="company-logo">
-                <img src="../assets/canva.svg" width="62" height="62" alt="Icon" />
-            </div>
-            <div class="company-details">
-                <p>Social Media Assistant</p>
-                <p>Packer - Madrid, Spain - Full-Time</p>
-            </div>
-            <div class="applied-date">
-                <p>Date Applied</p>
-                <p>22 July 2021</p>
-            </div>
-            <span class="status rejected">Rejected</span>
-        </div>
+        <div id="applicationsContainer"></div>
     </section>
     
+    
     </div>
-    <script src="dashboard.js"></script>
+    <script type="module" src="dashboard.js"></script>
   </body>
 </html>

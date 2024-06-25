@@ -127,14 +127,23 @@ body {
   background-color: #e0e8ff;
   color: #3b4cc0;
 }
-
 .profile {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 10px 0px 0px;
   background-color: #f8f9fa;
   border-radius: 5px;
+  overflow: hidden;
 }
+
+.profile p {
+  margin: 0; 
+  white-space: normal;
+width: 149px;
+margin-bottom: 4px;
+  word-wrap: break-word; 
+}
+
 
 .profile img {
   border-radius: 50%;
@@ -157,7 +166,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 25px;
 }
 
 .header h1 {
@@ -240,9 +249,10 @@ canvas {
 }
 
 h1 {
-  font-weight: 500;
-  font-size: 18px;
-  margin-bottom: 20px;
+  font-weight: 650;
+  /* font-size: 20px; */
+  font-family: "Red Hat Display", sans-serif;
+    margin-bottom: 10px;
 }
 
 .chart-legend {
@@ -261,8 +271,8 @@ h1 {
 .legend-text {
   display: flex;
   color: #333;
-  gap: 5px;
-  flex-direction: column;
+  gap: 10px;
+
   align-items: flex-start;
   font-family: "Epilogue", sans-serif;
 }
@@ -275,14 +285,19 @@ h1 {
   border-radius: 2px;
 }
 
-.unsuitable {
-  background-color: #4e44ce;
+.applied {
+  background-color: #98ABEE;
 }
 
 .interviewed {
-  background-color: #e0e7ff;
+  background-color: #393ebc;
 }
-
+.unsuitable {
+  background-color: #C4E4FF;
+}
+.offered {
+  background-color: #201658;
+}
 .view-applications {
   display: inline-block;
   margin-top: 20px;

@@ -6,7 +6,8 @@
   <title>Find Jobs</title>
   <link rel="stylesheet" href="Profile.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
+
+<link rel="stylesheet" href="../Pakage/toster.css">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 </head>
 <body>
@@ -17,28 +18,23 @@
       <div class="title">JobHuntly</div>
     </nav>
     <nav class="nav-menu">
-      <a href="#" class="nav-item">Dashboard</a>
-      <a href="#" class="nav-item">My Applications</a>
-      <a href="#" class="nav-item">Find Jobs</a>
+      <a href="../dashboard/dashboard.html" class="nav-item selected">Dashboard</a>
+      <a href="../Application/application.html" class="nav-item">My Applications</a>
+      <a href="../FindJobs/findjobs.html" class="nav-item">Find Jobs</a>
       <a href="#" class="nav-item">Browse Companies</a>
-      <a href="#" class="nav-item selected">My Public Profile</a>
+      <a href="../Profile/Profile.html" class="nav-item">My Public Profile</a>
     </nav>
-    <div class="settings">
-      <a href="#" class="settings-item">Settings</a>
-      <a href="#" class="settings-item">Help Center</a>
-    </div>
+
     <div class="profile">
-      <div>
-        <p>Jake Gyll</p>
-        <p>jakegyll@email.com</p>
-      </div>
+
     </div>
   </div>
   <main class="main-content">
     <header class="header">
       <button class="menu-button" id="menuButton">☰</button>
       <h1>Dashboard</h1>
-      <button class="back-button">Back to homepage</button>
+    <button
+        class="back-button">LogOut</button>
     </header>
     <div class="profile-container">
       <div class="profile-container-left">
@@ -328,7 +324,6 @@
   </main>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
-  <script src="Profile.js"></script>
+  <script type="module" src="Profile.js"></script>
 </body>
 </html>

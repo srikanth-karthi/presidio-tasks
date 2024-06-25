@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Find Jobs</title>
     <link rel="stylesheet" href="findjobs.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="../Pakage/toster.css">
   </head>
 
   <body>
@@ -25,53 +23,39 @@
         <div class="title">JobHuntly</div>
       </nav>
       <nav class="nav-menu">
-        <a href="#" class="nav-item">Dashboard</a>
-        <a href="#" class="nav-item">My Applications</a>
-        <a href="../FindJobs/findjobs.html" class="nav-item selected"
-          >Find Jobs</a
-        >
+        <a href="../dashboard/dashboard.html" class="nav-item selected">Dashboard</a>
+        <a href="../Application/application.html" class="nav-item">My Applications</a>
+        <a href="../FindJobs/findjobs.html" class="nav-item">Find Jobs</a>
         <a href="#" class="nav-item">Browse Companies</a>
-        <a href="#" class="nav-item">My Public Profile</a>
+        <a href="../Profile/Profile.html" class="nav-item">My Public Profile</a>
       </nav>
-      <div class="settings">
-        <a href="#" class="settings-item">Settings</a>
-        <a href="#" class="settings-item">Help Center</a>
-      </div>
+
       <div class="profile">
-        <img src="https://via.placeholder.com/40" alt="Profile Picture" />
-        <div>
-          <p>Jake Gyll</p>
-          <p>jakegyll@email.com</p>
-        </div>
+
+
       </div>
     </div>
     <div class="main-content" id="main-content">
       <header class="header">
         <button class="menu-button" id="menuButton">☰</button>
         <h1>Find Jobs</h1>
-        <button class="back-button">Back to homepage</button>
+        <a href="../dashboard/dashboard.html">      <button
+          class="back-button">Back to Dashboard</button></a>
       </header>
       <div class="separator"></div>
       <div class="search-bar">
         <div class="search-box">
           <img src="../assets/search-icon.svg" alt="Search Icon" />
-          <input
-            type="text"
-            placeholder="Job title or keyword"
-            id="title-input"
-            list="title-list"
-          />
-          <datalist id="title-list"></datalist>
+          <select class="form-control" name="title" id="title-list">  
+            <option value="">Job Title</option>
+          </select>
         </div>
         <div class="search-box">
           <img src="../assets/company-icon.svg" alt="Search Icon" />
-          <input
-            type="text"
-            placeholder="Company Name"
-            id="company-input"
-            list="company-list"
-          />
-          <datalist id="company-list"></datalist>
+          <select class="form-control" name="title" id="company-list">  
+            <option value="">Company  </option>
+          </select>
+    
         </div>
         <div class="search-box">
           <img src="../assets/location-icon.svg" alt="Location Icon" />
@@ -81,122 +65,106 @@
         </div>
       </div>
       <div class="job-content">
-        <div class="filters" id="filters">
-          <div class="filter-group">
-            <button class="toggle-button">
-              <span>Type of Employment </span>
-              <img src="../assets/down-arrow.svg" alt="Search Icon" />
-            </button>
-            <div class="toggle-content">
-              <div>
-                <input type="checkbox" id="full-time" />
-                <label for="full-time">Full-Time</label>
-              </div>
-              <div>
-                <input type="checkbox" id="part-time" />
-                <label for="part-time">Part-Time</label>
-              </div>
-              <div>
-                <input type="checkbox" id="remote" />
-                <label for="remote">Remote</label>
-              </div>
-              <div>
-                <input type="checkbox" id="internship" />
-                <label for="internship">Internship</label>
-              </div>
-              <div>
-                <input type="checkbox" id="contract" />
-                <label for="contract">Freelance</label>
-              </div>
-            </div>
-          </div>
 
-          <div class="filter-group">
-            <button class="toggle-button">
-              <span>Job Level</span>
-              <img src="../assets/down-arrow.svg" alt="Search Icon" />
-            </button>
-            <div class="toggle-content">
-              <div>
-                <input type="checkbox" id="entry-level" />
-                <label for="entry-level">Entry Level</label>
-              </div>
-              <div>
-                <input type="checkbox" id="mid-level" />
-                <label for="mid-level">Mid Level</label>
-              </div>
-              <div>
-                <input type="checkbox" id="senior-level" />
-                <label for="senior-level">Senior Level</label>
-              </div>
-              <div>
-                <input type="checkbox" id="director" />
-                <label for="director">Director</label>
-              </div>
-              <div>
-                <input type="checkbox" id="vp" />
-                <label for="vp">VP or Above</label>
-              </div>
-            </div>
-          </div>
 
-          <div class="filter-group">
-            <button class="toggle-button">
-              <span>Salary Range (in LPA)</span>
-              <img src="../assets/down-arrow.svg" alt="Search Icon" />
-            </button>
-            <div class="toggle-content">
-              <div>
-                <input type="checkbox" id="1-5-lpa" />
-                <label for="1-5-lpa">1 LPA - 5 LPA</label>
-              </div>
-              <div>
-                <input type="checkbox" id="5-10-lpa" />
-                <label for="5-10-lpa">5 LPA - 10 LPA</label>
-              </div>
-              <div>
-                <input type="checkbox" id="10-20-lpa" />
-                <label for="10-20-lpa">10 LPA - 20 LPA</label>
-              </div>
-              <div>
-                <input type="checkbox" id="20-plus-lpa" />
-                <label for="20-plus-lpa">20 LPA or above</label>
-              </div>
-              <div class="range-slider">
-                <label for="salary-range">Select Range:<span id="range-values"></span></label>
-                <input
-                  type="range"
-                  id="salary-range-min"
-                  name="salary-range-min"
-                  min="1"
-                  max="100"
-                  value="1"
-                  oninput="updateSliderValue()"
-                />
-                <input
-                  type="range"
-                  id="salary-range-max"
-                  name="salary-range-max"
-                  min="1"
-                  max="100"
-                  value="100"
-                  oninput="updateSliderValue()"
-                />
-                
-              </div>
-            </div>
+<div class="filters" id="filters">
+  <div class="filter-group" id="employment-filter">
+      <button class="toggle-button">
+          <span>Type of Employment </span>
+          <img src="../assets/down-arrow.svg" alt="Search Icon" />
+      </button>
+      <div class="toggle-content">
+          <div>      
+
+              <input type="checkbox" id="FullTime" name="employment" />
+              <label for="FullTime">Full-Time</label>
           </div>
+          <div>
+              <input type="checkbox" id="PartTime" name="employment" />
+              <label for="PartTime">Part-Time</label>
+          </div>
+          <div>
+              <input type="checkbox" id="Hybrid" name="employment" />
+              <label for="Hybrid">Hybrid</label>
+          </div>
+          <div>
+              <input type="checkbox" id="Internship" name="employment" />
+              <label for="Internship">Internship</label>
+          </div>
+          <div>
+              <input type="checkbox" id="Freelance" name="employment" />
+              <label for="Freelance">Freelance</label>
+          </div>
+      </div>
+  </div>
+
+  <!-- Job Level filter-group -->
+  <div class="filter-group" id="level-filter">
+      <button class="toggle-button">
+          <span>Job Level</span>
+          <img src="../assets/down-arrow.svg" alt="Search Icon" />
+      </button>
+      <div class="toggle-content">
+          <div>
+              <input type="checkbox" id="entry-level" name="level" />
+              <label for="entry-evel">Entry Level</label>
+          </div>
+          <div>
+              <input type="checkbox" id="mid-level" name="level" />
+              <label for="mid-level">Mid Level</label>
+          </div>
+          <div>
+            <input type="checkbox" id="Mid-Senior-level" name="level" />
+            <label for="Mid-Senior-level">Mid-Senior level</label>
         </div>
+          <div>
+              <input type="checkbox" id="senior-level" name="level" />
+              <label for="senior-level">Senior Level</label>
+          </div>
+ 
+
+      </div>
+  </div>
+
+
+  <div class="filter-group" id="salary-filter">
+      <button class="toggle-button">
+          <span>Salary Range (in LPA)</span>
+          <img src="../assets/down-arrow.svg" alt="Search Icon" />
+      </button>
+      <div class="toggle-content">
+          <div>
+              <input type="checkbox" id="1-5-lpa" name="salary" />
+              <label for="1-5-lpa">1 LPA - 5 LPA</label>
+          </div>
+          <div>
+              <input type="checkbox" id="5-10-lpa" name="salary" />
+              <label for="5-10-lpa">5 LPA - 10 LPA</label>
+          </div>
+          <div>
+              <input type="checkbox" id="10-20-lpa" name="salary" />
+              <label for="10-20-lpa">10 LPA - 20 LPA</label>
+          </div>
+          <div>
+              <input type="checkbox" id="20-plus-lpa" name="salary" />
+              <label for="20-plus-lpa">20 LPA or above</label>
+          </div>
+
+      </div>
+  </div>
+</div>
+
         <div class="job-content-right">
           <div class="job-header">
-            <h1>All Jobs</h1>
+            <h1>Recommended Jobs</h1>
 
             <div class="sort-and-view">
               <label for="sort" class="sort-label">Sort by:</label>
               <select id="sort" class="sort-select">
-                <option value="relevant">Most relevant</option>
-                <option value="applied">First Applied</option>
+                <option value="recent">Recently posted</option>
+                <option value="relevant">Most Relevant</option>
               </select>
+              
               <button id="list-view-button" class="view-button active">
                 <img
                   id="list-view-img"
@@ -219,8 +187,9 @@
         </div>
       </div>
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
-    <script src="findjobs.js"></script>
+    <script type="module" src="findjobs.js"></script>
   </body>
 </html>
