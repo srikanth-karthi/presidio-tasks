@@ -11,15 +11,40 @@ import { showToast } from "../Pakage/toster.js";
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
     }
-  
-  
+    
+    function removeQueryParam(param) {
+      const url = new URL(window.location);
+      const urlParams = new URLSearchParams(url.search);
+      urlParams.delete(param);
+      url.search = urlParams.toString();
+      window.history.replaceState({}, document.title, url.toString());
+    }
+    
     const authid = getQueryParam('authid');
-  
-  if(authid==1)
-    {
-      showToast('success', 'Success', 'Login Sucessfull.');
+    
+    if (authid == 1) {
+      showToast('success', 'Success', 'Login Successful.');
+      removeQueryParam('authid');
     }
 
+
+        
+
+    function getGreetingBasedOnTime() {
+      const now = new Date();
+      const hours = now.getHours();
+    
+      if (hours >= 0 && hours < 12) {
+        return "Good morning,";
+      } else if (hours >= 12 && hours < 18) {
+        return "Good afternoon,";
+      } else {
+        return "Good evening,";
+      }
+    }
+
+
+    document.querySelector('.greeting').textContent=getGreetingBasedOnTime()
   const profileElement = document.querySelector(".profile");
   const nameElement = document.querySelector('.name');
   const appliedCountElement = document.querySelector(".Applied-count");
@@ -49,7 +74,7 @@ import { showToast } from "../Pakage/toster.js";
       <img src="${profileData.profileUrl?profileData.profileUrl :'../assets/profile.png' }" width="60" height="60" alt="" />
       <div>
         <p>${profileData.name}</p>
-        <p>${profileData.email}</p>
+  
       </div>
     `;
 

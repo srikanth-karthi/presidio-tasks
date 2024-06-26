@@ -4,8 +4,7 @@ export async function fetchData(
     url,
     httpMethod = "GET",
     body = null,
-    isFileUpload = false
-  ) {
+    isFileUpload = false,isauth=false ) {
     const headers = {
       Authorization: `Bearer ${localStorage.getItem("authToken")}`,
     };
@@ -20,7 +19,7 @@ export async function fetchData(
       body: isFileUpload ? body : body ? JSON.stringify(body) : undefined,
     });
 
-    if (response.status == 401) {
+    if (response.status == 401 && !isauth) {
       window.location.href = "/Auth/login.html";
       return;
     }

@@ -1,0 +1,122 @@
+.sidebar {
+    font-family: "Nunito", sans-serif;
+    width: 250px;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    transition: transform 0.3s ease;
+  }
+  
+  #cross {
+    background-color: transparent;
+    border: none;
+    font-size: 30px;
+    font-weight: bold;
+    width: 30px;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  
+  #cross:hover {
+    color: #ff0000;
+  }
+  
+  #cross:active {
+    transform: scale(0.9);
+  }
+  
+  .menu-button {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    margin-left: 15px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+    padding: 10px;
+  }
+  
+  .menu-button:hover {
+    color: #ff0000;
+  }
+  
+  .menu-button:active {
+    transform: scale(0.9);
+  }
+  
+  .sidebar.hidden {
+    transform: translateX(-100%);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  .logo .title {
+    color: #000;
+    font-size: 24px;
+    font-weight: 700;
+    margin-left: 20px;
+    font-family: "Red Hat Display", sans-serif;
+  }
+  
+  .nav-menu {
+    flex: 1;
+  }
+  
+  .nav-item {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-item.selected,
+  .nav-item:hover {
+    background-color: #e0e8ff;
+    color: #3b4cc0;
+  }
+  
+  .settings {
+    margin-top: 20px;
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+    padding: 10px 0px 0px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    overflow: hidden;
+  }
+  
+  .profile p {
+    margin: 0;
+    white-space: normal;
+    width: 130px;
+    margin-left: 10px;
+    margin-bottom: 4px;
+    word-wrap: break-word;
+  }
+  
+  .profile img {
+    border-radius: 50%;
+    margin-right: 10px;
+  }

@@ -1,0 +1,253 @@
+@import url("https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap");
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Epilogue", sans-serif;
+  margin: 0;
+  display: flex;
+}
+
+.profile {
+  margin-bottom: 0px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.expanded {
+  margin-left: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.back-button {
+  padding: 10px 10px;
+  background-color: rgba(70, 64, 222, 1);
+  color: white;
+  border: none;
+  display: flex;
+  margin-right: 30px;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.menu-button {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.overview {
+  margin-bottom: 20px;
+}
+
+.overview h2 {
+  margin: 0 0 10px;
+}
+
+.overview p {
+  margin: 0 0 40px;
+}
+
+.description {
+  color: rgba(124, 132, 147, 1);
+ 
+}
+
+.statistics, .job-statistics{
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+ justify-content:  center;
+
+}
+.total-job
+{
+    font-size: 40px;
+    font-weight: bold;
+}
+.stats-card, .job-card {
+    color: white;
+    background-color: rgba(70, 64, 222, 1);
+    display: flex;
+    gap: 15px;
+  padding: 20px;
+  padding-inline: 40px;
+  align-items: center;
+  border-radius: 5px;
+
+}
+.job-updates 
+{
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.job-updates-headings
+{
+    display: flex;
+flex-wrap: wrap;
+font-weight: 600;
+justify-content: center;
+width: 100%;
+
+}
+
+.job-updates-headings button
+{
+    margin-left: auto;
+text-decoration: none;
+background: none;
+display: flex;
+align-items: center;
+gap: 10px;
+font-weight: 600;
+color:rgba(70, 64, 222, 1);
+border: none;
+outline: none;
+
+}
+
+.job-list {
+    margin-top: 30px;
+    display: flex;
+flex-wrap: wrap;
+gap: 16px;
+  }
+  
+
+
+  .job-item {
+    cursor: pointer;
+    border: 1px solid #ddd;
+    padding: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+  
+  }
+  
+  .meta-tags {
+  width: fit-content;
+    border-radius: 20px;
+    font-size: 12px;
+    border: 2px solid;
+    text-align: center;
+    padding: 5px 7px 5px 7px;
+  }
+  .PartTime{
+    background-color:rgba(235, 133, 51, 0.1);
+    border-color: rgba(255, 184, 54, 1);
+    color: rgba(255, 184, 54, 1);
+  }
+  .FullTime{
+    background-color: rgba(86, 205, 173, 0.1);
+    border-color: rgba(86, 205, 173, 1);
+    color: rgba(86, 205, 173, 1);
+  }
+  
+  .Hybrid{
+    background-color:  rgba(70, 64, 222, 0.1);
+    border-color: rgba(70, 64, 222, 1);
+    color:rgba(70, 64, 222, 1);
+  }
+  
+  .Internship {
+    background-color: rgba(255, 101, 80, 0.1);
+    border-color: rgba(255, 101, 80, 1);
+    color:  rgba(255, 101, 80, 1)
+  }
+  .Freelance
+  {
+    background-color: rgb(156, 59, 149,0.1);
+    border-color: rgb(156, 59, 149);
+    color: rgb(156, 59, 149);
+    
+  }
+  .company-details
+  {
+  margin-left: 20px;
+  margin-right: auto;
+  display: flex ;
+  flex-direction: column;
+  }
+  .job-item h3 {
+    font-weight: 600;
+    margin: 8px 0;
+  }
+  
+  .job-item p {
+    margin: 4px 2px 10px;
+    color: rgba(124, 132, 147, 1) ;
+  }
+  
+  .grid-view .job-item {
+  position: relative;
+    width: 250px;
+    gap: 15px;
+    
+  }
+  .job-item img
+  {
+        margin-left: 20px;
+  }
+  
+  
+  .grid-view .job-item .meta-tags {
+    position: absolute;
+    right: 50px;
+    top: 20px;
+  }
+  
+  
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.hidden {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .menu-button {
+    display: inline-block;
+  }
+}

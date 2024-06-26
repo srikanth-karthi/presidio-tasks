@@ -48,7 +48,7 @@ if (profileData) {
   <img src="${profileData.profileUrl?profileData.profileUrl :'../assets/profile.png' }" width="60" height="60" alt="" />
       <div>
         <p>${profileData.name}</p>
-        <p>${profileData.email}</p>
+  
       </div>
     `;
   }
@@ -97,13 +97,24 @@ function formatDate(dateString) {
       modal.style.display = "none";
     }
   }
-  try {
-const jobhistory = await fetchData("api/JobActivity/user/appliedjobs");
-
-const itemsPerPage = 5;
+  var jobhistory
+  const itemsPerPage = 5;
 let currentPage = 1;
-const totalItems = jobhistory.length;
-const totalPages = Math.ceil(totalItems / itemsPerPage);
+  try {
+ jobhistory = await fetchData("api/JobActivity/user/appliedjobs");
+
+} catch (error) {
+    if (error.message.includes("404")) {
+    document.querySelector(".tab-container").style.display='none'
+    document.querySelector(".applications-list").style.display='none'
+    document.querySelector(".description").style.display='none'
+    document.querySelector(".notfound").style.display='block'
+
+    }
+       else {            showToast('error', 'Server Error', 'Server error. Please try again later.');
+      } 
+
+}
 
 function renderTable(page, filteredJobs) {
     const tableBody = document.getElementById("applicationsTable");
@@ -213,18 +224,6 @@ function updateCategoryCounts() {
 updateCategoryCounts();
 renderTable(currentPage, jobhistory);
 renderPagination(jobhistory);
-} catch (error) {
-    if (error.message.includes("404")) {
-    document.querySelector(".tab-container").style.display='none'
-    document.querySelector(".applications-list").style.display='none'
-    document.querySelector(".description").style.display='none'
-    document.querySelector(".notfound").style.display='block'
-
-    }
-       else {            showToast('error', 'Server Error', 'Server error. Please try again later.');
-      } 
-
-}
 const tabs = document.querySelectorAll('.tab-item');
 
 tabs.forEach((tab, index) => {
@@ -252,7 +251,7 @@ tabs.forEach((tab, index) => {
                 filteredJobs = jobhistory.filter(job => job.applicationstatus === 'Rejected');
                 break;
         }
-
+console.log(filteredJobs)
         currentPage = 1; 
         renderTable(currentPage, filteredJobs);
         renderPagination(filteredJobs);

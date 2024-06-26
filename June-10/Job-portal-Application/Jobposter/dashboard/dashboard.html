@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../../Pakage/sidebar.css">
+  <link rel="stylesheet" href="dashboard.css" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
+  />
+  <link rel="stylesheet" href="../../Pakage/toster.css">
+</head>
+<body>
+  <div class="sidebar" id="sidebar">
+    <nav class="logo">
+      <button style="display: none;" id="cross">x</button>
+      <img src="../../assets/icon.svg" width="42" height="42" alt="Icon" id="company-logo"/>
+      <div class="title">JobHuntly</div>
+    </nav>
+    <nav class="nav-menu">
+      <a href="../dashboard/dashboard.html" class="nav-item ">Dashboard</a>
+      <a href="../../Jobposter/Profile/profile.html" class="nav-item">Company Profile</a>
+      <a href="../FindJobs/findjobs.html" class="nav-item">Job Listing</a>
+      <a href="#" class="nav-item">Browse Companies</a>
+      <a href="../Profile/Profile.html" class="nav-item selected">My Public Profile</a>
+    </nav>
+    <div class="profile">
+
+    </div>
+  </div>
+  <div class="main-content">
+    <header class="header">
+      <button class="menu-button" id="menuButton">☰</button>
+      <h1>Dashboard</h1>
+      <a href="../dashboard/dashboard.html">
+        <button class="back-button">
+          <img src="../../assets/addpost.svg" width="15" height="15"> Post a job
+        </button>
+      </a>
+    </header>
+    <section class="overview">
+      <h2><span class="greeting"></span> <span class="name"></span></h2>
+      <p class="description">Here is your job posting statistic.</p>
+    </section>
+    <section class="statistics">
+      <div class="stats-card"><span class="total-job posted">0</span>Total Job posted</div>
+      <div style="background-color: rgba(86, 205, 173, 1);" class="stats-card"><span class="total-job open">0</span>Jobs Opened</div>
+      <div style="background-color: rgba(38, 164, 255, 1);" class="stats-card"><span class="total-job close">0</span>Jobs Closed</div>
+    </section>
+
+    <section class="job-updates">
+        <div class="job-updates-headings">
+
+            Recently Posted <button type="button">View All <img src="../../assets/rightarrow.svg" width="20" height="20" alt=""></button>
+        </div>
+      <div class="job-list grid-view" id="job-list"></div>
+    </section>
+  </div>
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Application Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Job Application Dashboard</h1>
+  <canvas id="myChart" width="400" height="200"></canvas>
+  <script >document.addEventListener('DOMContentLoaded', (event) => {
+    // Sample data
+    const jobApplications = [
+      {
+        "jobactivityId": "8e401184-550b-4878-a54b-1d4103f33fbf",
+        "userId": "21e857db-64d9-4435-b1c6-83c3e1212996",
+        "jobId": "50449fe0-427f-479a-af67-00e486af7abb",
+        "status": "Applied",
+        "resumeViewed": false,
+        "comments": "",
+        "appliedDate": "2024-06-24",
+        "updatedDate": null
+      },
+      {
+        "jobactivityId": "e9363153-1f61-4f66-8c8e-33753fc39fe5",
+        "userId": "3d7c7bde-2bc0-477d-ae31-b5225077f865",
+        "jobId": "50449fe0-427f-479a-af67-00e486af7abb",
+        "status": "Applied",
+        "resumeViewed": false,
+        "comments": "",
+        "appliedDate": "2024-06-24",
+        "updatedDate": null
+      },
+      {
+        "jobactivityId": "318841de-4ca5-4aeb-94b0-7078d28a1953",
+        "userId": "5ab9aa0b-4196-4ee0-a7ee-3384d7b8a769",
+        "jobId": "50449fe0-427f-479a-af67-00e486af7ab",
+        "status": "selevted",
+        "resumeViewed": false,
+        "comments": "",
+        "appliedDate": "2024-06-24",
+        "updatedDate": null
+      }
+    ];
+  
+    // Process the data
+    const statusCount = jobApplications.reduce((acc, application) => {
+      acc[application.status] = (acc[application.status] || 0) + 1;
+      return acc;
+    }, {});
+  console.log(statusCount)
+    // Create the chart
+    const ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: Object.keys(statusCount),
+        datasets: [{
+          label: 'Number of Applications',
+          data: Object.values(statusCount),
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  });
+  </script>
+</body>
+</html>  -->

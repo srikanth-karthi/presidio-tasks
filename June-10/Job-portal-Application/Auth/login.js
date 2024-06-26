@@ -6,18 +6,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
   }
-
-
-  const authid = getQueryParam('authid');
-
-if(authid==2)
-  {
-    showToast('success', 'Success', 'Logout Sucessfull.');
+  
+  function removeQueryParam(param) {
+    const url = new URL(window.location);
+    const urlParams = new URLSearchParams(url.search);
+    urlParams.delete(param);
+    url.search = urlParams.toString();
+    window.history.replaceState({}, document.title, url.toString());
   }
-  else if(authid==3)
+  
+  const authid = getQueryParam('authid');
+  if(authid==2)
     {
-      showToast('warning', 'Warning', 'Please Login.');
+      showToast('success', 'Success', 'Logout Sucessfull.');
+      removeQueryParam('authid');
     }
+    else if(authid==3)
+      {
+        showToast('warning', 'Warning', 'Please Login.');
+        removeQueryParam('authid');
+      }
+  
+
+
     const loginForm = document.getElementById('loginForm');
 
     loginForm.addEventListener('submit', async (event) => {
@@ -47,9 +58,14 @@ if(authid==2)
         }
 
         try {
-            const response = await fetchData(loginUrl, 'POST', loginData);
+            const response = await fetchData(loginUrl, 'POST', loginData,false,true);
             localStorage.setItem("authToken", response.token);
-            window.location.href = "../dashboard/dashboard.html?authid=1";
+            if (userType === 'job-seeker') {
+              window.location.href = "../dashboard/dashboard.html?authid=1";
+          } else if (userType === 'company') {
+            window.location.href = "/Jobposter/dashboard/dashboard.html?authid=1";
+          }
+   
         } catch (error) {
             console.error("Error updating profile details:", error);
         

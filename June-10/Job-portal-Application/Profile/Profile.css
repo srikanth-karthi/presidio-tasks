@@ -5,42 +5,15 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
+ 
 }
 
 .sidebar {
-  font-family: "Nunito", sans-serif;
+ 
   width: 200px;
-  background-color: #f8f9fa;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  transition: transform 0.3s ease;
+  
 }
 
-#cross {
-  background-color: transparent;
-  border: none;
-  font-size: 30px;
-  font-weight: bold;
-  width: 30px;
-  color: #000;
-  cursor: pointer;
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
-#cross:hover {
-  color: #ff0000;
-}
-
-#cross:active {
-  transform: scale(0.9);
-}
 .file-upload {
   position: relative;
   display: inline-block;
@@ -85,29 +58,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
-.menu-button {
-  background-color: transparent;
-  border: none;
-  font-size: 24px;
-  margin-left: 15px;
-  font-weight: bold;
-  color: #000;
-  cursor: pointer;
-  transition: transform 0.2s ease, color 0.2s ease;
-  padding: 10px;
-}
 
-.menu-button:hover {
-  color: #ff0000;
-}
-
-.menu-button:active {
-  transform: scale(0.9);
-}
-
-.sidebar.hidden {
-  transform: translateX(-100%);
-}
 .isCurrentlyStudying
 {
   position: relative;
@@ -116,74 +67,6 @@ body {
 {
   position: absolute;
 top: 0;
-}
-.logo {
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-.logo .title {
-  color: #000;
-  font-size: 24px;
-  font-weight: 700;
-  margin-left: 20px;
-  font-family: "Red Hat Display", sans-serif;
-}
-
-.nav-menu {
-  flex: 1;
-}
-
-.nav-item {
-  display: block;
-  padding: 10px;
-  color: #333;
-  text-decoration: none;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  transition: background-color 0.3s;
-}
-
-.nav-item.selected,
-.nav-item:hover {
-  background-color: #e0e8ff;
-  color: #3b4cc0;
-}
-
-.settings {
-  margin-top: 20px;
-}
-
-.settings-item {
-  font-family: "Nunito", sans-serif;
-  display: block;
-  padding: 10px;
-  color: #333;
-  text-decoration: none;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  transition: background-color 0.3s;
-}
-
-.settings-item:hover {
-  background-color: #e0e8ff;
-  color: #3b4cc0;
-}
-
-.profile {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  background-color: #f8f9fa;
-  border-radius: 5px;
-}
-
-.profile img {
-  border-radius: 50%;
-  margin-right: 10px;
 }
 
 .main-content {
@@ -289,45 +172,6 @@ top: 0;
   height: 20px;
 }
 
-.detail-text {
-  font-size: 14px;
-  color: #333;
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-}
-
-.detail-text:empty::after {
-  content: "Not provided";
-  color: #999;
-  font-style: italic;
-}
-
-.profile-section h2, .detail-text {
-  color: #444;
-}
-
-.detail-item .icon img {
-  vertical-align: middle;
-}
-
-.detail-item .icon img,
-.detail-item .detail-text {
-  flex-shrink: 0;
-  flex-grow: 0;
-}
-
-.detail-item {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.details-container .detail-item {
-  padding: 5px 0;
-}
 .portfolio-link {
   color: #3b4cc0;
   text-decoration: none;

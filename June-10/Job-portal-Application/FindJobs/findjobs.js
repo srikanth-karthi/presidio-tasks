@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     <img src="${profileData.profileUrl?profileData.profileUrl :'../assets/profile.png' }" width="60" height="60" alt="" />
         <div>
           <p>${profileData.name}</p>
-          <p>${profileData.email}</p>
+    
         </div>
       `;
     }
@@ -145,13 +145,17 @@ catch
       content.classList.toggle("hidden");
     });
   });
+  let maxpagereached=false
   async function GetJobs(pageNumber, pageSize) {
+    maxpagereached=false
     try {
       return await fetchData(
         `api/User/recommended-jobs?pageNumber=${pageNumber}&pageSize=${pageSize}`
       );
     } catch (error) {
-      console.log(error);
+      if ( error.message.includes("404")) {
+        maxpagereached=true
+      } 
       return [];
     }
   }
@@ -191,23 +195,22 @@ catch
     const startIndex = (pageNumber - 1) * itemsPerPage;
     let endIndex = startIndex + itemsPerPage;
     if (endIndex > jobItems.length-6) {
-      const nextPage = gridview ? currentGridPage + 1 : currentPage + 1;
+
       let additionalData;
+      if(!maxpagereached)
+        {
       if (isfiltered) {
-        additionalData = await updateSearchCriteria(gridview?nextPage:Math.floor(nextPage/2), 24, 24);
+        additionalData = await updateSearchCriteria(1+Math.floor( jobItems.length/24), 24);
+        jobItems = jobItems.concat(additionalData);
       } else {
-        additionalData = await GetJobs(gridview?nextPage:Math.floor(nextPage/2), 24);
+        additionalData = await GetJobs(1+Math.floor( jobItems.length/24), 24);
+        jobItems = jobItems.concat(additionalData);
       }
 
-      jobItems = jobItems.concat(additionalData);
+    }
+ 
 
-      totalPages = jobItems.length > itemsPerPage ? Math.ceil( jobItems.length  / itemsPerPage) : 1;
 
-      if (gridview) {
-        currentGridPage++;
-      } else {
-        currentPage++;
-      }
     }
 
     endIndex = Math.min(endIndex, jobItems.length);
@@ -249,7 +252,9 @@ catch
       }
       button.addEventListener("click", function () {
         if (!isDisabled) {
-          currentPage = parseInt(text) || currentPage + (text === ">" ? 1 : -1);
+          console.log(currentPage,totalPages)
+    
+currentPage = parseInt(text) || currentPage + (text === ">" ? 1 : -1);
           renderTable(currentPage, itemsPerPage, gridview, isfiltered);
         }
       });
@@ -326,7 +331,8 @@ catch
 
   async function updateSearchCriteria(PageNumber,PageSize) {
     document.querySelector(".job-header h1").textContent = "All Jobs";
-  
+
+
     const searchCriteria = {};
   
     const selectedTitle = titleDropdown.value;
@@ -413,21 +419,25 @@ catch
   
     searchCriteria.PageNumber = PageNumber;
     searchCriteria.PageSize = PageSize;
-  
+
     try{
       return   await fetchData('api/Job/search', 'POST', searchCriteria);
 
       }
       catch(error)
       {
-    console.log(error);
-    return []
+      
+        if ( error.message.includes("404")) {
+          maxpagereached=true
+          return []
+        } 
       }
 
   
   }
   async function GetFilteredData()
   {
+    maxpagereached=false
      currentPage = 1;
      currentGridPage = 1;
     isfiltered=true

@@ -88,9 +88,10 @@ if(!localStorage.getItem('authToken'))
     $("#title-list-aoi").select2();
     $("#title-list").select2();
   });
-  var userprofile;
+  var userprofile=[],jobTitles=[],companies=[],skillsArray=[]
+
   try{
-    const companies = await fetchData("api/Company");
+     companies = await fetchData("api/Company");
      userprofile = await fetchData("api/User/profile");
      console.log(userprofile)
      
@@ -102,25 +103,25 @@ if(!localStorage.getItem('authToken'))
   <img src="${userprofile.profilePictureUrl?userprofile.profilePictureUrl :'../assets/profile.png' }" width="60" height="60" alt="" />
       <div>
         <p>${userprofile.name.split(' ')[0]}</p>
-        <p>${userprofile.email}</p>
+
       </div>
     `;
-  
+ 
+     skillsArray = await fetchData("api/Skill");
+     jobTitles = await fetchData("api/Title");
 
-    const skillsArray = await fetchData("api/Skill");
-    const jobTitles = await fetchData("api/Title");
-    populateData("title-list", jobTitles, "titleName", "titleId");
-    populateData("title-list-aoi", jobTitles, "titleName", "titleId");
-    populateData("company-list", companies, "companyName", "companyId");
-    populateData("skill-list", skillsArray, "skillName", "skillId", userprofile.userSkills);
   }
   catch
   {
   
   }
 
+  populateData("title-list", jobTitles, "titleName", "titleId");
+  populateData("title-list-aoi", jobTitles, "titleName", "titleId");
+  populateData("company-list", companies, "companyName", "companyId");
+  populateData("skill-list", skillsArray, "skillName", "skillId", userprofile.userSkills);
 
-  const skillsArray = await fetchData("api/Skill");
+
 
   const educations = userprofile.educations;
   const experiences = userprofile.experiences;
@@ -1023,6 +1024,7 @@ updateAoiBtn.addEventListener("click", async function (event) {
   
     showToast('success', 'Success', 'Area of Interest updated successfully');
   } catch (error) {
+    console.log(err)
     if (error.message.includes("400")) {
       showToast('error', 'Error', 'Enter proper input');
     } else if (error.message.includes("404")) {
