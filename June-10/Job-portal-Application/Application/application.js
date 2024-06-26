@@ -1,5 +1,5 @@
 
-import { fetchData } from "../Pakage/api.js";
+import { fetchData } from "../Package/api.js";
 
 
 if(!localStorage.getItem('authToken'))
@@ -139,6 +139,7 @@ function renderTable(page, filteredJobs) {
             showModal(row);
         });
         tableBody.appendChild(tr);
+        
     }
 }
 

@@ -172,6 +172,44 @@ top: 0;
   height: 20px;
 }
 
+.detail-text {
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+.detail-text:empty::after, .portfolio-link:empty::after{
+  content: "Not provided";
+  color: #999;
+  font-style: italic;
+}
+
+.profile-section h2, .detail-text {
+  color: #444;
+}
+
+.detail-item .icon img {
+  vertical-align: middle;
+}
+
+.detail-item .icon img,
+.detail-item .detail-text {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.details-container .detail-item {
+  padding: 5px 0;
+}
 .portfolio-link {
   color: #3b4cc0;
   text-decoration: none;
@@ -577,8 +615,6 @@ margin-left: 350px;
     flex-direction: column;
   }
   .sidebar {
-    height: auto;
-    width: 100%;
     transform: translateX(-100%);
   }
 

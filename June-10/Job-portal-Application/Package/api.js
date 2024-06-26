@@ -7,8 +7,8 @@ export async function fetchData(
     isFileUpload = false,isauth=false ) {
     const headers = {
       Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      
     };
-  
     if (!isFileUpload) {
       headers["Content-Type"] = "application/json";
     }

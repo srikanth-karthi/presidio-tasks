@@ -1,5 +1,5 @@
-import { fetchData } from "../../Pakage/api.js";
-import { showToast } from "../../Pakage/toster.js";
+import { fetchData } from "../../Package/api.js";
+import { showToast } from "../../Package/toaster.js";
 
   if(!localStorage.getItem('authToken'))
     {

@@ -1,0 +1,419 @@
+@import url("https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap");
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Epilogue", sans-serif;
+  margin: 0;
+  display: flex;
+}
+
+.profile {
+  margin-bottom: 0px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.expanded {
+  margin-left: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+.description
+{
+    color: rgba(124, 132, 147, 1);
+    margin-top: 10px;
+}
+
+.back-button {
+  padding: 10px 10px;
+  background-color: rgba(70, 64, 222, 1);
+  color: white;
+  border: none;
+  display: flex;
+  margin-right: 30px;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.menu-button {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.job-list table {
+  margin-top: 30px;
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.job-list th, .job-list td {
+  padding: 18px;
+  border-bottom: 1px solid #eaeaea;
+  text-align:center;
+}
+.job-list th:nth-child(1),.job-list td:nth-child(1) {
+
+  text-align:left;
+}
+.job-list th {
+  background-color: #f8f9fc;
+  color: #6c757d;
+}
+
+.job-list td {
+  /* color: #495057; */
+}
+
+.job-list tr:hover {
+  cursor: pointer;
+  background-color: #f1f3f5;
+}
+
+.active {
+  color: #28a745;
+  font-weight: 700;
+}
+
+.inactive {
+  color: #dc3545;
+  font-weight: 700;
+}
+.meta-tags {
+
+    font-size: 12px;
+
+    text-align: center;
+    margin: 9px ;
+}
+.PartTime{
+  background-color:rgba(235, 133, 51, 0.1);
+  border-color: rgba(255, 184, 54, 1);
+  color: rgba(255, 184, 54, 1);
+}
+.FullTime{
+  /* background-color: rgba(86, 205, 173, 0.1); */
+  border-color: rgba(86, 205, 173, 1);
+  color: rgba(86, 205, 173, 1);
+}
+
+.Hybrid{
+  /* background-color:  rgba(70, 64, 222, 0.1); */
+  border-color: rgba(70, 64, 222, 1);
+  color:rgba(70, 64, 222, 1);
+}
+
+.Internship {
+  /* background-color: rgba(255, 101, 80, 0.1); */
+  border-color: rgba(255, 101, 80, 1);
+  color:  rgba(255, 101, 80, 1)
+}
+.Freelance
+{
+  background-color: rgb(156, 59, 149,0.1);
+  border-color: rgb(156, 59, 149);
+  color: rgb(156, 59, 149);
+  
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 10px 15px;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #e2e6ea;
+}
+
+.pagination span {
+  font-weight: 700;
+}
+
+
+
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: none;
+}
+
+.job-header {
+display: flex;
+gap: 30px;
+  margin-bottom: 20px;
+}
+
+.job-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.job-info {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #666;
+}
+
+.more-action button {
+  background-color: #0056b3;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.more-action button:hover {
+  background-color: #004099;
+}
+
+.job-navigation {
+  display: flex;
+  border-bottom: 2px solid #e2e2e2;
+  margin-bottom: 20px;
+}
+/* Style for options and dropdown */
+.options-cell {
+    position: relative;
+}
+.show
+{
+
+  display: none;
+}
+.options {
+  display: none;
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
+
+.dropdown-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.dropdown-content {
+    
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content .option-btn {
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.dropdown-content .option-btn:hover {
+    background-color: #ddd;
+}
+
+.job-navigation a {
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333;
+}
+
+.job-navigation a:hover {
+  color: #0056b3;
+}
+
+.applicants-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.applicants-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-filter input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-left: 30px;
+  margin-right: 10px;
+}
+
+.filter-btn {
+  background-color: #0056b3;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-left: 30px;
+}
+
+.filter-btn:hover {
+  background-color: #004099;
+}
+
+.view-buttons button {
+  background-color: white;
+  color: #0056b3;
+  border: 1px solid #0056b3;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.view-buttons button:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+.applicants-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.applicants-table th, .applicants-table td {
+  padding: 15px;
+  border-bottom: 1px solid #e2e2e2;
+  text-align: left;
+}
+
+.applicants-table th {
+  background-color: #f9fafc;
+}
+
+.applicants-table td img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.score {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 15px;
+  color: white;
+  font-size: 14px;
+}
+
+.in-review {
+  background-color: orange;
+}
+
+.shortlisted {
+  background-color: blue;
+}
+
+.declined {
+  background-color: red;
+}
+
+.hired {
+  background-color: green;
+}
+
+.interview {
+  background-color: cyan;
+}
+
+.see-application {
+  background-color: white;
+  color: #0056b3;
+  border: 1px solid #0056b3;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.see-application:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+  
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.hidden {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .menu-button {
+    display: inline-block;
+  }
+}

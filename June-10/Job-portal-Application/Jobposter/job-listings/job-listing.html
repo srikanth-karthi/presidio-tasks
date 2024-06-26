@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../../Package/sidebar.css" />
+    <link rel="stylesheet" href="job-listing.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
+    />
+    <link rel="stylesheet" href="../../Package/toaster.css" />
+  </head>
+  <body>
+    <div class="sidebar" id="sidebar">
+      <nav class="logo">
+        <button style="display: none" id="cross">x</button>
+        <img
+          src="../../assets/icon.svg"
+          width="42"
+          height="42"
+          alt="Icon"
+          id="company-logo"
+        />
+        <div class="title">JobHuntly</div>
+      </nav>
+      <nav class="nav-menu">
+        <a href="../dashboard/dashboard.html" class="nav-item">Dashboard</a>
+        <a href="../Profile/profile.html" class="nav-item">Company Profile</a>
+        <a href="#" class="nav-item selected">Job Listing</a>
+        <a href="#" class="nav-item">Browse Companies</a>
+        <a href="../Profile/Profile.html" class="nav-item">My Public Profile</a>
+      </nav>
+      <div class="profile"></div>
+    </div>
+    <div class="main-content">
+      <header class="header">
+        <button class="menu-button" id="menuButton">☰</button>
+        <div class="headings">
+          <h1>Job listing</h1>
+          <p class="description">Here is your jobs listing status .</p>
+        </div>
+        <a href="../dashboard/dashboard.html">
+          <button class="back-button">
+            <img src="../../assets/addpost.svg" width="15" height="15" /> Post a
+            job
+          </button>
+        </a>
+      </header>
+      <div class="job-list">
+        <table>
+          <thead>
+            <tr>
+              <th>Roles</th>
+              <th>Status</th>
+              <th>Date Posted</th>
+              <th>Job Type</th>
+              <th>Experience</th>
+            </tr>
+          </thead>
+          <tbody id="job-list-body">
+            <!-- Data will be injected here -->
+          </tbody>
+        </table>
+      </div>
+      <div class="job-details container">
+        <header class="job-header">
+          <img
+            src="../../assets/backarrow.svg"
+            class="back-jobdetails"
+            srcset=""
+          />
+          <div>
+            <div class="job-title">Social Media Assistant</div>
+            <div class="job-info">Full-Time</div>
+          </div>
+        </header>
+        <nav class="job-navigation">
+          <a href="#">Applicants</a>
+          <a href="#">Job Details</a>
+          <a href="#">Analytics</a>
+        </nav>
+        <div class="applicants-section">
+          <div class="applicants-header">
+            <span class="totalno"></span>
+            <form class="search-filter">
+              <input type="checkbox" name="perfectMatchSkills" /> MatchSkills
+              <input type="checkbox" name="perfectMatchExperience" /> MatchExperience
+              <input type="checkbox" name="hasExperienceInJobTitle" /> HasExperience
+              <input type="checkbox" name="firstApplied" /> FirstApplied
+              <button class="filter-btn">Filter</button>
+          </form>
+          
+          </div>
+          <table class="applicants-table">
+            <thead>
+              <tr class="filter-data">
+
+                <th>Full Name</th>
+                <th>Status</th>
+                <th>Applied Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="applicants-tbody">
+              <!-- Applicant rows will be dynamically inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="pagination">
+        <button id="prev-page">Previous</button>
+        <span id="page-number">1</span>
+        <button id="next-page">Next</button>
+      </div>
+    </div>
+    <script type="module" src="job-listings.js"></script>
+  </body>
+</html>

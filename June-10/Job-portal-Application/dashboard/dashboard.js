@@ -1,5 +1,5 @@
-import { fetchData } from "../Pakage/api.js";
-import { showToast } from "../Pakage/toster.js";
+import { fetchData } from "../Package/api.js";
+import { showToast } from "../Package/toaster.js";
 // document.addEventListener("DOMContentLoaded", async function() {
   if(!localStorage.getItem('authToken'))
     {
@@ -58,13 +58,34 @@ import { showToast } from "../Pakage/toster.js";
   const mainContent = document.querySelector('.main-content');
   const legendElements = document.querySelectorAll(".chart-legend .element .legend-text .percentage");
 
+
+
+  menuButton.addEventListener('click', function() {
+    sidebar.classList.toggle('hidden');
+    companyLogo.style.display = 'none';
+    crossButton.style.display = 'block';
+    mainContent.classList.toggle('expanded');
+  });
+
+  crossButton.addEventListener('click', function() {
+    sidebar.classList.toggle('hidden');
+    mainContent.classList.toggle('expanded');
+
+    if (companyLogo.style.display === 'none' || companyLogo.style.display === '') {
+      companyLogo.style.display = 'block';
+      crossButton.style.display = 'none';
+    } else {
+      companyLogo.style.display = 'none';
+      crossButton.style.display = 'block';
+    }
+  });
   try {
     const userProfile = await fetchData("api/User/profile");
     const firstName = userProfile.name.split(' ')[0];
 
     const profileData = {
       name: firstName,
-      email: userProfile.email,
+ 
       profileUrl: userProfile.profilePictureUrl
     };
 
@@ -244,24 +265,6 @@ import { showToast } from "../Pakage/toster.js";
 
   fetchJobHistory();
 
-  menuButton.addEventListener('click', function() {
-    sidebar.classList.toggle('hidden');
-    companyLogo.style.display = 'none';
-    crossButton.style.display = 'block';
-    mainContent.classList.toggle('expanded');
-  });
 
-  crossButton.addEventListener('click', function() {
-    sidebar.classList.toggle('hidden');
-    mainContent.classList.toggle('expanded');
-
-    if (companyLogo.style.display === 'none' || companyLogo.style.display === '') {
-      companyLogo.style.display = 'block';
-      crossButton.style.display = 'none';
-    } else {
-      companyLogo.style.display = 'none';
-      crossButton.style.display = 'block';
-    }
-  });
 
 // });

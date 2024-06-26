@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard</title>
-  <link rel="stylesheet" href="../../Pakage/sidebar.css">
+  <link rel="stylesheet" href="../../Package/sidebar.css">
   <link rel="stylesheet" href="profile.css" />
-  <link rel="stylesheet" href="../../Pakage/toster.css">
+  <link rel="stylesheet" href="../../Package/toaster.css">
   <link
     rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
@@ -16,19 +16,19 @@
   <div class="sidebar" id="sidebar">
     <nav class="logo">
       <button style="display: none;" id="cross">x</button>
-      <img src="../../assets/icon.svg" width="42" height="42" alt="Icon" id="company-logo"/>
+      <img src="../../assets/icon.svg" width="42" height="42" alt="Icon" id="companylogo"/>
+
       <div class="title">JobHuntly</div>
     </nav>
     <nav class="nav-menu">
       <a href="../dashboard/dashboard.html" class="nav-item">Dashboard</a>
-      <a href="../Application/application.html" class="nav-item selected">Company Profile</a>
-      <a href="../FindJobs/findjobs.html" class="nav-item">Job Listing</a>
+      <a href="#" class="nav-item selected">Company Profile</a>
+      <a href="../job-listings/job-listing.html" class="nav-item">Job Listing</a>
       <a href="#" class="nav-item">Browse Companies</a>
-      <a href="../Profile/Profile.html" class="nav-item">My Public Profile</a>
+      <a href="../..Profile/Profile.html" class="nav-item">My Public Profile</a>
     </nav>
     <div class="profile">
-      <p>Maria Kelly</p>
-      <img src="../../assets/profile.jpg" width="42" height="42" alt="Profile">
+    
     </div>
   </div>
   <div class="main-content">
@@ -41,113 +41,106 @@
 
     <section class="company-profile">
       <div class="company-header">
-        <img src="../../assets/Company.png"  alt="Nomad" class="company-logo">
-        
+        <div class="company-logo-container">
+          <label for="file-upload" class="custom-file-upload">
+            <img src="" alt="" class="company-logo">
+            <button class="edit-btn edit-profile"><img src="../../assets/edit.svg" width="20" height="20"></button>
+          </label>
+          <input type="file" id="file-upload" accept=".png, .jpg, .jpeg, .svg" style="display:none">
+        </div>
         <h2 class="company-name"></h2>
-   
-        <div class="profile-container-right">
-          <section class="profile-section">
-            <h2>Additional Details <button class="edit-btn edit-Aditional-details"><img src="../assets/edit.svg" width="20" height="20"></button></h2>
-            <div class="details-container">
-              <div class="detail-item">
-                <span class="icon email-icon"><img src="../assets/mail-icon.svg" alt="Email Icon"></span>
-                <span class="detail-text email"></span>
-              </div>
-              <div class="detail-item">
-                <span class="icon phone-icon"><img src="../assets/phone-icon.svg" alt="Phone Icon"></span>
-                <span class="detail-text phone"></span>
-              </div>
-              <div class="detail-item">
-                <span class="icon date-icon"><img src="../assets/date-icon.svg" alt="Date Icon"></span>
-                <span class="detail-text dob"></span>
-              </div>
-              <div class="detail-item">
-                <span class="icon address-icon"><img src="../assets/home-icon.svg" alt="Address Icon"></span>
-                <span class="detail-text address"></span>
-              </div>
-              <div class="detail-item">
-                <span class="icon portfolio-icon"><img src="../assets/portfolio.png" alt="Portfolio Icon"></span>
-                <span class="detail-text portfolio"><a href="#" target="_blank" class="portfolio-link"></a></span>
-              </div>
+      </div>
+      
+      
+      <div class="profile-container-right">
+        <section class="profile-section">
+          <h2>Details <button class="edit-btn edit-additional-details"><img src="../../assets/edit.svg" width="20" height="20"></button></h2>
+          <div class="details-container">
+            <div class="detail-item">
+              <span class="icon email-icon"><img src="../../assets/company-mail-icon.svg" alt="Email Icon"></span>
+              <span class="detail-text email"></span>
             </div>
-          </section>
-          <div id="editAdditionalDetailsModal" class="modal">
-            <div class="modal-content">
-              <h2>Edit Additional Details <span class="close">&times;</span></h2>
-              <form id="editAdditionalDetailsForm">
-                <div class="details-container">
-                  <div class="form-group">
-                    <label for="modal-email">
-                      <span class="icon email-icon"><img src="../assets/mail-icon.svg" alt="Email Icon"></span>
-                      Email:
-                    </label>
-                    <input type="email" id="modal-email" name="modal-email" required disabled>
-                  </div>
-          
-                  <div class="form-group">
-                    <label for="modal-phone">
-                      <span class="icon phone-icon"><img src="../assets/phone-icon.svg" alt="Phone Icon"></span>
-                      Phone:
-                    </label>
-                    <input type="tel" id="modal-phone" name="modal-phone" required>
-                  </div>
-          
-                  <div class="form-group">
-                    <label for="modal-dob">
-                      <span class="icon date-icon"><img src="../assets/date-icon.svg" alt="Date Icon"></span>
-                      Date of Birth:
-                    </label>
-                    <input type="date" id="modal-dob" name="modal-dob" required>
-                  </div>
-          
-                  <div class="form-group">
-                    <label for="modal-address">
-                      <span class="icon address-icon"><img src="../assets/home-icon.svg" alt="Address Icon"></span>
-                      Address:
-                    </label>
-                    <input type="text" id="modal-address" name="modal-address" required>
-                  </div>
-          
-                  <div class="form-group">
-                    <label for="modal-portfolio">
-                      <span class="icon portfolio-icon"><img src="../assets/portfolio.png" alt="Portfolio Icon"></span>
-                      Portfolio:
-                    </label>
-                    <input type="url" id="modal-portfolio" name="modal-portfolio" >
-                  </div>
-                </div>
-          
-                <div class="form-actions">
-                  <button type="submit" id="updateDetailsBtn" class="submit-btn">Update Details</button>
-                </div>
-              </form>
+            <div class="detail-item">
+              <span class="icon location-icon"><img src="../../assets/company-location-icon.svg" alt="Location Icon"></span>
+              <span class="detail-text location"></span>
             </div>
+            <div class="detail-item">
+              <span class="icon address-icon"><img src="../../assets/company-address-icon.svg" alt="Address Icon"></span>
+              <span class="detail-text address"></span>
+            </div>
+            <div class="detail-item">
+              <span class="icon size-icon"><img src="../../assets/size-icon.svg" alt="Size Icon"></span>
+              <span class="detail-text size"></span>
+            </div>
+            <div class="detail-item">
+              <span class="icon website-icon"><img src="../../assets/website.svg" alt="Website Icon"></span>
+              <span class="detail-text website"><a href="#" target="_blank" class="website-link"></a></span>
+            </div>
+          </div>
+        </section>
+        
+        <div id="editAdditionalDetailsModal" class="modal">
+          <div class="modal-content">
+            <h2>Edit Additional Details <span class="modal-close">&times;</span></h2>
+            <form id="editAdditionalDetailsForm">
+              <div class="details-container">
+                <div class="form-group">
+                  <label for="modal-email">
+                    <span class="icon email-icon"><img src="../../assets/company-mail-icon.svg" alt="Email Icon"></span>
+                    Email:
+                  </label>
+                  <input type="email" id="modal-email" name="modal-email" required disabled>
+                </div>
+                <div class="form-group">
+                  <label for="modal-location">
+                    <span class="icon location-icon"><img src="../../assets/company-location-icon.svg" alt="Location Icon"></span>
+                    Address:
+                  </label>
+                  <input type="text" id="modal-location" name="modal-location" required>
+                </div>
+                <div class="form-group">
+                  <label for="modal-address">
+                    <span class="icon address-icon"><img src="../../assets/company-address-icon.svg" alt="Address Icon"></span>
+                    City:
+                  </label>
+                  <input type="text" id="modal-address" name="modal-address" required>
+                </div>
+                <div class="form-group">
+                  <label for="modal-size">
+                    <span class="icon size-icon"><img src="../../assets/size-icon.svg" alt="Size Icon"></span>
+                    Size:
+                  </label>
+                  <input type="number" id="modal-size" name="modal-size" required>
+                </div>
+                <div class="form-group">
+                  <label for="modal-website">
+                    <span class="icon website-icon"><img src="../../assets/website.svg" alt="Website Icon"></span>
+                    Website:
+                  </label>
+                  <input type="url" id="modal-website" name="modal-website">
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" id="updateDetailsBtn" class="submit-btn">Update Details</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
+      
 
-      <section class="profile-section">
-        <h2>Company Profile <button class="edit-btn edit-description"><img src="../../assets/edit.svg" width="20" height="20"></button></h2>
-        <div id="description-container">
-          <p id="description-text"></p>
-        </div>
-      </section>
 
+
+      
+    </section>
+    <section class="profile-section">
+      <h2>Company Profile <button class="edit-btn edit-description"><img src="../../assets/edit.svg" width="20" height="20"></button></h2>
+      <div id="description-container">
+        <p id="description-text"></p>
+      </div>
     </section>
   </div>
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span class="close-button" id="closeButton">&times;</span>
-      <h2>Edit Company Profile</h2>
-      <form id="editForm">
-        <!-- Form fields for editing company information -->
-        <label for="companyName">Company Name:</label>
-        <input type="text" id="companyName" name="companyName">
-        <!-- Add more form fields as needed -->
-        <button type="submit">Save</button>
-      </form>
-    </div>
-  </div>
+
   <script type="module" src="profile.js"></script>
 </body>
 </html>

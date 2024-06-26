@@ -1,5 +1,5 @@
-import { showToast } from "../Pakage/toster.js";
-import { fetchData } from "../Pakage/api.js";
+import { showToast } from "../Package/toaster.js";
+import { fetchData } from "../Package/api.js";
 document.addEventListener('DOMContentLoaded', (event) => {
 
   function getQueryParam(param) {

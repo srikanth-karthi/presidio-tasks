@@ -1,6 +1,6 @@
-import { showToast } from "../Pakage/toster.js";
-import { fetchData } from "../Pakage/api.js";
-import { MultiSelectTag } from "../Pakage/Multiselect.js";
+import { showToast } from "../Package/toaster.js";
+import { fetchData } from "../Package/api.js";
+import { MultiSelectTag } from "../Package/Multiselect.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
 if(!localStorage.getItem('authToken'))
@@ -8,14 +8,13 @@ if(!localStorage.getItem('authToken'))
     window.location.href = "/Auth/login.html?authid=3";
 
   }
-  
+  const menuButton = document.getElementById('menuButton');
+  const sidebar = document.getElementById('sidebar');
+  const companyLogo = document.getElementById('company-logo');
+  const crossButton = document.getElementById('cross');
+  const mainContent = document.querySelector('.main-content');
 
 
-  const sidebar = document.getElementById("sidebar");
-  const companyLogo = document.getElementById("company-logo");
-  const crossButton = document.getElementById("cross");
-  const mainContent = document.querySelector(".main-content");
-  const menuButton = document.getElementById("menuButton");
   const profilePictureContainer = document.querySelector(".profile-picture");
   const userName = document.getElementById("name");
   const userLocation = document.getElementById("location");
@@ -66,23 +65,29 @@ if(!localStorage.getItem('authToken'))
   var updateDetailsForm = document.getElementById('editAdditionalDetailsForm');
   const profileElement = document.querySelector(".profile");
   crossButton.style.display = "none";
+  
 
-  menuButton.addEventListener("click", () => {
-    toggleSidebar();
+
+  menuButton.addEventListener('click', function() {
+    sidebar.classList.toggle('hidden');
+    companyLogo.style.display = 'none';
+    crossButton.style.display = 'block';
+    mainContent.classList.toggle('expanded');
+
   });
 
-  crossButton.addEventListener("click", () => {
-    toggleSidebar();
-  });
+  crossButton.addEventListener('click', function() {
+    sidebar.classList.toggle('hidden');
+    mainContent.classList.toggle('expanded');
 
-  function toggleSidebar() {
-    sidebar.classList.toggle("hidden");
-    mainContent.classList.toggle("expanded");
-    const isSidebarHidden = sidebar.classList.contains("hidden");
-    
-    companyLogo.style.display = isSidebarHidden ? "block" : "none";
-    crossButton.style.display = isSidebarHidden ? "none" : "block";
-  }
+    if (companyLogo.style.display === 'none' || companyLogo.style.display === '') {
+      companyLogo.style.display = 'block';
+      crossButton.style.display = 'none';
+    } else {
+      companyLogo.style.display = 'none';
+      crossButton.style.display = 'block';
+    }
+  });
 
   $(function () {
     $("#title-list-aoi").select2();
@@ -93,14 +98,14 @@ if(!localStorage.getItem('authToken'))
   try{
      companies = await fetchData("api/Company");
      userprofile = await fetchData("api/User/profile");
-     console.log(userprofile)
+
+     
+
      
 
 
-
-
     profileElement.innerHTML = `
-  <img src="${userprofile.profilePictureUrl?userprofile.profilePictureUrl :'../assets/profile.png' }" width="60" height="60" alt="" />
+  <img src="${userprofile.profilePictureUrl?userprofile.profilePictureUrl+'?date='+Date.now() :'../assets/profile.png' }" width="60" height="60" alt="" />
       <div>
         <p>${userprofile.name.split(' ')[0]}</p>
 
@@ -132,7 +137,7 @@ if(!localStorage.getItem('authToken'))
 
 
   const profilePicture = userprofile.profilePictureUrl || "../assets/profile.png";
-  profilePictureContainer.innerHTML = `<img src="${profilePicture}" alt="User Profile Picture" />`;
+  profilePictureContainer.innerHTML = `<img src="${profilePicture+'?date='+Date.now()}" alt="User Profile Picture" />`;
 
   userName.innerText = userprofile.name;
   userLocation.innerHTML = `
@@ -302,16 +307,18 @@ document.querySelector('.detail-text.portfolio').innerHTML = userprofile.portfol
         userLocation.innerHTML = `
           <img src="../assets/profile-location-icon.svg" alt="Location Icon"> ${userprofile.city}
         `;
+  
         profileElement.innerHTML = `
-        <img src="${userprofile.profilePictureUrl?userprofile.profilePictureUrl :'../assets/profile.png' }" width="60" height="60" alt="" />
-            <div>
-              <p>${userprofile.name.split(' ')[0]}</p>
-              <p>${userprofile.email}</p>
-            </div>
-          `;
-          localStorage.setItem("profile", JSON.stringify(   {name: userprofile.name.split(' ')[0],
-            email: userprofile.email,
-            profileUrl: userprofile.profilePictureUrl}));
+     <img src="${userprofile.profilePictureUrl?userprofile.profilePictureUrl+'?date='+Date.now() :'../assets/profile.png' }" width="60" height="60" alt="" />
+      <div>
+        <p>${userprofile.name.split(' ')[0]}</p>
+
+      </div>`
+
+      
+localStorage.setItem("profile", JSON.stringify(   {name: userprofile.name.split(' ')[0],
+name: userprofile.name,
+profileUrl: userprofile.profilePictureUrl}));
         showToast('success', 'Success', 'Profile updated successfully');
       } catch (error) {
         console.error("Error updating profile:", error);
@@ -340,17 +347,17 @@ document.querySelector('.detail-text.portfolio').innerHTML = userprofile.portfol
             profilePictureContainer.innerHTML = `<img src="${uploadResponse.logoUrl}" alt="User Profile Picture" />`;
             
 
-            userprofile.profilePictureUrl = uploadResponse.logoUrl;
+            userprofile.profilePictureUrl = uploadResponse.logoUrl+'?date='+Date.now();
               profileElement.innerHTML = `
-           <img src="${userprofile.profilePictureUrl?userprofile.profilePictureUrl :'../assets/profile.png' }" width="60" height="60" alt="" />
+           <img src="${userprofile.profilePictureUrl?userprofile.profilePictureUrl+'?date='+Date.now() :'../assets/profile.png' }" width="60" height="60" alt="" />
             <div>
               <p>${userprofile.name.split(' ')[0]}</p>
-              <p>${userprofile.email}</p>
+
             </div>`
 
             
     localStorage.setItem("profile", JSON.stringify(   {name: userprofile.name.split(' ')[0],
-      email: userprofile.email,
+      name: userprofile.name,
       profileUrl: userprofile.profilePictureUrl}));
             showToast('success', 'Success', 'Profile picture uploaded successfully');
           } catch (error) {
@@ -629,6 +636,7 @@ renderExperience();
 renderEducation();
 renderAOI();
 renderSkills();
+
 function assignExperienceEventListeners() {
   document.querySelectorAll(".edit-experience").forEach(function (editButton, index) {
     editButton.addEventListener("click", function () {

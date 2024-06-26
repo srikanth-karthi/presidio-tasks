@@ -1,5 +1,5 @@
-import { showToast } from "../Pakage/toster.js";
-import { fetchData } from "../Pakage/api.js";
+import { showToast } from "../Package/toaster.js";
+import { fetchData } from "../Package/api.js";
 
 
 
@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   document.getElementById("menuButton").addEventListener("click", function () {
     document.getElementById("sidebar").classList.toggle("hidden");
+    document.getElementById("sidebar").style.transform = "translateX(1px)";
     document.getElementById("company-logo").style.display = "none";
     document.getElementById("cross").style.display = "block";
     document.querySelector(".main-content").classList.toggle("expanded");
