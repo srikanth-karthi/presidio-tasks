@@ -290,7 +290,7 @@ function renderfilterdata(applications) {
             </td>
         `;
 
-        // Add event listener for dropdown button click
+
         const dropdownBtn = row.querySelector('.dropdown-btn');
         const dropdownContent = row.querySelector('.dropdown-content');
         dropdownBtn.addEventListener('click', () => {
