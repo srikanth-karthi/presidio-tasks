@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobHuntly</title>
+    <link rel="shortcut icon" href="../assets/icon.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="Auth.css" />
+    <link rel="stylesheet" href="../Package/toaster.css">
+
+  </head>
+  <body>
+    <nav>
+      <img src="../assets/icon.svg" width="52" height="52" alt="Icon" />
+      <div class="title">JobHuntly</div>
+    </nav>
+    <main>
+      <div class="login-container">
+        <div class="col-1">
+          <img
+            src="../assets/login-photo.png"
+            width="306"
+            height="522"
+            class="login-img"
+            alt=""
+            sizes=""
+            srcset=""
+          />
+        </div>
+        <div class="col-2" style="margin-top: 50px;">
+            <div class="tabs">
+              <input type="radio" id="job-seeker" name="user-type" class="tab-input" checked />
+              <label for="job-seeker" class="tab-label">Job Seeker</label>
+              <input type="radio" id="company" name="user-type" class="tab-input" />
+              <label for="company" class="tab-label">Company</label>
+            </div>
+            <h1 class="welcome-message">Welcome Back, Dude</h1>
+        <form id="loginForm">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Email Address" aria-label="Email Address" required />
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Password" required />
+          <div class="check-box">
+              <input type="checkbox" id="remember" />
+              <label for="remember">Remember me</label>
+          </div>
+          <button type="submit">Login</button>
+          <div class="signup">
+              Don’t have an account?
+              <a href="Register.html">Sign up</a>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script type="module"  src="login.js"></script>
+  </body>
+</html>

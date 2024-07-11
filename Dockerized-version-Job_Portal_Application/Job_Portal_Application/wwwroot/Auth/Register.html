@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobHuntly</title>
+    <link rel="shortcut icon" href="../assets/icon.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="Auth.css" />
+    <link rel="stylesheet" href="../Package/toaster.css">
+
+  </head>
+  <body>
+    <nav>
+      <img src="../assets/icon.svg" width="52" height="52" alt="Icon" />
+      <div class="title">JobHuntly</div>
+    </nav>
+    <main>
+      <div class="login-container">
+        <div class="col-1">
+          <img
+            src="../assets/login-photo.png"
+            width="306"
+            height="522"
+            class="login-img"
+            alt=""
+          />
+        </div>
+        <div class="col-2">
+          <div class="tabs">
+            <input
+              type="radio"
+              id="job-seeker"
+              name="user-type"
+              class="tab-input"
+              checked
+            />
+            <label for="job-seeker" class="tab-label">Job Seeker</label>
+            <input
+              type="radio"
+              id="company"
+              name="user-type"
+              class="tab-input"
+            />
+            <label for="company" class="tab-label">Company</label>
+          </div>
+          <h1 class="welcome-message">Get more opportunities</h1>
+          <form id="registration-form">
+            <div id="job-seeker-form">
+              <div class="job-seeker-content">
+              <label for="name">Name</label>
+              <input name="name" type="text" id="name" placeholder="Full Name"     />
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email Address"
+                   
+              />
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                   
+              />
+              <div class="seprater">
+              <label for="dob">Date of Birth</label>
+              <input type="date" name="dob" id="dob"     />
+              <label for="city">City</label>
+              <input type="text" id="city" name="city" placeholder="City"     />
+            </div>
+            </div>
+          </div>
+            <div id="company-form">
+              <div class="company-form-content">
+         
+                <label for="companyName">Company Name</label>
+                <input
+                  type="text"
+                  name="companyName"
+                  id="companyName"
+                  placeholder="Company Name"
+                    
+                />
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="companyEmail"
+                  name="companyEmail"
+                  placeholder="Email Address"
+                    
+                />
+       
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  id="companyPassword"
+                  placeholder="Password"
+                  name="companyPassword"
+                    
+                />
+              <div class="seprater">
+                <label for="companyAddress">Address</label>
+                <input
+                  type="text"
+                  name="companyAddress"
+                  id="companyAddress"
+                  placeholder="Company Address"
+                    
+                />
+   
+                <label for="city">City</label>
+                <input
+                  type="text"
+                  id="companyCity"
+                  placeholder="City"
+                  name="companyCity"
+                    
+                />
+
+              </div>
+        
+            </div>
+          </div>
+            <button type="submit">Continue</button>
+            <div class="signup">
+              Don’t have an account?
+              <a href="login.html">Sign in</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script type="module"  src="register.js"></script>
+  </body>
+</html>

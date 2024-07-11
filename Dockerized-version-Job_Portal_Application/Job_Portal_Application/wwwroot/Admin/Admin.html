@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobHuntly</title>
+    <link rel="shortcut icon" href="../assets/icon.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="Admin.css">
+    <link rel="stylesheet" href="../Package/toaster.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+            <li><a href="#" id="skills-link">Skills</a></li>
+            <li><a href="#" id="titles-link">Titles</a></li>
+        </ul>
+
+    </div>
+    <div class="content">
+        <div id="skills-page" class="page">
+            <h2>Manage Skills
+                <form action="">
+                    <input type="search" id="skill-search" onkeyup="searchSkills()" required>
+                    <i class="fa fa-search" onclick="searchSkills()"></i>
+                
+                </form>
+            </h2>
+            <div class="input-container">
+                <input type="text" id="skill-input" placeholder="Add a Skill">
+                <button id="add-skill-btn">Add</button>
+            </div>
+        
+
+        <ul id="skills-list" class="scrollable-list"></ul>
+
+              
+        </div>
+        <div id="titles-page" class="page" style="display:none;">
+            <h2>Manage Titles
+                <form action="">
+                    <input type="search" id="title-search" onkeyup="searchTitles()" required>
+                    <i class="fa fa-search" onclick="searchTitles()"></i>
+                
+                </form>
+            </h2>
+            <div class="input-container">
+                <input type="text" id="title-input" placeholder="Add a Title">
+                <button id="add-title-btn">Add</button>
+            </div>
+     
+            <ul id="titles-list" class="scrollable-list"></ul>
+        </div>
+    </div>
+    <script type="module" src="Admin.js"></script>
+</body>
+</html>

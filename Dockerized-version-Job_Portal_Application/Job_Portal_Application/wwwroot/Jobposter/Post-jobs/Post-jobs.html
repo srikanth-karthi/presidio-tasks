@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobHuntly</title>
+    <link rel="shortcut icon" href="../../assets/icon.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="../../Package/sidebar.css" />
+    <link rel="stylesheet" href="Post-jobs.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
+    />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="../../Package/toaster.css" />
+  </head>
+  <body>
+    <div class="sidebar" id="sidebar">
+      <nav class="logo">
+        <button style="display: none" id="cross">x</button>
+        <img
+          src="../../assets/icon.svg"
+          width="42"
+          height="42"
+          alt="Icon"
+          id="company-logo"
+        />
+        <div class="title">JobHuntly</div>
+      </nav>
+      <nav class="nav-menu">
+        <a href="../dashboard/dashboard.html" class="nav-item">Dashboard</a>
+        <a href="../Profile/profile.html" class="nav-item">Company Profile</a>
+        <a href="../job-listings/job-listing.html" class="nav-item ">Job Listing</a>
+        <a href="#" class="nav-item selected">Post Job</a>
+      </nav>
+      <div class="profile"></div>
+    </div>
+  
+    <div   class="main-content">
+      <header class="header">
+        <button class="menu-button" id="menuButton">☰</button>
+        <div class="headings">
+          <h1>Post a Job</h1>
+          <p class="description">Post your job with your requirements.</p>
+        </div>
+        <a href="../dashboard/dashboard.html">
+          <a href="../dashboard/dashboard.html">      <button
+            class="back-button">Back to Dashboard</button></a>
+        </a>
+      </header>
+      <div class="container">
+      
+        <form>
+            <div class="form-group">
+              <label for="jobTitle">Job Title:</label>
+              <select class="form-control" id="title-list">  
+                <option value="">Select your Title</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="job-description">Job Description:</label>
+              <textarea style="height: 80px;" id="model-job-description" required placeholder="Enter job description here"></textarea>
+          </div>
+          
+            <div class="form-group">
+                <label>Type of Employment</label>
+      <div class="job-type-cointainer">
+                <div class="job-type">
+                    <input type="radio" id="status-active" name="job-status" value="FullTime">
+                    <label for="status-active">Full-Time</label>
+                </div>
+                <div class="job-type">
+                    <input type="radio" id="status-inactive" name="job-status" value="PartTime">
+                    <label for="status-inactive">Part-Time</label>
+                </div>
+                <div class="job-type">
+                  <input type="radio" id="status-inactive" name="job-status" value="Internship">
+                  <label for="status-inactive">Internship</label>
+              </div>
+              <div class="job-type">
+                <input type="radio" id="status-inactive" name="job-status" value="Hybrid">
+                <label for="status-inactive">Hybrid</label>
+            </div>
+            <div class="job-type">
+              <input type="radio" id="status-inactive" name="job-status" value="Freelance">
+              <label for="status-inactive">Freelance</label>
+          </div>
+        </div>
+            </div>
+
+            <div class="form-group">
+                <label for="salary">Salary(in lpa)</label>
+                <div class="salary-range">
+                    <input type="number" id="salary" name="salary" placeholder="9 lpa">
+                    
+                </div>
+            </div>
+
+           
+
+            <div class="form-group">
+              <label for="salary">Experience Required(in yrs)</label>
+              <div class="salary-range">
+                  <input type="number" id="experience" name="salary" placeholder="7 years">
+                  
+              </div>
+          </div>
+            <div class="form-group">
+              <label>Required Skills</label>
+              <select name="skill-list" id="skill-list" multiple></select>
+            </div>
+
+            <button type="submit">Post</button>
+        </form>
+    </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script type="module" src="Post-jobs.js"></script>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobHuntly</title>
+  <link rel="shortcut icon" href="../../assets/icon.svg" type="image/x-icon" />
+  <link rel="stylesheet" href="../../Package/sidebar.css">
+  <link rel="stylesheet" href="dashboard.css" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
+  />
+  <link rel="stylesheet" href="../../Package/toaster.css">
+</head>
+<body>
+  <div class="sidebar" id="sidebar">
+    <nav class="logo">
+      <button style="display: none;" id="cross">x</button>
+      <img src="../../assets/icon.svg" width="42" height="42" alt="Icon" id="company-logo"/>
+      <div class="title">JobHuntly</div>
+    </nav>
+    <nav class="nav-menu">
+      <a href="#" class="nav-item selected">Dashboard</a>
+      <a href="../Profile/profile.html" class="nav-item">Company Profile</a>
+      <a href="../job-listings/job-listing.html" class="nav-item ">Job Listing</a>
+      <a href="../Post-jobs/Post-jobs.html" class="nav-item ">Post Job</a>
+    </nav>
+    <div class="profile">
+
+    </div>
+  </div>
+  <div class="main-content">
+    <header class="header">
+      <button class="menu-button" id="menuButton">☰</button>
+      <h1>Dashboard</h1>
+      <a href="../Post-jobs/Post-jobs.html">
+        <button class="back-button">
+          <img src="../../assets/addpost.svg" width="15" height="15"> Post a job
+        </button>
+      </a>
+    </header>
+    <section class="overview">
+      <h2><span class="greeting"></span> <span class="name"></span></h2>
+      <p class="description">Here is your job posting statistic.</p>
+    </section>
+    <section class="statistics">
+      <div class="stats-card"><span class="total-job posted">0</span>Total Job posted</div>
+      <div style="background-color: rgba(86, 205, 173, 1);" class="stats-card"><span class="total-job open">0</span>Jobs Opened</div>
+      <div style="background-color: rgba(38, 164, 255, 1);" class="stats-card"><span class="total-job close">0</span>Jobs Closed</div>
+    </section>
+
+    <section class="job-updates">
+        <div class="job-updates-headings">
+
+            Recently Posted <a href="../job-listings/job-listing.html"><button type="button">View All <img src="../../assets/rightarrow.svg" width="20" height="20" alt=""></button></a>
+        </div>
+      <div class="job-list grid-view" id="job-list"></div>
+    </section>
+  </div>
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobHuntly</title>
+  <link rel="shortcut icon" href="../assets/icon.svg" type="image/x-icon" />
+  <link rel="stylesheet" href="../../Package/sidebar.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css">
+  <link rel="stylesheet" href="../Package/toaster.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="Profile.css" />
+</head>
+<body>
+  <div class="sidebar" id="sidebar">
+    <nav class="logo">
+      <button id="cross">x</button>
+      <img src="../assets/icon.svg" width="42" height="42" alt="Icon" id="company-logo" />
+      <div class="title">JobHuntly</div>
+    </nav>
+    <nav class="nav-menu">
+      <a href="../dashboard/dashboard.html" class="nav-item ">Dashboard</a>
+      <a href="../Application/application.html" class="nav-item">My Applications</a>
+      <a href="../FindJobs/findjobs.html" class="nav-item">Find Jobs</a>
+ 
+      <a href="../Profile/Profile.html" class="nav-item selected">My Public Profile</a>
+    </nav>
+
+    <div class="profile">
+
+    </div>
+  </div>
+  <main class="main-content">
+    <header class="header">
+      <button class="menu-button" id="menuButton">☰</button>
+      <h1>Profile</h1>
+    <button
+        class="back-button">LogOut</button>
+    </header>
+    <div class="profile-container">
+      <div class="profile-container-left">
+        <section class="profile-header">
+          <div class="profile-picture-background">
+            <img src="../assets/profile-background.png" width="100%" height="100" srcset="" />
+            <div class="profile-picture"></div>
+          </div>
+          <div class="profile-details">
+            <div class="col-1">
+              <h2 id="name"></h2>
+              <p id="location">
+                <img src="../assets/profile-location-icon.svg" alt="Location Icon" width="10" height="10">
+              </p>
+              <button class="View-Resume">
+                <img src="../assets/resume.svg" height="15" width="15" alt="Resume Icon">
+                View Resume
+              </button>
+            </div>
+            <button class="Edit-profile">Edit profile</button>
+          </div>
+        </section>
+        <div id="addProfileModal" class="modal">
+          <div class="modal-content">
+            <h2>Update Profile <span class="close">&times;</span></h2>
+            <form id="addProfileModalForm">
+              <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="edit-name" name="name" placeholder="Full Name" required>
+              </div>
+              <br><br>
+              <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="edit-location" name="location" placeholder="Location" required>
+              </div>
+              <br><br>
+              <div class="search-bar">
+                <label for="profilePhoto">Profile Photo:</label>
+                <div class="file-upload">
+                  <div class="photo-input">
+                    <input type="file" id="edit-profilePhoto" name="profilePhoto" accept="image/*">
+                    <span class="upload-instruction">Click to replace or drag and drop</span>
+                    <small class="file-types">SVG, PNG, JPG or GIF (max. 125 x 125px)</small>
+                  </div>
+    
+                  <div class="photo-file-name"></div>
+                </div>
+                <button type="button" class="remove-file-btn" id="remove-file-btn-profile">Remove File</button>
+              </div>
+              <br><br>
+              <div class="search-bar">
+                <label for="resume">Resume:</label>
+                <div class="file-upload">
+                  <div class="resume-input">
+                      <input type="file" id="edit-resume" name="resume" accept="application/pdf">
+                      <span class="upload-instruction">Click to replace or drag and drop</span>
+                      <small class="file-types">File type: PDF</small>
+                  </div>
+                  <div class="resume-file-name"></div>
+                </div>
+                <button type="button" class="remove-file-btn" id="remove-file-btn-resume">Remove File</button>
+              </div>
+              <br><br>
+              <button type="submit" id="Profile-submitBtn-update">Update Profile</button>
+            </form>
+          </div>
+        </div>
+        <section class="profile-section">
+          <h2>About Me <button class="edit-btn edit-about-me"><img src="../assets/edit.svg" width="20" height="20"></button></h2>
+          <div id="about-me-container">
+            <p id="about-me-text"></p>
+          </div>
+        </section>
+        <section class="profile-section Experience">
+          <h2 style="margin-top: -10px;">Experiences <button id="add-experience" class="add-btn"><img src="../assets/add.svg" width="20" height="20"></h2></button>
+          <p style="margin-bottom: 30px;">Share your work experience with us</p>
+          <div class="Experiences"></div>
+        </section>
+        <div id="addExperienceModal" class="modal">
+          <div class="modal-content">
+            <h2 id="ExperienceModalTitle">Add Experience <span class="close">&times;</span></h2>
+            <form id="addExperienceForm">
+              <div class="form-group">
+                <label for="company">Company:</label>
+                <input type="text" required placeholder="Company Name" id="company" list="company-list" />
+                <datalist id="company-list"></datalist>
+              </div>
+        
+              <div class="form-group">
+                <label for="jobTitle">Job Title:</label>
+                <select class="form-control" id="title-list">  
+                  <option value="">Select your Title</option>
+                </select>
+              </div>
+        
+              <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input type="month" id="startDate" name="startDate" required>
+              </div>
+        
+              <div class="form-group">
+                <label for="endDate">End Date:</label>
+                <input type="month" id="endDate" name="endDate">
+              </div>
+        
+              <div class="form-actions">
+                <button id="Exp-submitBtn-update" class="submit-btn">Update Experience</button>
+                <button id="Exp-submitBtn-add" class="submit-btn">Add Experience</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <section class="profile-section Educations">
+          <h2 style="margin-top: -10px;">Educations<button id="add-Education" class="add-btn"><img src="../assets/add.svg" width="20" height="20"></h2>
+            <p style="margin-top: -10px;">Tell us about your educational background</p>
+            <div class="educations"></div>
+        </section>
+        <div id="addEducationModal" class="modal">
+          <div class="modal-content">
+            <h2 id="EducationModalTitle">Add Education <span class="close">&times;</span></h2>
+            <form id="addEducationForm">
+              <div class="form-group">
+                <label for="institutionName">Institution Name:</label>
+                <input type="text" required placeholder="Institution Name" id="institutionName" list="institution-list" />
+                <datalist id="institution-list"></datalist>
+              </div>
+              
+              <div class="form-group">
+                <label for="level">Level:</label>
+                <input type="text" required placeholder="Education Level" id="level" list="level-list" />
+                <datalist id="level-list">
+                  <option value="High School"></option>
+                  <option value="Associate's Degree"></option>
+                  <option value="Bachelor's Degree"></option>
+                  <option value="Master's Degree"></option>
+                  <option value="Doctorate"></option>
+                  <option value="Diploma"></option>
+                  <option value="Certificate"></option>
+                </datalist>
+              </div>
+              
+              <div class="form-group">
+                <label for="startYear">Start Year:</label>
+                <input type="month" id="startYear" name="startYear" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="endYear">End Year:</label>
+                <input type="month" id="endYear" name="endYear">
+              </div>
+              
+              <div class="form-group">
+                <label for="percentage">Percentage:</label>
+                <input type="number" id="percentage" name="percentage" min="0" max="100" step="0.1" required placeholder="75.5">
+              </div>
+              
+              <div class="form-group">
+                <div class="isCurrentlyStudying">
+                  <label for="isCurrentlyStudying">Currently Studying:</label>
+                  <input type="checkbox" id="isCurrentlyStudying" name="isCurrentlyStudying">
+                </div>
+             
+              </div>
+              
+              <div class="form-actions">
+                <button id="Edu-submitBtn-update" class="submit-btn">Update Education</button>
+                <button id="Edu-submitBtn-add" class="submit-btn">Add Education</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        
+        <section class="profile-section aoi">
+          <h2 style="margin-top: -10px;">Area of Interest<button id="add-AreaOfInterest" class="add-btn"><img src="../assets/add.svg" width="20" height="20"></h2>
+          <p style="margin-top: -10px;">Tell us what kind of work you’re open to</p>
+          <div class="aoi-items"></div>
+        </section>
+        <div id="addAreaOfInterestModal" class="modal">
+          <div class="modal-content">
+            <h2 id="aoiModalTitle">Add Area of Interest <span class="close">&times;</span></h2>
+            <form id="addAreaOfInterestForm">
+              <div class="form-group">
+                <label for="title-list-aoi">
+                  Job Title:
+                </label>
+                <select class="form-control" name="title" id="title-list-aoi">  
+                  <option value="">Select your title</option>
+                </select>
+              </div>
+        
+              <div class="form-group">
+                <label for="lpa">
+                  LPA:
+                </label>
+                <input type="number" id="lpa" name="lpa" min="0" max="100" step="0.1" required placeholder="4.5">
+              </div>
+        
+              <div class="form-actions">
+                <button type="submit" id="update-aoi-btn" class="submit-btn">Update Area of Interest</button>
+                <button type="submit" id="add-aoi-btn" class="submit-btn">Add Area of Interest</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <section class="profile-section">
+          <h2 style="margin-top: -10px;">Key skills <button id="edit-skills" class="edit-btn"><img src="../assets/edit.svg" alt="Edit"></button></h2>
+          <p style="margin-top: -10px;margin-bottom: 30PX;">Highlight your key skills and competencies</p>
+          <div class="skills-list" id="skills-list"></div>
+          <div id="skillsModal" class="modal">
+            <div class="modal-content" style="height:400px;">
+              <h2>Key Skills <span class="close">&times;</span></h2>
+              <select name="skill-list" id="skill-list" multiple></select>
+              <button id="edit-skills-btn">Update Skills</button>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="profile-container-right">
+        <section class="profile-section">
+          <h2>Additional Details <button class="edit-btn edit-Aditional-details"><img src="../assets/edit.svg" width="20" height="20"></button></h2>
+          <div class="details-container">
+            <div class="detail-item">
+              <span class="icon email-icon"><img src="../assets/mail-icon.svg" alt="Email Icon"></span>
+              <span class="detail-text email"></span>
+            </div>
+            <div class="detail-item">
+              <span class="icon phone-icon"><img src="../assets/phone-icon.svg" alt="Phone Icon"></span>
+              <span class="detail-text phone"></span>
+            </div>
+            <div class="detail-item">
+              <span class="icon date-icon"><img src="../assets/date-icon.svg" alt="Date Icon"></span>
+              <span class="detail-text dob"></span>
+            </div>
+            <div class="detail-item">
+              <span class="icon address-icon"><img src="../assets/home-icon.svg" alt="Address Icon"></span>
+              <span class="detail-text address"></span>
+            </div>
+            <div class="detail-item">
+              <span class="icon portfolio-icon"><img src="../assets/portfolio.svg" alt="Portfolio Icon"></span>
+              <span class="detail-text portfolio"><a href="#" target="_blank" class="portfolio-link"></a></span>
+            </div>
+          </div>
+        </section>
+        <div id="editAdditionalDetailsModal" class="modal">
+          <div class="modal-content">
+            <h2>Edit Additional Details <span class="close">&times;</span></h2>
+            <form id="editAdditionalDetailsForm">
+              <div class="details-container">
+                <div class="form-group">
+                  <label for="modal-email">
+                    <span class="icon email-icon"><img src="../assets/mail-icon.svg" alt="Email Icon"></span>
+                    Email:
+                  </label>
+                  <input type="email" id="modal-email" name="modal-email" required disabled>
+                </div>
+        
+                <div class="form-group">
+                  <label for="modal-phone">
+                    <span class="icon phone-icon"><img src="../assets/phone-icon.svg" alt="Phone Icon"></span>
+                    Phone:
+                  </label>
+                  <input type="tel" id="modal-phone" name="modal-phone" required>
+                </div>
+        
+                <div class="form-group">
+                  <label for="modal-dob">
+                    <span class="icon date-icon"><img src="../assets/date-icon.svg" alt="Date Icon"></span>
+                    Date of Birth:
+                  </label>
+                  <input type="date" id="modal-dob" name="modal-dob" required>
+                </div>
+        
+                <div class="form-group">
+                  <label for="modal-address">
+                    <span class="icon address-icon"><img src="../assets/home-icon.svg" alt="Address Icon"></span>
+                    Address:
+                  </label>
+                  <input type="text" id="modal-address" name="modal-address" required>
+                </div>
+        
+                <div class="form-group">
+                  <label for="modal-portfolio">
+                    <span class="icon portfolio-icon"><img src="../assets/portfolio.svg" alt="Portfolio Icon"></span>
+                    Portfolio:
+                  </label>
+                  <input type="url" id="modal-portfolio" name="modal-portfolio" >
+                </div>
+              </div>
+        
+              <div class="form-actions">
+                <button type="submit" id="updateDetailsBtn" class="submit-btn">Update Details</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    
+      
+  </main>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script type="module" src="Profile.js"></script>
+</body>
+</html>

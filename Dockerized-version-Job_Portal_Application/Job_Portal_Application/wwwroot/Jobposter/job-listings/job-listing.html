@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobHuntly</title>
+    <link rel="shortcut icon" href="../../assets/icon.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="../../Package/sidebar.css" />
+    <link rel="stylesheet" href="job-listing.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
+    />
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css"
+  />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css">
+
+    <link rel="stylesheet" href="../../Package/toaster.css" />
+  </head>
+  <body>
+    <div class="sidebar" id="sidebar">
+      <nav class="logo">
+        <button style="display: none" id="cross">x</button>
+        <img
+          src="../../assets/icon.svg"
+          width="42"
+          height="42"
+          alt="Icon"
+          id="company-logo"
+        />
+        <div class="title">JobHuntly</div>
+      </nav>
+      <nav class="nav-menu">
+        <a href="../dashboard/dashboard.html" class="nav-item">Dashboard</a>
+        <a href="../Profile/profile.html" class="nav-item">Company Profile</a>
+        <a href="#" class="nav-item selected">Job Listing</a>
+        <a href="../Post-jobs/Post-jobs.html" class="nav-item ">Post Job</a>
+      </nav>
+      <div class="profile"></div>
+    </div>
+    <div style="display: none;" class="user-profile">
+
+   
+
+        <h3 class="user-backbutton"> <img
+          onclick="profilebackbtn()"
+            src="../../assets/backarrow.svg"
+        
+            srcset=""
+          />Applicant Details </h3>
+          <div  id="user-profile-container" class="user-profile-container">
+       
+        </div>
+    </div>
+      
+    </div>
+    <div   class="main-content">
+      <header class="header">
+        <button class="menu-button" id="menuButton">☰</button>
+        <div class="headings">
+          <h1>Job listing</h1>
+          <p class="description">Here is your jobs listing status .</p>
+        </div>
+        <a href="../dashboard/dashboard.html">
+          <button class="back-button">
+            <img src="../../assets/addpost.svg" width="15" height="15" /> Post a
+            job
+          </button>
+        </a>
+      </header>
+      <div class="job-list">
+        <table>
+          <thead>
+            <tr>
+              <th>Roles</th>
+              <th>Status</th>
+              <th>Date Posted</th>
+              <th>Job Type</th>
+              <th>Experience</th>
+            </tr>
+          </thead>
+          <tbody id="job-list-body">
+
+          </tbody>
+        </table>
+      </div>
+      <div class="job-details container">
+        <header class="job-header">
+          <img
+            src="../../assets/backarrow.svg"
+            class="back-jobdetails"
+            srcset=""
+          />
+          <div>
+            <div class="job-title"></div>
+            <div class="job-info"></div>
+          </div>
+        </header>
+        <nav class="job-navigation">
+          <a class="job-applicants-tab active-tab">Applicants</a>
+          <a class="job-details-tab">Job Details</a>
+          <a class="job-analytics-tab">Analytics</a>
+        </nav>
+        <div class="applicants-section">
+          <div class="applicants-header">
+            <span class="totalno"></span>
+            <form class="search-filter">
+              <input type="checkbox" name="perfectMatchSkills" /> MatchSkills
+              <input type="checkbox" name="perfectMatchExperience" /> MatchExperience
+              <input type="checkbox" name="hasExperienceInJobTitle" /> HasExperience
+              <input type="checkbox" name="firstApplied" /> FirstApplied
+              <button class="filter-btn">Filter</button>
+          </form>
+          
+          </div>
+          <table class="applicants-table">
+            <thead>
+              <tr class="filter-data">
+
+                <th>Full Name</th>
+                <th>Status</th>
+                <th>Applied Date</th>
+                <th>Profile</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="applicants-tbody">
+          
+            </tbody>
+          </table>
+          <div class="pagination-applicant">
+            <button id="prev-page-applicant">Previous</button>
+            <span id="page-number-applicant">1</span>
+            <button id="next-page-applicant">Next</button>
+          </div>
+        </div>
+      </div>
+      <div style="display: none;" class="jobcontainer">
+       
+    </div>
+
+    <div style="display: none;" id="job-stats-chart">
+
+
+      <table class="charts-css column show-labels hide-data data-spacing-5 show-primary-axis">
+          <caption>
+              Job Portal Stats
+          </caption>
+          <thead>
+              <tr>
+                  <th scope="col">Status</th>
+                  <th scope="col">Count</th>
+              </tr>
+          </thead>
+          <tbody id="chart-data">
+      
+          </tbody>
+      </table>
+  </div>
+
+  <div id="editjobModal" class="modal">
+    <div class="modal-content">
+        <h2>Edit Job Details <span class="close">&times;</span></h2>
+        <form id="editjobform">
+            <div class="form-group">
+                <label for="job-description">Job Description:</label>
+                <textarea style="height: 80px;" id="model-job-description" required placeholder="Enter job description here"></textarea>
+            </div>
+            
+            <div class="model-status">
+                <label for="job-status">Status</label>
+                <div>
+                    <input type="radio" id="status-active" name="job-status" value="active">
+                    <label for="status-active">Active</label>
+                </div>
+                <div>
+                    <input type="radio" id="status-inactive" name="job-status" value="inactive">
+                    <label for="status-inactive">Inactive</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="job-type">Job Type:</label>
+                <select id="model-job-type" required>
+                    <option value="FullTime">Full Time</option>
+                    <option value="PartTime">Part Time</option>
+                    <option value="Hybrid">Hybrid</option>
+                    <option value="Internship">Internship</option>
+                    <option value="Freelance">Freelance</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="salary">Salary:</label>
+                <input type="number" id="model-salary"  placeholder="Salary Not Provided">
+            </div>
+            
+            <div class="form-group">
+                <label for="experience">Experience:</label>
+                <input type="number" id="model-experience"  placeholder="Experience Not Provided">
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">Update Job Details</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+      <div class="pagination">
+        <button id="prev-page">Previous</button>
+        <span id="page-number">1</span>
+        <button id="next-page">Next</button>
+      </div>
+    </div>
+
+
+
+
+
+  
+<div id="commentPopup" class="popup hidden">
+  <div class="popup-content">
+      <h3>Provide Comments</h3>
+      <textarea id="commentText" rows="4" placeholder="Enter your comments here..."></textarea>
+      <div>
+      <button id="submitComment">Submit</button>
+      <button id="cancelComment">Cancel</button>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script type="module" src="job-listings.js"></script>
+  </body>
+</html>
