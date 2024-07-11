@@ -84,13 +84,13 @@ private async Task EnsureBucketExistsAsync()
                 UseClientRegion = true 
             });
 
-            await SetBucketPolicyAsync(_bucketName); // Set the bucket policy to make it public
+            await SetBucketPolicyAsync(_bucketName); 
         }
     }
     catch (AmazonS3Exception ex)
     {
         Console.WriteLine($"Error creating bucket {_bucketName}: {ex.Message}");
-        throw; // Handle or throw exception as appropriate for your application
+        throw; 
     }
 }
 
