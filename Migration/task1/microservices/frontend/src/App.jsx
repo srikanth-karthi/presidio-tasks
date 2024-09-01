@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const BACKEND_URL = "http://localhost:3000"
+const BACKEND_URL = "http://52.226.167.128/:3000"
 
 function App() {
   const [users, setUsers] = useState([]);
