@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.use(cors())
 
-app.post("/users", async (req, res) => {
+app.post("/api/users", async (req, res) => {
   try {
     console.log(req.body);
 
@@ -23,8 +23,7 @@ app.post("/users", async (req, res) => {
   }
 });
 
-app.get("*", async (req, res) => {
-  const users = await GetAllUsers();
+app.get("/api/users", async (req, res) => {  const users = await GetAllUsers();
   users.reverse();
   res.json(users);
 });
